@@ -282,7 +282,7 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="1" />
 			<pad bytes="4" />
 			<field type="CARD32" name="n" />
-			<pad byes="16" />
+			<pad bytes="16" />
 		</reply>
 	</request>
 
@@ -367,7 +367,7 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<field type="CARD32" name="context_tag" />
-			<pad byes="20" />
+			<pad bytes="20" />
 		</reply>
 	</request>
 

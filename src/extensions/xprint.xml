@@ -50,36 +50,36 @@ authorization from the authors.
 
     <!-- "PrintGetDocumentData" -->
     <enum name="GetDoc">
-        <item name="Finished">0</item>
-            <item name="SecondConsumer">1</item>
+        <item name="Finished"><value>0</value></item>
+            <item name="SecondConsumer"><value>1</value></item>
     </enum>
 
     <!-- Event Mask ("PrintSelectInput") -->
     <enum name="EvMask">
-        <item name="NoEventMask">0x00000000</item>
-        <item name="PrintMask">0x00000001</item>
-        <item name="AttributeMask">0x00000002</item>
+        <item name="NoEventMask"><value>0x00000000</value></item>
+        <item name="PrintMask"><value>0x00000001</value></item>
+        <item name="AttributeMask"><value>0x00000002</value></item>
     </enum>
 
     <!-- "PrintNotify" detail -->
     <enum name="Detail">
-        <item name="StartJobNotify">1</item>
-        <item name="EndJobNotify">2</item>
-        <item name="StartDocNotify">3</item>
-        <item name="EndDocNotify">4</item>
-        <item name="StartPageNotify">5</item>
-        <item name="EndPageNotify">6</item>
+        <item name="StartJobNotify"><value>1</value></item>
+        <item name="EndJobNotify"><value>2</value></item>
+        <item name="StartDocNotify"><value>3</value></item>
+        <item name="EndDocNotify"><value>4</value></item>
+        <item name="StartPageNotify"><value>5</value></item>
+        <item name="EndPageNotify"><value>6</value></item>
     </enum>
 
     <!-- "AttributeNotify" detail -->
     <enum name="Attr">
-        <item name="JobAttr">1</item>
-        <item name="DocAttr">2</item>
-        <item name="PageAttr">3</item>
-        <item name="PrinterAttr">4</item>
-        <item name="ServerAttr">5</item>
-        <item name="MediumAttr">6</item>
-        <item name="SpoolerAttr">7</item>
+        <item name="JobAttr"><value>1</value></item>
+        <item name="DocAttr"><value>2</value></item>
+        <item name="PageAttr"><value>3</value></item>
+        <item name="PrinterAttr"><value>4</value></item>
+        <item name="ServerAttr"><value>5</value></item>
+        <item name="MediumAttr"><value>6</value></item>
+        <item name="SpoolerAttr"><value>7</value></item>
     </enum>
     
     

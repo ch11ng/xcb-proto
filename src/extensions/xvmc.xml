@@ -77,7 +77,7 @@ authorization from the authors.
             <field type="CARD16" name="width_actual" />
             <field type="CARD16" name="height_actual" />
             <field type="CARD32" name="flags_return" />
-            <pad byte="20" />
+            <pad bytes="20" />
             <list type="CARD32" name="priv_data" />
         </reply>
     </request>
