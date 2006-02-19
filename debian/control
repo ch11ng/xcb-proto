@@ -1,0 +1,26 @@
+Source: xcb-proto
+Section: libdevel
+Priority: optional
+Maintainer: XCB Developers <xcb@lists.freedesktop.org>
+Uploaders: Jamey Sharp <sharpone@debian.org>, Josh Triplett <josh@freedesktop.org>
+Build-Depends: cdbs, debhelper (>= 4.0.0), autoconf, automake1.9 | automaken
+Build-Conflicts: automake1.4, automake1.5, automake1.6
+Standards-Version: 3.6.1
+Bugs: mailto:xcb@lists.freedesktop.org
+
+Package: xcb-proto
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: X C Binding - protocol descriptions
+ Xlib has been the standard C binding for the X Window System protocol
+ for many years now. It is an excellent piece of work, but there are
+ applications for which it is not ideal. XCB builds on nearly two
+ decades of experience with X specifically and software engineering in
+ general in an effort to replace the aging Xlib code base.
+ .
+ xcb-proto contains descriptions of the X core protocol and selected
+ extensions in an XML-based data format. XCB uses these descriptions to
+ generate much of its code. You only need this package if you want to compile
+ XCB or otherwise make use of these protocol descriptions.
+ .
+ Homepage: http://xcb.freedesktop.org
