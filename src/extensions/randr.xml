@@ -58,7 +58,7 @@ authorization from the authors.
 		<reply>
 			<pad bytes="1" />
 			<field type="CARD32" name="major_version" />
-			<field type="CARD32" name="minor_version" />i
+			<field type="CARD32" name="minor_version" />
 			<pad bytes="16" />
 		</reply>
 	</request>
