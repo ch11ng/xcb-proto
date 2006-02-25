@@ -165,7 +165,10 @@ authorization from the authors.
             </xsd:choice>
             <xsd:element name="reply" minOccurs="0" maxOccurs="1">
               <xsd:complexType>
-                <xsd:group ref="fields" minOccurs="1" maxOccurs="unbounded" />
+                <xsd:choice minOccurs="1" maxOccurs="unbounded">
+                  <xsd:group ref="fields" />
+                  <xsd:element ref="valueparam" />
+                </xsd:choice>
               </xsd:complexType>
             </xsd:element>
           </xsd:sequence>
