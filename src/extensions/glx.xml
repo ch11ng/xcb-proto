@@ -59,7 +59,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	<typedef oldname="CARD32" newname="BOOL32" />
 	    
 	<!-- Errors -->
-	<error name="Generic">
+	<error name="Generic" number="-1"> <!-- FIXME: fake number -->
 		<field type="CARD32" name="bad_value" />
 		<field type="CARD16" name="minor_opcode" />
 		<field type="CARD8" name="major_opcode" />

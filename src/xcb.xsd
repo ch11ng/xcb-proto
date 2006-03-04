@@ -30,7 +30,7 @@ authorization from the authors.
   <xsd:element name="xcb">
     <xsd:complexType>
       <xsd:group ref="macro" minOccurs="0" maxOccurs="unbounded" />
-      <xsd:attribute name="header" type="xsd:string" />
+      <xsd:attribute name="header" type="xsd:string" use="required" />
       <xsd:attribute name="extension-xname" type="xsd:string" use="optional" />
       <xsd:attribute name="extension-name"  type="xsd:string" use="optional" />
     </xsd:complexType>
@@ -39,14 +39,14 @@ authorization from the authors.
   <!-- Padding -->
   <xsd:element name="pad">
     <xsd:complexType>
-      <xsd:attribute name="bytes" type="xsd:integer" />
+      <xsd:attribute name="bytes" type="xsd:integer" use="required" />
     </xsd:complexType>
   </xsd:element>
 
   <!-- Type for fields or parameters with attributes "name" and "type" -->
   <xsd:complexType name="var">
-    <xsd:attribute name="name" type="xsd:string" />
-    <xsd:attribute name="type" type="xsd:string" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="type" type="xsd:string" use="required" />
   </xsd:complexType>
 
   <!-- field replaces FIELD, PARAM, and REPLY. -->
@@ -77,7 +77,7 @@ authorization from the authors.
             <xsd:group ref="expression" />
             <xsd:group ref="expression" />
           </xsd:sequence>
-          <xsd:attribute name="op">
+          <xsd:attribute name="op" use="required">
             <xsd:simpleType>
               <xsd:restriction base="xsd:string">
                 <xsd:pattern value="\+|-|\*|/|&amp;|&lt;&lt;" />
@@ -106,9 +106,9 @@ authorization from the authors.
   <!-- BITMASK/LISTofVALUE parameter pairs. -->
   <xsd:element name="valueparam">
     <xsd:complexType>
-      <xsd:attribute name="value-mask-type" type="xsd:string" />
-      <xsd:attribute name="value-mask-name" type="xsd:string" />
-      <xsd:attribute name="value-list-name" type="xsd:string" />
+      <xsd:attribute name="value-mask-type" type="xsd:string" use="required" />
+      <xsd:attribute name="value-mask-name" type="xsd:string" use="required" />
+      <xsd:attribute name="value-list-name" type="xsd:string" use="required" />
     </xsd:complexType>
   </xsd:element>
 
@@ -123,21 +123,21 @@ authorization from the authors.
   <!-- Type for a structure -->
   <xsd:complexType name="struct">
     <xsd:group ref="fields" minOccurs="1" maxOccurs="unbounded" />
-    <xsd:attribute name="name" type="xsd:string" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
   </xsd:complexType>
 
   <!-- Type for a packet structure -->
   <xsd:complexType name="packet-struct">
     <xsd:group ref="fields" minOccurs="0" maxOccurs="unbounded" />
-    <xsd:attribute name="name" type="xsd:string" />
-    <xsd:attribute name="number" type="xsd:integer" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="number" type="xsd:integer" use="required" />
   </xsd:complexType>
 
   <!-- Type for a packet structure copy -->
   <xsd:complexType name="packet-struct-copy">
-    <xsd:attribute name="name" type="xsd:string" />
-    <xsd:attribute name="number" type="xsd:integer" />
-    <xsd:attribute name="ref" type="xsd:string" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="number" type="xsd:integer" use="required" />
+    <xsd:attribute name="ref" type="xsd:string" use="required" />
   </xsd:complexType>
 
   <!-- Type for hex integers -->
@@ -172,16 +172,18 @@ authorization from the authors.
               </xsd:complexType>
             </xsd:element>
           </xsd:sequence>
-          <xsd:attribute name="name" type="xsd:string" />
-          <xsd:attribute name="opcode" type="xsd:integer" />
-          <xsd:attribute name="combine-adjacent" type="xsd:boolean" />
+          <xsd:attribute name="name" type="xsd:string" use="required" />
+          <xsd:attribute name="opcode" type="xsd:integer" use="required" />
+          <xsd:attribute name="combine-adjacent" type="xsd:boolean"
+                         use="optional"/>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="event">
         <xsd:complexType>
           <xsd:complexContent>
             <xsd:extension base="packet-struct">
-              <xsd:attribute name="no-sequence-number" type="xsd:boolean" />
+              <xsd:attribute name="no-sequence-number" type="xsd:boolean"
+                             use="optional" />
             </xsd:extension>
           </xsd:complexContent>
         </xsd:complexType>
@@ -193,7 +195,7 @@ authorization from the authors.
       <xsd:element name="union" type="struct" />
       <xsd:element name="xidtype">
         <xsd:complexType>
-          <xsd:attribute name="name" type="xsd:string" />
+          <xsd:attribute name="name" type="xsd:string" use="required" />
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="enum">
@@ -202,17 +204,17 @@ authorization from the authors.
             <xsd:element name="item">
               <xsd:complexType>
                 <xsd:group ref="expression" minOccurs="0" maxOccurs="1" />
-                <xsd:attribute name="name" type="xsd:string" />
+                <xsd:attribute name="name" type="xsd:string" use="required" />
               </xsd:complexType>
             </xsd:element>
           </xsd:sequence>
-          <xsd:attribute name="name" type="xsd:string" />
+          <xsd:attribute name="name" type="xsd:string" use="required" />
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="typedef">
         <xsd:complexType>
-          <xsd:attribute name="oldname" type="xsd:string" />
-          <xsd:attribute name="newname" type="xsd:string" />
+          <xsd:attribute name="oldname" type="xsd:string" use="required" />
+          <xsd:attribute name="newname" type="xsd:string" use="required" />
         </xsd:complexType>
       </xsd:element>
       <!-- The import element allows a protocol description to reference the
