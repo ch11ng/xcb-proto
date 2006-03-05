@@ -10,7 +10,7 @@ AM_INIT_AUTOMAKE([foreign dist-bzip2])
 
 AC_PATH_PROG(XMLLINT, xmllint, no)
 AM_CONDITIONAL(HAVE_XMLLINT, test "x$XMLLINT" != "xno")
-if test "$XSLTPROC" = "no"; then
+if test "$XMLLINT" = "no"; then
    AC_MSG_WARN([xmllint not found; unable to validate against schema.])
 fi
 
