@@ -8,6 +8,12 @@ AC_INIT([XCBProto],
 AC_CONFIG_SRCDIR([xcb-proto.pc.in])
 AM_INIT_AUTOMAKE([foreign dist-bzip2])
 
+AC_PATH_PROG(XMLLINT, xmllint, no)
+AM_CONDITIONAL(HAVE_XMLLINT, test "x$XMLLINT" != "xno")
+if test "$XSLTPROC" = "no"; then
+   AC_MSG_WARN([xmllint not found; unable to validate against schema.])
+fi
+
 xcbincludedir='${includedir}/X11/XCB'
 AC_SUBST(xcbincludedir)
 

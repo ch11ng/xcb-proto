@@ -20,3 +20,9 @@ nobase_xcbinclude_HEADERS = xcb.xsd                  \
 			    extensions/xprint.xml    \
 			    extensions/xv.xml	     \
 			    extensions/xvmc.xml
+
+if HAVE_XMLLINT
+check-local:
+	$(XMLLINT) --noout --schema $(srcdir)/xcb.xsd \
+	           $(srcdir)/*.xml $(srcdir)/extensions/*.xml
+endif
