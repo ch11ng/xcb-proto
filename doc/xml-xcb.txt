@@ -186,7 +186,7 @@ Top-Level Elements
   the new name given in the name attribute, and the new event number given in
   the number attribute.
 
-<eventcopy name="identifier" number="identifier" ref="identifier" />
+<errorcopy name="identifier" number="identifier" ref="identifier" />
 
   This element creates an alias for the error named in the ref attribute, with
   the new name given in the name attribute, and the new error number given in
