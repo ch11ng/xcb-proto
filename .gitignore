@@ -15,3 +15,5 @@ ltmain.sh
 missing
 mkinstalldirs
 *.pc
+*.tar.bz2
+*.tar.gz
