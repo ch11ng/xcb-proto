@@ -34,7 +34,7 @@ authorization from the authors.
     <item name="Set" />
     <item name="Union" />
     <item name="Intersect" />
-    <item name="Substract" />
+    <item name="Subtract" />
     <item name="Invert" />
   </enum>
 
