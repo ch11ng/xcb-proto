@@ -18,7 +18,7 @@ for licensing information.
   <request name="GetXIDRange" opcode="1">
     <reply>
       <pad bytes="1" />
-      <field type="XID" name="start_id" />
+      <field type="CARD32" name="start_id" />
       <field type="CARD32" name="count" />
     </reply>
   </request>
@@ -29,7 +29,7 @@ for licensing information.
       <pad bytes="1" />
       <field type="CARD32" name="ids_len" />
       <pad bytes="20" />
-      <list type="XID" name="ids">
+      <list type="CARD32" name="ids">
         <fieldref>ids_len</fieldref>
       </list>
     </reply>
