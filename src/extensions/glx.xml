@@ -134,7 +134,7 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="glx:CONTEXT" name="context" />
 		<field type="VISUALID" name="visual" />
 		<field type="CARD32" name="screen" />
-		<field type="CARD32" name="share_list" />
+		<field type="glx:CONTEXT" name="share_list" />
 		<field type="BOOL" name="is_direct" />
 		<pad bytes="3" />
 	</request>
