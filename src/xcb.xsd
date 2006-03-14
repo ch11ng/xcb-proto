@@ -88,6 +88,11 @@ authorization from the authors.
       </xsd:element>
       <xsd:element name="fieldref" type="xsd:string" />
       <xsd:element name="value" type="dec-or-hex-integer" />
+      <xsd:element name="bit">
+        <xsd:complexType>
+          <xsd:attribute name="bit" type="xsd:integer" use="required" />
+        </xsd:complexType>
+      </xsd:element>
     </xsd:choice>
   </xsd:group>
   
