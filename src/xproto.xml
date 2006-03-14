@@ -336,51 +336,21 @@ authorization from the authors.
 
   <!-- Window attributes for CreateWindow and ChangeWindowAttributes. -->
   <enum name="CW">
-    <item name="BackPixmap">
-      <op op="&lt;&lt;"><value>1</value><value>0</value></op>
-    </item>
-    <item name="BackPixel">
-      <op op="&lt;&lt;"><value>1</value><value>1</value></op>
-    </item>
-    <item name="BorderPixmap">
-      <op op="&lt;&lt;"><value>1</value><value>2</value></op>
-    </item>
-    <item name="BorderPixel">
-      <op op="&lt;&lt;"><value>1</value><value>3</value></op>
-    </item>
-    <item name="BitGravity">
-      <op op="&lt;&lt;"><value>1</value><value>4</value></op>
-    </item>
-    <item name="WinGravity">
-      <op op="&lt;&lt;"><value>1</value><value>5</value></op>
-    </item>
-    <item name="BackingStore">
-      <op op="&lt;&lt;"><value>1</value><value>6</value></op>
-    </item>
-    <item name="BackingPlanes">
-      <op op="&lt;&lt;"><value>1</value><value>7</value></op>
-    </item>
-    <item name="BackingPixel">
-      <op op="&lt;&lt;"><value>1</value><value>8</value></op>
-    </item>
-    <item name="OverrideRedirect">
-      <op op="&lt;&lt;"><value>1</value><value>9</value></op>
-    </item>
-    <item name="SaveUnder">
-      <op op="&lt;&lt;"><value>1</value><value>10</value></op>
-    </item>
-    <item name="EventMask">
-      <op op="&lt;&lt;"><value>1</value><value>11</value></op>
-    </item>
-    <item name="DontPropagate">
-      <op op="&lt;&lt;"><value>1</value><value>12</value></op>
-    </item>
-    <item name="Colormap">
-      <op op="&lt;&lt;"><value>1</value><value>13</value></op>
-    </item>
-    <item name="Cursor">
-      <op op="&lt;&lt;"><value>1</value><value>14</value></op>
-    </item>
+    <item name="BackPixmap">      <bit bit="0"/></item>
+    <item name="BackPixel">       <bit bit="1"/></item>
+    <item name="BorderPixmap">    <bit bit="2"/></item>
+    <item name="BorderPixel">     <bit bit="3"/></item>
+    <item name="BitGravity">      <bit bit="4"/></item>
+    <item name="WinGravity">      <bit bit="5"/></item>
+    <item name="BackingStore">    <bit bit="6"/></item>
+    <item name="BackingPlanes">   <bit bit="7"/></item>
+    <item name="BackingPixel">    <bit bit="8"/></item>
+    <item name="OverrideRedirect"><bit bit="9"/></item>
+    <item name="SaveUnder">       <bit bit="10"/></item>
+    <item name="EventMask">       <bit bit="11"/></item>
+    <item name="DontPropagate">   <bit bit="12"/></item>
+    <item name="Colormap">        <bit bit="13"/></item>
+    <item name="Cursor">          <bit bit="14"/></item>
   </enum>
 
   <request name="CreateWindow" opcode="1">
