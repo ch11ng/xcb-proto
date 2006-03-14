@@ -51,12 +51,19 @@ The patch that fixed this server bug in X.org CVS is here:
 	<xidtype name="CONTEXT" />
 	<xidtype name="PBUFFER" />
 	<xidtype name="WINDOW" />
-	<xidtype name="FBCONFIG" />
-	<xidtype name="DRAWABLE" />
+        <xidtype name="FBCONFIG" />
+
+        <union name="DRAWABLE">
+            <field type="xcb_types:WINDOW" name="window" />
+            <field type="PBUFFER" name="glx_pbuffer" />
+            <field type="glx:PIXMAP" name="glx_pixmap" />
+            <field type="glx:WINDOW" name="glx_window" />
+        </union>
 
 	<typedef oldname="float" newname="FLOAT32" />
 	<typedef oldname="double" newname="FLOAT64" />
-	<typedef oldname="CARD32" newname="BOOL32" />
+        <typedef oldname="CARD32" newname="BOOL32" />
+        <typedef oldname="CARD32" newname="CONTEXT_TAG" />
 	    
 	<!-- Errors -->
 	<error name="Generic" number="-1"> <!-- FIXME: fake number -->
@@ -116,12 +123,12 @@ The patch that fixed this server bug in X.org CVS is here:
 
 	<!-- Requests -->
 	<request name="Render" opcode="1" combine-adjacent="true">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<list type="BYTE" name="data" />
 	</request>
 
 	<request name="RenderLarge" opcode="2">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD16" name="request_num" />
 		<field type="CARD16" name="request_total" />
 		<field type="CARD32" name="data_len" />
@@ -146,10 +153,10 @@ The patch that fixed this server bug in X.org CVS is here:
 	<request name="MakeCurrent" opcode="5">
 		<field type="glx:DRAWABLE" name="drawable" />
 		<field type="glx:CONTEXT" name="context" />
-		<field type="CARD32" name="old_context_tag" />
+		<field type="CONTEXT_TAG" name="old_context_tag" />
 		<reply>
 			<pad bytes="1" />
-			<field type="CARD32" name="context_tag" />
+			<field type="CONTEXT_TAG" name="context_tag" />
 			<pad bytes="20" />
 		</reply>
 	</request>
@@ -175,18 +182,18 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="WaitGL" opcode="8">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 	</request>
 
 	<request name="WaitX" opcode="9">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 	</request>
 
 	<request name="CopyContext" opcode="10">
 		<field type="glx:CONTEXT" name="src" />
 		<field type="glx:CONTEXT" name="dest" />
 		<field type="CARD32" name="mask" />
-		<field type="CARD32" name="src_context_tag" />
+		<field type="CONTEXT_TAG" name="src_context_tag" />
 	</request>
 
 	<!-- Enum for CopyContext: mask -->
@@ -215,12 +222,12 @@ The patch that fixed this server bug in X.org CVS is here:
 	</enum>
 
 	<request name="SwapBuffers" opcode="11">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="glx:DRAWABLE" name="drawable" />
 	</request>
 
 	<request name="UseXFont" opcode="12">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="FONT" name="font" />
 		<field type="CARD32" name="first" />
 		<field type="CARD32" name="count" />
@@ -258,13 +265,13 @@ The patch that fixed this server bug in X.org CVS is here:
 	-->
 	<request name="VendorPrivate" opcode="16">
 		<field type="CARD32" name="vendor_code" />
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<list type="BYTE" name="data" />
 	</request>
 
 	<request name="VendorPrivateWithReply" opcode="17">
 		<field type="CARD32" name="vendor_code" />
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<list type="BYTE" name="data" />
 		<reply>
 			<pad bytes="1" />
@@ -360,13 +367,13 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="MakeContextCurrent" opcode="26">
-		<field type="CARD32" name="old_context_tag" />
+		<field type="CONTEXT_TAG" name="old_context_tag" />
 		<field type="glx:DRAWABLE" name="drawable" />
 		<field type="glx:DRAWABLE" name="read_drawable" />
 		<field type="glx:CONTEXT" name="context" />
 		<reply>
 			<pad bytes="1" />
-			<field type="CARD32" name="context_tag" />
+			<field type="CONTEXT_TAG" name="context_tag" />
 			<pad bytes="20" />
 		</reply>
 	</request>
@@ -423,23 +430,23 @@ The patch that fixed this server bug in X.org CVS is here:
 	<!-- Requests for GL Non-rendering Commands (single ops) -->
 
 	<request name="NewList" opcode="101">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="list" />
 		<field type="CARD32" name="mode" />
 	</request>
 
 	<request name="EndList" opcode="102">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 	</request>
 
 	<request name="DeleteLists" opcode="103">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="list" />
 		<field type="INT32" name="range" />
 	</request>
 
 	<request name="GenLists" opcode="104">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="range" />
 		<reply>
 			<pad bytes="1" />
@@ -448,13 +455,13 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="FeedbackBuffer" opcode="105">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="size" />
 		<field type="INT32" name="type" />
 	</request>
 
 	<request name="SelectBuffer" opcode="106">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="size" />
 		<!-- the reply is actually returned in the data
 		of the next RenderMode request -->
@@ -462,7 +469,7 @@ The patch that fixed this server bug in X.org CVS is here:
 
 
 	<request name="RenderMode" opcode="107">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="mode" />
 		<!--
 		This reply is only if RM was previously feedback/selection.
@@ -488,26 +495,26 @@ The patch that fixed this server bug in X.org CVS is here:
 	</enum>
 
 	<request name="Finish" opcode="108">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<reply>
 			<pad bytes="1" />
 		</reply>
 	</request>
 
 	<request name="PixelStoref" opcode="109">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="pname" />
 		<field type="FLOAT32" name="datum" />
 	</request>
 
 	<request name="PixelStorei" opcode="110">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="pname" />
 		<field type="INT32" name="datum" />
 	</request>
 
 	<request name="ReadPixels" opcode="111">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="x" />
 		<field type="INT32" name="y" />
 		<field type="INT32" name="width" />
@@ -530,7 +537,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	Starts on page 58/180
 	-->
 	<request name="GetBooleanv" opcode="112">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="pname" />
 		<reply>
 			<pad bytes="1" />
@@ -545,7 +552,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetClipPlane" opcode="113">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="plane" />
 		<reply>
 			<pad bytes="1" />
@@ -555,7 +562,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetDoublev" opcode="114">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="pname" />
 		<reply>
 			<pad bytes="1" />
@@ -570,7 +577,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetError" opcode="115">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<reply>
 			<pad bytes="1" />
 			<field type="INT32" name="error" />
@@ -578,7 +585,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetFloatv" opcode="116">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="pname" />
 		<reply>
 			<pad bytes="1" />
@@ -593,7 +600,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetIntegerv" opcode="117">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="pname" />
 		<reply>
 			<pad bytes="1" />
@@ -608,7 +615,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetLightfv" opcode="118">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="light" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -624,7 +631,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetLightiv" opcode="119">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="light" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -640,7 +647,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMapdv" opcode="120">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="query" />
 		<reply>
@@ -656,7 +663,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMapfv" opcode="121">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="query" />
 		<reply>
@@ -672,7 +679,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMapiv" opcode="122">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="query" />
 		<reply>
@@ -688,7 +695,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMaterialfv" opcode="123">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="face" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -704,7 +711,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMaterialiv" opcode="124">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="face" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -720,7 +727,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetPixelMapfv" opcode="125">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="map" />
 		<reply>
 			<pad bytes="1" />
@@ -735,7 +742,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetPixelMapuiv" opcode="126">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="map" />
 		<reply>
 			<pad bytes="1" />
@@ -750,7 +757,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetPixelMapusv" opcode="127">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="map" />
 		<reply>
 			<pad bytes="1" />
@@ -765,7 +772,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetPolygonStipple" opcode="128">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="BOOL" name="lsb_first" />
 		<reply>
 			<pad bytes="1" />
@@ -776,7 +783,7 @@ The patch that fixed this server bug in X.org CVS is here:
 
 
 	<request name="GetString" opcode="129">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="name" />
 		<reply>
 			<pad bytes="1" />
@@ -790,7 +797,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexEnvfv" opcode="130">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -806,7 +813,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexEnviv" opcode="131">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -822,7 +829,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexGendv" opcode="132">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="coord" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -838,7 +845,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexGenfv" opcode="133">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="coord" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -854,7 +861,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexGeniv" opcode="134">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="coord" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -870,7 +877,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexImage" opcode="135">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="INT32" name="level" />
 		<field type="CARD32" name="format" />
@@ -889,7 +896,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	    
 
 	<request name="GetTexParameterfv" opcode="136">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -905,7 +912,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexParameteriv" opcode="137">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -921,7 +928,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexLevelParameterfv" opcode="138">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="INT32" name="level" />
 		<field type="CARD32" name="pname" />
@@ -938,7 +945,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetTexLevelParameteriv" opcode="139">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="INT32" name="level" />
 		<field type="CARD32" name="pname" />
@@ -955,7 +962,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="IsList" opcode="141" >
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="list" />
 		<reply>
 			<pad bytes="1" />
@@ -964,11 +971,11 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="Flush" opcode="142">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 	</request>
 
 	<request name="AreTexturesResident" opcode="143">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="n" />
 		<list type="CARD32" name="textures">
 		    <fieldref>n</fieldref>
@@ -982,7 +989,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="DeleteTextures" opcode="144">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="n" />
 		<list type="CARD32" name="textures">
 			<fieldref>n</fieldref>
@@ -990,7 +997,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GenTextures" opcode="145">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="n" />
 		<reply>
 			<pad bytes="1" />
@@ -1000,7 +1007,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="IsTexture" opcode="146">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="texture" />
 		<reply>
 			<pad bytes="1" />
@@ -1009,7 +1016,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetColorTable" opcode="147">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="format" />
 		<field type="CARD32" name="type" />
@@ -1024,7 +1031,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 	
 	<request name="GetColorTableParameterfv" opcode="148">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1040,7 +1047,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetColorTableParameteriv" opcode="149">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1056,7 +1063,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetConvolutionFilter" opcode="150">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="format" />
 		<field type="CARD32" name="type" />
@@ -1073,7 +1080,7 @@ The patch that fixed this server bug in X.org CVS is here:
 
 
 	<request name="GetConvolutionParameterfv" opcode="151">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1089,7 +1096,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetConvolutionParameteriv" opcode="152">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1105,7 +1112,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetSeparableFilter" opcode="153">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="format" />
 		<field type="CARD32" name="type" />
@@ -1121,7 +1128,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetHistogram" opcode="154">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="format" />
 		<field type="CARD32" name="type" />
@@ -1138,7 +1145,7 @@ The patch that fixed this server bug in X.org CVS is here:
 
 
 	<request name="GetHistogramParameterfv" opcode="155">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1154,7 +1161,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetHistogramParameteriv" opcode="156">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1170,7 +1177,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMinmax" opcode="157">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="format" />
 		<field type="CARD32" name="type" />
@@ -1184,7 +1191,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMinmaxParameterfv" opcode="158">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1200,7 +1207,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GetMinmaxParameteriv" opcode="159">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1227,7 +1234,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	http://oss.sgi.com/projects/ogl-sample/registry/ARB/texture_compression.txt
 	-->
 	<request name="GetCompressedTexImageARB" opcode="160">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="INT32" name="level" />
 		<reply>
@@ -1246,7 +1253,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	-->
 
 	<request name="DeleteQueriesARB" opcode="161">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="n" />
 		<list type="CARD32" name="ids">
 			<fieldref>n</fieldref>
@@ -1254,7 +1261,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="GenQueriesARB" opcode="162">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="INT32" name="n" />
 		<reply>
 			<pad bytes="1" />
@@ -1264,7 +1271,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 	
 	<request name="IsQueryARB" opcode="163">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="id" />
 		<reply>
 			<pad bytes="1" />
@@ -1273,7 +1280,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 	
 	<request name="GetQueryivARB" opcode="164">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="target" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1289,7 +1296,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 	
 	<request name="GetQueryObjectivARB" opcode="165">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="id" />
 		<field type="CARD32" name="pname" />
 		<reply>
@@ -1305,7 +1312,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 	
 	<request name="GetQueryObjectuivARB" opcode="166">
-		<field type="CARD32" name="context_tag" />
+		<field type="CONTEXT_TAG" name="context_tag" />
 		<field type="CARD32" name="id" />
 		<field type="CARD32" name="pname" />
 		<reply>
