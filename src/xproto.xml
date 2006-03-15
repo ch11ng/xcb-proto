@@ -237,6 +237,11 @@ authorization from the authors.
 
   <eventcopy name="CirculateRequest" number="27" ref="CirculateNotify" />
 
+  <enum name="Property">
+    <item name="NewValue"><value>0</value></item>
+    <item name="Delete">  <value>1</value></item>
+  </enum>
+
   <event name="PropertyNotify" number="28">
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
@@ -294,6 +299,12 @@ authorization from the authors.
     <field type="ClientMessageData" name="data" />
   </event>
 
+  <enum name="Mapping">
+    <item name="Modifier"><value>0</value></item>
+    <item name="Keyboard"><value>1</value></item>
+    <item name="Pointer"> <value>2</value></item>
+  </enum>
+
   <event name="MappingNotify" number="34">
     <pad bytes="1" />
     <field type="BYTE" name="request" />
@@ -334,23 +345,58 @@ authorization from the authors.
 
   <!-- FIXME: The ListFontsWithInfo request is not supported by XCB. -->
 
+  <enum name="WindowClass">
+    <item name="CopyFromParent"><value>0</value></item>
+    <item name="InputOutput">   <value>1</value></item>
+    <item name="InputOnly">     <value>2</value></item>
+  </enum>
+
   <!-- Window attributes for CreateWindow and ChangeWindowAttributes. -->
   <enum name="CW">
-    <item name="BackPixmap">      <bit bit="0"/></item>
-    <item name="BackPixel">       <bit bit="1"/></item>
-    <item name="BorderPixmap">    <bit bit="2"/></item>
-    <item name="BorderPixel">     <bit bit="3"/></item>
-    <item name="BitGravity">      <bit bit="4"/></item>
-    <item name="WinGravity">      <bit bit="5"/></item>
-    <item name="BackingStore">    <bit bit="6"/></item>
-    <item name="BackingPlanes">   <bit bit="7"/></item>
-    <item name="BackingPixel">    <bit bit="8"/></item>
-    <item name="OverrideRedirect"><bit bit="9"/></item>
-    <item name="SaveUnder">       <bit bit="10"/></item>
-    <item name="EventMask">       <bit bit="11"/></item>
-    <item name="DontPropagate">   <bit bit="12"/></item>
-    <item name="Colormap">        <bit bit="13"/></item>
-    <item name="Cursor">          <bit bit="14"/></item>
+    <item name="BackPixmap">      <bit bit="0" /></item>
+    <item name="BackPixel">       <bit bit="1" /></item>
+    <item name="BorderPixmap">    <bit bit="2" /></item>
+    <item name="BorderPixel">     <bit bit="3" /></item>
+    <item name="BitGravity">      <bit bit="4" /></item>
+    <item name="WinGravity">      <bit bit="5" /></item>
+    <item name="BackingStore">    <bit bit="6" /></item>
+    <item name="BackingPlanes">   <bit bit="7" /></item>
+    <item name="BackingPixel">    <bit bit="8" /></item>
+    <item name="OverrideRedirect"><bit bit="9" /></item>
+    <item name="SaveUnder">       <bit bit="10" /></item>
+    <item name="EventMask">       <bit bit="11" /></item>
+    <item name="DontPropagate">   <bit bit="12" /></item>
+    <item name="Colormap">        <bit bit="13" /></item>
+    <item name="Cursor">          <bit bit="14" /></item>
+  </enum>
+
+  <enum name="EventMask">
+    <item name="NoEvent">           <value>0</value></item>
+    <item name="KeyPress">            <bit bit="0" /></item>
+    <item name="KeyRelease">          <bit bit="1" /></item>
+    <item name="ButtonPress">         <bit bit="2" /></item>
+    <item name="ButtonRelease">       <bit bit="3" /></item>
+    <item name="EnterWindow">         <bit bit="4" /></item>
+    <item name="LeaveWindow">         <bit bit="5" /></item>
+    <item name="PointerMotion">       <bit bit="6" /></item>
+    <item name="PointerMotionHint">   <bit bit="7" /></item>
+    <item name="Button1Motion">       <bit bit="8" /></item>
+    <item name="Button2Motion">       <bit bit="9" /></item>
+    <item name="Button3Motion">       <bit bit="10" /></item>
+    <item name="Button4Motion">       <bit bit="11" /></item>
+    <item name="Button5Motion">       <bit bit="12" /></item>
+    <item name="ButtonMotion">        <bit bit="13" /></item>
+    <item name="KeymapState">         <bit bit="14" /></item>
+    <item name="Exposure">            <bit bit="15" /></item>
+    <item name="VisibilityChange">    <bit bit="16" /></item>
+    <item name="StructureNotify">     <bit bit="17" /></item>
+    <item name="ResizeRedirect">      <bit bit="18" /></item>
+    <item name="SubstructureNotify">  <bit bit="19" /></item>
+    <item name="SubstructureRedirect"><bit bit="20" /></item>
+    <item name="FocusChange">         <bit bit="21" /></item>
+    <item name="PropertyChange">      <bit bit="22" /></item>
+    <item name="ColorMapChange">      <bit bit="23" /></item>
+    <item name="OwnerGrabButton">     <bit bit="24" /></item>
   </enum>
 
   <request name="CreateWindow" opcode="1">
@@ -376,6 +422,12 @@ authorization from the authors.
                 value-mask-name="value_mask"
                 value-list-name="value_list" />
   </request>
+  
+  <enum name="MapState">
+    <item name="Unmapped">  <value>0</value></item>
+    <item name="Unviewable"><value>1</value></item>
+    <item name="Viewable">  <value>2</value></item>
+  </enum>
 
   <request name="GetWindowAttributes" opcode="3">
     <pad bytes="1" />
@@ -408,6 +460,11 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
   </request>
+  
+  <enum name="SetMode">
+    <item name="Insert"><value>0</value></item>
+    <item name="Delete"><value>1</value></item>
+  </enum>
 
   <request name="ChangeSaveSet" opcode="6">
     <field type="BYTE" name="mode" />
@@ -441,6 +498,16 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
   </request>
+  
+  <enum name="ConfigWindow">
+    <item name="X">          <bit bit="0" /></item>
+    <item name="Y">          <bit bit="1" /></item>
+    <item name="Width">      <bit bit="2" /></item>
+    <item name="Height">     <bit bit="3" /></item>
+    <item name="BorderWidth"><bit bit="4" /></item>
+    <item name="Sibling">    <bit bit="5" /></item>
+    <item name="StackMode">  <bit bit="6" /></item>
+  </enum>
 
   <request name="ConfigureWindow" opcode="12">
     <pad bytes="1" />
@@ -509,6 +576,12 @@ authorization from the authors.
       </list>
     </reply>
   </request>
+  
+  <enum name="PropMode">
+    <item name="Replace"><value>0</value></item>
+    <item name="Prepend"><value>1</value></item>
+    <item name="Append"> <value>2</value></item>
+  </enum>
 
   <request name="ChangeProperty" opcode="18">
     <field type="CARD8" name="mode" />
@@ -534,6 +607,10 @@ authorization from the authors.
     <field type="WINDOW" name="window" />
     <field type="ATOM" name="property" />
   </request>
+  
+  <enum name="GetPropertyType">
+    <item name="Any"><value>0</value></item>
+  </enum>
 
   <request name="GetProperty" opcode="20">
     <field type="BOOL" name="delete" />
@@ -928,6 +1005,32 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="PIXMAP" name="pixmap" />
   </request>
+  
+  <enum name="GC">
+    <item name="Function">          <bit bit="0" /> </item>
+    <item name="PlaneMask">         <bit bit="1" /> </item>
+    <item name="Foreground">        <bit bit="2" /> </item>
+    <item name="Background">        <bit bit="3" /> </item>
+    <item name="LineWidth">         <bit bit="4" /> </item>
+    <item name="LineStyle">         <bit bit="5" /> </item>
+    <item name="CapStyle">          <bit bit="6" /> </item>
+    <item name="JoinStyle">         <bit bit="7" /> </item>
+    <item name="FillStyle">         <bit bit="8" /> </item>
+    <item name="FillRule">          <bit bit="9" /> </item>
+    <item name="Tile">              <bit bit="10" /> </item>
+    <item name="Stipple">           <bit bit="11" /> </item>
+    <item name="TileStippleOriginX"><bit bit="12" /> </item>
+    <item name="TileStippleOriginY"><bit bit="13" /> </item>
+    <item name="Font">              <bit bit="14" /> </item>
+    <item name="SubwindowMode">     <bit bit="15" /> </item>
+    <item name="GraphicsExposures"> <bit bit="16" /> </item>
+    <item name="ClipOriginX">       <bit bit="17" /> </item>
+    <item name="ClipOriginY">       <bit bit="18" /> </item>
+    <item name="Mask">              <bit bit="19" /> </item>
+    <item name="DashOffset">        <bit bit="20" /> </item>
+    <item name="DashList">          <bit bit="21" /> </item>
+    <item name="ArcMode">           <bit bit="22" /> </item>
+  </enum>
 
   <request name="CreateGC" opcode="55">
     <pad bytes="1" />
@@ -1081,6 +1184,17 @@ authorization from the authors.
     <field type="GCONTEXT" name="gc" />
     <list type="ARC" name="arcs" />
   </request>
+  
+  <enum name="ImageFormat">
+    <item name="XYBitmap"><value>0</value></item>
+    <item name="XYPixmap"><value>1</value></item>
+    <item name="ZPixmap"> <value>2</value></item>
+  </enum>
+
+  <enum name="ImageOrder">
+    <item name="LSBFirst"><value>0</value></item>
+    <item name="MSBFirst"><value>1</value></item>
+  </enum>
 
   <request name="PutImage" opcode="72">
     <field type="CARD8" name="format" />
