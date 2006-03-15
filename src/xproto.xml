@@ -369,6 +369,12 @@ authorization from the authors.
     <item name="Colormap">        <bit bit="13" /></item>
     <item name="Cursor">          <bit bit="14" /></item>
   </enum>
+  
+  <enum name="BackingStore">
+    <item name="NotUseful"> <value>0</value></item>
+    <item name="WhenMapped"><value>1</value></item>
+    <item name="Always">    <value>2</value></item>
+  </enum>
 
   <enum name="EventMask">
     <item name="NoEvent">           <value>0</value></item>
@@ -694,6 +700,15 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="TIMESTAMP" name="time" />
   </request>
+
+  <enum name="Button">
+     <item name="Any"><value>0</value></item>
+     <item name="1">  <value>1</value></item>
+     <item name="2">  <value>2</value></item>
+     <item name="3">  <value>3</value></item>
+     <item name="4">  <value>4</value></item>
+     <item name="5">  <value>5</value></item>
+  </enum>
 
   <request name="GrabButton" opcode="28">
     <field type="BOOL" name="owner_events" />
@@ -1114,6 +1129,11 @@ authorization from the authors.
     <field type="CARD16" name="height" />
     <field type="CARD32" name="bit_plane" />
   </request>
+  
+  <enum name="CoordMode">
+    <item name="Origin">  <value>0</value></item>
+    <item name="Previous"><value>1</value></item>
+  </enum>
 
   <request name="PolyPoint" opcode="64" combine-adjacent="true">
     <field type="BYTE" name="coordinate_mode" />
