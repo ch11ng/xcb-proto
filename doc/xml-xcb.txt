@@ -259,9 +259,9 @@ Expressions
 <op op="operator">expression expression</op>
 
   The op element represents an operator, with the op attribute specifying
-  which operator.  The supported operations are *, /, &amp;, and &lt;&lt;, and
-  their semantics are identical to the corresponding operators in C.  The two
-  operand expressions may be fieldref, value, or op elements.
+  which operator.  The supported operations are +, -, *, /, &amp;, and
+  &lt;&lt;, and their semantics are identical to the corresponding operators
+  in C.  The two operand expressions may be other expression elements.
 
 <fieldref>identifier</fieldref>
 
@@ -273,3 +273,8 @@ Expressions
 
   The value element represents a literal integer value in an expression.  The
   integer may be expressed in decimal or hexadecimal.
+
+<bit>integer</bit>
+
+  The bit element represents a literal bitmask value in an expression.
+  The integer must be in the range 0..31, expanding to (1<<n) in C.
