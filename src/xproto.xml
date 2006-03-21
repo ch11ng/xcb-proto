@@ -363,8 +363,6 @@ authorization from the authors.
   <!-- The requests, in major number order. -->
   <!-- It is the caller's responsibility to free returned XCB*Rep objects. -->
 
-  <!-- FIXME: The ListFontsWithInfo request is not supported by XCB. -->
-
   <enum name="WindowClass">
     <item name="CopyFromParent"><value>0</value></item>
     <item name="InputOutput">   <value>1</value></item>
