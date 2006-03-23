@@ -534,6 +534,14 @@ authorization from the authors.
     <item name="Sibling">    <bit>5</bit></item>
     <item name="StackMode">  <bit>6</bit></item>
   </enum>
+  
+  <enum name="StackMode">
+    <item name="Above">   <value>0</value></item>
+    <item name="Below">   <value>1</value></item>
+    <item name="TopIf">   <value>2</value></item>
+    <item name="BottomIf"><value>3</value></item>
+    <item name="Opposite"><value>4</value></item>
+  </enum>
 
   <request name="ConfigureWindow" opcode="12">
     <pad bytes="1" />
@@ -1061,7 +1069,7 @@ authorization from the authors.
     <item name="GraphicsExposures"> <bit>16</bit></item>
     <item name="ClipOriginX">       <bit>17</bit></item>
     <item name="ClipOriginY">       <bit>18</bit></item>
-    <item name="Mask">              <bit>19</bit></item>
+    <item name="ClipMask">          <bit>19</bit></item>
     <item name="DashOffset">        <bit>20</bit></item>
     <item name="DashList">          <bit>21</bit></item>
     <item name="ArcMode">           <bit>22</bit></item>
@@ -1263,6 +1271,12 @@ authorization from the authors.
     <list type="ARC" name="arcs" />
   </request>
 
+  <enum name="PolyShape">
+    <item name="Complex">  <value>0</value></item>
+    <item name="Nonconvex"><value>1</value></item>
+    <item name="Convex">   <value>2</value></item>
+  </enum>
+
   <request name="FillPoly" opcode="69">
     <pad bytes="1" />
     <field type="DRAWABLE" name="drawable" />
@@ -1371,6 +1385,11 @@ authorization from the authors.
       <fieldref>string_len</fieldref>
     </list>
   </request>
+
+  <enum name= "ColormapAlloc">
+    <item name="None"><value>0</value></item>
+    <item name="All"> <value>1</value></item>
+  </enum>
 
   <request name="CreateColormap" opcode="78">
     <field type="BYTE" name="alloc" />
