@@ -238,9 +238,10 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="CARD32" name="screen" />
 		<field type="VISUALID" name="visual" />
 		<field type="xcb_types:PIXMAP" name="pixmap" />
-		<field type="glx:PIXMAP" name="glxpixmap" />
+		<field type="glx:PIXMAP" name="glx_pixmap" />
 	</request>
 
+        
 	<request name="GetVisualConfigs" opcode="14">
 		<field type="CARD32" name="screen" />
 		<reply>
@@ -255,7 +256,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<request name="DestroyGLXPixmap" opcode="15">
-		<field type="glx:PIXMAP" name="glxpixmap" />
+		<field type="glx:PIXMAP" name="glx_pixmap" />
 	</request>
 
 	<!--
@@ -335,12 +336,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="CARD32" name="screen" />
 		<field type="CARD32" name="fbconfig" />
 		<field type="xcb_types:PIXMAP" name="pixmap" />
-		<field type="glx:PIXMAP" name="glxpixmap" />
+		<field type="glx:PIXMAP" name="glx_pixmap" />
 		<field type="CARD32" name="num_attribs" />  
 	</request>
 
 	<request name="DestroyPixmap" opcode="23">
-		<field type="glx:PIXMAP" name="glxpixmap" />
+		<field type="glx:PIXMAP" name="glx_pixmap" />
 	</request>
 
 	<request name="CreateNewContext" opcode="24">
