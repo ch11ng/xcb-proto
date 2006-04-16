@@ -1,4 +1,11 @@
-xcb-proto (0.9-1pre2v2) unstable; urgency=low
+xcb-proto (0.9-3) UNRELEASED; urgency=low
+
+  * Stop running autoreconf in debian/rules, and remove Build-Depends for
+    autoconf and automake.
+
+ -- Josh Triplett <josh@freedesktop.org>  Sat, 15 Apr 2006 19:20:07 -0700
+
+xcb-proto (0.9-2) unstable; urgency=low
 
   * Change Architecture from any to all; these protocol descriptions are
     architecture-independent.
