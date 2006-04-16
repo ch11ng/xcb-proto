@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.57)
-AC_INIT([XCBProto],
+AC_INIT([XCB Proto],
         0.9,
         [xcb@lists.freedesktop.org])
 AC_CONFIG_SRCDIR([xcb-proto.pc.in])
