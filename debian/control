@@ -10,6 +10,7 @@ Bugs: mailto:xcb@lists.freedesktop.org
 Package: xcb-proto
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: x11-common (>= 1:1.09)
 Description: X C Binding - protocol descriptions
  Xlib has been the standard C binding for the X Window System protocol
  for many years now. It is an excellent piece of work, but there are
