@@ -1,4 +1,18 @@
-xcb-proto (0.9-1pre2v2) unstable; urgency=low
+xcb-proto (0.9-3) UNRELEASED; urgency=low
+
+  * Stop running autoreconf in debian/rules, and remove Build-Depends for
+    autoconf and automake.
+  * Debian X11R7 transition:
+    * Install protocol descriptions to /usr/include/X11, not
+      /usr/X11R6/include/X11.
+    * Pre-Depends: x11-common (>= 1:1.09).
+  * Validate the protocol descriptions during the build:
+    * Set DEB_MAKE_CHECK_TARGET=check in debian/rules.
+    * Add Build-Depends on libxml2-utils for xmllint.
+
+ -- Josh Triplett <josh@freedesktop.org>  Sun, 16 Apr 2006 13:03:02 -0700
+
+xcb-proto (0.9-2) unstable; urgency=low
 
   * Change Architecture from any to all; these protocol descriptions are
     architecture-independent.

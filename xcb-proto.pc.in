@@ -2,6 +2,6 @@ prefix=@prefix@
 includedir=@includedir@
 xcbincludedir=@xcbincludedir@
 
-Name: XCBProto
+Name: XCB Proto
 Description: X protocol descriptions for XCB
 Version: @PACKAGE_VERSION@
