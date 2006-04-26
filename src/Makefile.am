@@ -19,6 +19,7 @@ nobase_xcbinclude_HEADERS = xcb.xsd \
                             extensions/xf86dri.xml \
                             extensions/xfixes.xml \
                             extensions/xprint.xml \
+                            extensions/xtest.xml \
                             extensions/xv.xml    \
                             extensions/xvmc.xml
 
