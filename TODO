@@ -1,4 +1,4 @@
-Last Updated: 01/15/06
+Last Updated: 2006-04-27
 
 Extension Status:
 
@@ -32,8 +32,6 @@ U XFree86-DRI
   XFree86-VidModeExtension
   XINERAMA
 I XpExtension (XPRINT)
-  XTEST
+X XTEST
 X XVideo
 U XVideo-MotionCompensation
-
-
