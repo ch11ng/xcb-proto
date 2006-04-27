@@ -33,7 +33,7 @@ X XEVIE
 X XFIXES
   XFree86-Bigfont
   XFree86-DGA
-U XFree86-DRI
+X XFree86-DRI
   XFree86-Misc
   XFree86-VidModeExtension
   XINERAMA
