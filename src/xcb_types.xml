@@ -150,7 +150,7 @@ authorization from the authors.
     </list>
   </struct>
 
-  <struct name="ConnSetupReq">
+  <struct name="SetupReq">
     <field type="CARD8" name="byte_order" />
     <pad bytes="1" />
     <field type="CARD16" name="protocol_major_version" />
@@ -165,13 +165,7 @@ authorization from the authors.
     </list>
   </struct>
 
-  <struct name="ConnSetupGenericRep">
-    <field type="CARD8" name="status" />
-    <pad bytes="5" />
-    <field type="CARD16" name="length" />
-  </struct>
-
-  <struct name="ConnSetupFailedRep">
+  <struct name="SetupFailed">
     <field type="CARD8" name="status" /> <!-- always 0 -> Failed -->
     <field type="CARD8" name="reason_len" />
     <field type="CARD16" name="protocol_major_version" />
@@ -182,7 +176,7 @@ authorization from the authors.
     </list>
   </struct>
 
-  <struct name="ConnSetupAuthenticateRep">
+  <struct name="SetupAuthenticate">
     <field type="CARD8" name="status" /> <!-- always 2 -> Authenticate -->
     <pad bytes="5" />
     <field type="CARD16" name="length" />
@@ -194,7 +188,7 @@ authorization from the authors.
     </list>
   </struct>
 
-  <struct name="ConnSetupSuccessRep">
+  <struct name="Setup">
     <field type="CARD8" name="status" /> <!-- always 1 -> Success -->
     <pad bytes="1" />
     <field type="CARD16" name="protocol_major_version" />
