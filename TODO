@@ -11,6 +11,7 @@ X COMPOSITE
 X DAMAGE
   DOUBLE-BUFFER
 X DPMS
+  Extended-Visual-Information
 X GLX
   LBX
 X MIT-SCREEN-SAVER
@@ -20,17 +21,24 @@ X MIT-SHM
 X RANDR
 X RECORD
 X RENDER
+  SECURITY
+  SGI-GLX
 X SHAPE
 X SYNC
+  TOG-CUP
 X X-Resource
-  AC-APPGROUP
+  XC-APPGROUP
 X XC-MISC
 X XEVIE
 X XFIXES
+  XFree86-Bigfont
   XFree86-DGA
 U XFree86-DRI
+  XFree86-Misc
   XFree86-VidModeExtension
   XINERAMA
+  XInputExtension
+  XKEYBOARD
 I XpExtension (XPRINT)
 X XTEST
 X XVideo
