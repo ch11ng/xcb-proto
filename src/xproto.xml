@@ -26,7 +26,7 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 <xcb header="xproto">
-  <!-- Core event and error types -->
+  <!-- Core event types -->
   
   <enum name="ModMask">
     <item name="Shift">  <bit>0</bit></item>
@@ -80,6 +80,12 @@ authorization from the authors.
 
   <eventcopy name="ButtonRelease" number="5" ref="ButtonPress" />
 
+  <!-- MotionNotify detail -->
+  <enum name="Motion">
+    <item name="Normal"><value>0</value></item>
+    <item name="Hint">  <value>1</value></item>
+  </enum>
+
   <event name="MotionNotify" number="6">
     <field type="BYTE" name="detail" />
     <field type="TIMESTAMP" name="time" />
@@ -93,6 +99,24 @@ authorization from the authors.
     <field type="CARD16" name="state" />
     <field type="BOOL" name="same_screen" />
   </event>
+
+  <enum name="NotifyDetail">
+    <item name="Ancestor">        <value>0</value></item>
+    <item name="Virtual">         <value>1</value></item>
+    <item name="Inferior">        <value>2</value></item>
+    <item name="Nonlinear">       <value>3</value></item>
+    <item name="NonlinearVirtual"><value>4</value></item>
+    <item name="Pointer">         <value>5</value></item>
+    <item name="PointerRoot">     <value>6</value></item>
+    <item name="None">            <value>7</value></item>
+  </enum>
+
+  <enum name="NotifyMode">
+    <item name="Normal">      <value>0</value></item>
+    <item name="Grab">        <value>1</value></item>
+    <item name="Ungrab">      <value>2</value></item>
+    <item name="WhileGrabbed"><value>3</value></item>
+  </enum>
 
   <event name="EnterNotify" number="7">
     <field type="BYTE" name="detail" />
@@ -151,6 +175,12 @@ authorization from the authors.
     <field type="CARD16" name="minor_opcode" />
     <field type="CARD8" name="major_opcode" />
   </event>
+
+  <enum name="Visibility">
+    <item name="Unobscured">       <value>0</value></item>
+    <item name="PartiallyObscured"><value>1</value></item>
+    <item name="FullyObscured">    <value>2</value></item>
+  </enum>
 
   <event name="VisibilityNotify" number="15">
     <pad bytes="1" />
@@ -247,6 +277,11 @@ authorization from the authors.
     <field type="CARD16" name="height" />
   </event>
 
+  <enum name="Place">
+    <item name="OnTop">   <value>0</value></item>
+    <item name="OnBottom"><value>1</value></item>
+  </enum>
+
   <event name="CirculateNotify" number="26">
     <pad bytes="1" />
     <field type="WINDOW" name="event" />
@@ -296,6 +331,11 @@ authorization from the authors.
     <field type="ATOM" name="property" />
   </event>
 
+  <enum name="ColormapState">
+    <item name="Uninstalled"><value>0</value></item>
+    <item name="Installed">  <value>1</value></item>
+  </enum>
+
   <event name="ColormapNotify" number="32">
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
@@ -332,6 +372,12 @@ authorization from the authors.
     <field type="CARD8" name="count" />
   </event>
 
+
+
+  <!-- Core error types -->
+
+
+
   <error name="Request" number="1">
     <field type="CARD32" name="bad_value" />
     <field type="CARD16" name="minor_opcode" />
@@ -360,8 +406,12 @@ authorization from the authors.
   <errorcopy name="Length" number="16" ref="Request" />
   <errorcopy name="Implementation" number="17" ref="Request" />
 
-  <!-- The requests, in major number order. -->
+
+
+  <!-- The core requests, in major number order. -->
   <!-- It is the caller's responsibility to free returned XCB*Rep objects. -->
+
+
 
   <enum name="WindowClass">
     <item name="CopyFromParent"><value>0</value></item>
@@ -388,6 +438,27 @@ authorization from the authors.
     <item name="Cursor">          <bit>14</bit></item>
   </enum>
   
+  <enum name="BackPixmap">
+    <item name="None">          <value>0</value></item>
+    <item name="ParentRelative"><value>1</value></item>
+  </enum>
+
+  <enum name="Gravity">
+    <item name="BitForget"><value>0</value></item>
+    <item name="WinUnmap"> <value>0</value></item>
+    <item name="NorthWest"><value>1</value></item>
+    <item name="North">    <value>2</value></item>
+    <item name="NorthEast"><value>3</value></item>
+    <item name="West">     <value>4</value></item>
+    <item name="Center">   <value>5</value></item>
+    <item name="East">     <value>6</value></item>
+    <item name="SouthWest"><value>7</value></item>
+    <item name="South">    <value>8</value></item>
+    <item name="SouthEast"><value>9</value></item>
+    <item name="Static">   <value>10</value></item>
+  </enum>
+
+  <!-- Also used in XCBSCREEN field backing_stores -->
   <enum name="BackingStore">
     <item name="NotUseful"> <value>0</value></item>
     <item name="WhenMapped"><value>1</value></item>
@@ -549,6 +620,11 @@ authorization from the authors.
                 value-list-name="value_list" />
   </request>
 
+  <enum name="Circulate">
+    <item name="RaiseLowest"> <value>0</value></item>
+    <item name="LowerHighest"><value>1</value></item>
+  </enum>
+
   <request name="CirculateWindow" opcode="13">
     <field type="CARD8" name="direction" />
     <field type="WINDOW" name="window" />
@@ -701,12 +777,30 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
   </request>
 
+  <enum name="SendEventDest">
+    <item name="PointerWindow"><value>0</value></item>
+    <item name="ItemFocus">    <value>1</value></item>
+  </enum>
+
   <request name="SendEvent" opcode="25">
     <field type="BOOL" name="propagate" />
     <field type="WINDOW" name="destination" />
     <field type="CARD32" name="event_mask" />
     <list type="char" name="event"><value>32</value></list>
   </request>
+
+  <enum name="GrabMode">
+    <item name="Async"><value>0</value></item>
+    <item name="Sync"> <value>1</value></item>
+  </enum>
+
+  <enum name="GrabStatus">
+    <item name="Success">       <value>0</value></item>
+    <item name="AlreadyGrabbed"><value>1</value></item>
+    <item name="InvalidTime">   <value>2</value></item>
+    <item name="NotViewable">   <value>3</value></item>
+    <item name="Frozen">        <value>4</value></item>
+  </enum>
 
   <request name="GrabPointer" opcode="26">
     <field type="BOOL" name="owner_events" />
@@ -779,6 +873,11 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
   </request>
 
+  <!-- Use KEYCODE any = { XCBGrabAny }; to grab any key -->
+  <enum name="Grab">
+    <item name="Any"><value>0</value></item>
+  </enum>
+
   <request name="GrabKey" opcode="33">
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
@@ -793,6 +892,17 @@ authorization from the authors.
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" />
   </request>
+
+  <enum name="Allow">
+    <item name="AsyncPointer">  <value>0</value></item>
+    <item name="SyncPointer">   <value>1</value></item>
+    <item name="ReplayPointer"> <value>2</value></item>
+    <item name="AsyncKeyboard"> <value>3</value></item>
+    <item name="SyncKeyboard">  <value>4</value></item>
+    <item name="ReplayKeyboard"><value>5</value></item>
+    <item name="AsyncBoth">     <value>6</value></item>
+    <item name="SyncBoth">      <value>7</value></item>
+  </enum>
 
   <request name="AllowEvents" opcode="35">
     <field type="CARD8" name="mode" />
@@ -865,6 +975,13 @@ authorization from the authors.
     <field type="INT16" name="dst_y" />
   </request>
 
+  <!-- used for revert_to and focus -->
+  <enum name="InputFocus">
+    <item name="None">       <value>0</value></item>
+    <item name="PointerRoot"><value>1</value></item>
+    <item name="Parent">     <value>2</value></item>  <!-- revert_to only -->
+  </enum>
+
   <request name="SetInputFocus" opcode="42">
     <field type="CARD8" name="revert_to" />
     <field type="WINDOW" name="focus" />
@@ -898,6 +1015,11 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="FONT" name="font" />
   </request>
+
+  <enum name="FontDraw">
+    <item name="LeftToRight"><value>0</value></item>
+    <item name="RightToLeft"><value>1</value></item>
+  </enum>
 
   <struct name="FONTPROP">
     <field type="ATOM" name="name" />
@@ -1168,6 +1290,13 @@ authorization from the authors.
     </list>
   </request>
 
+  <enum name="ClipOrdering">
+    <item name="Unsorted"><value>0</value></item>
+    <item name="YSorted"> <value>1</value></item>
+    <item name="YXSorted"><value>2</value></item>
+    <item name="YXBanded"><value>3</value></item>
+  </enum>
+
   <request name="SetClipRectangles" opcode="59">
     <field type="BYTE" name="ordering" />
     <field type="GCONTEXT" name="gc" />
@@ -1302,11 +1431,6 @@ authorization from the authors.
     <item name="XYBitmap"><value>0</value></item>
     <item name="XYPixmap"><value>1</value></item>
     <item name="ZPixmap"> <value>2</value></item>
-  </enum>
-
-  <enum name="ImageOrder">
-    <item name="LSBFirst"><value>0</value></item>
-    <item name="MSBFirst"><value>1</value></item>
   </enum>
 
   <request name="PutImage" opcode="72">
@@ -1512,6 +1636,12 @@ authorization from the authors.
     <list type="CARD32" name="pixels" />
   </request>
 
+  <enum name="ColorFlag">
+    <item name="Red">  <bit>0</bit></item>
+    <item name="Green"><bit>1</bit></item>
+    <item name="Blue"> <bit>2</bit></item>
+  </enum>
+
   <struct name="COLORITEM">
     <field type="CARD32" name="pixel" />
     <field type="CARD16" name="red" />
@@ -1622,6 +1752,12 @@ authorization from the authors.
     <field type="CARD16" name="back_blue" />
   </request>
 
+  <enum name="QueryShapeOf">
+    <item name="LargestCursor"> <value>0</value></item>
+    <item name="FastestTile">   <value>1</value></item>
+    <item name="FastestStipple"><value>2</value></item>    
+  </enum>
+
   <request name="QueryBestSize" opcode="97">
     <field type="CARD8" name="class" />
     <field type="DRAWABLE" name="drawable" />
@@ -1687,6 +1823,28 @@ authorization from the authors.
     </reply>
   </request>
 
+  <enum name="KB">
+    <item name="KeyClickPercent"><bit>0</bit></item>
+    <item name="BellPercent">    <bit>1</bit></item>
+    <item name="BellPitch">      <bit>2</bit></item>
+    <item name="BellDuration">   <bit>3</bit></item>
+    <item name="Led">            <bit>4</bit></item>
+    <item name="LedMode">        <bit>5</bit></item>
+    <item name="Key">            <bit>6</bit></item>
+    <item name="AutoRepeatMode"> <bit>7</bit></item>
+  </enum>
+
+  <enum name="LedMode">
+    <item name="Off"><value>0</value></item>
+    <item name="On"> <value>1</value></item>
+  </enum>
+
+  <enum name="AutoRepeatMode">
+    <item name="Off">    <value>0</value></item>
+    <item name="On">     <value>1</value></item>
+    <item name="Default"><value>2</value></item>
+  </enum>
+
   <request name="ChangeKeyboardControl" opcode="102">
     <pad bytes="1" />
     <valueparam value-mask-type="CARD32"
@@ -1729,6 +1887,21 @@ authorization from the authors.
     </reply>
   </request>
 
+  <!-- Screen saver timeout and interval can be set to -1 to restore defaults
+       and set to 0 to disable the screen saver. -->
+
+  <enum name="Blanking">
+    <item name="NotPreferred"><value>0</value></item>
+    <item name="Preferred">   <value>1</value></item>
+    <item name="Default">     <value>2</value></item>
+  </enum>
+
+  <enum name="Exposures">
+    <item name="NotAllowed"><value>0</value></item>
+    <item name="Allowed">   <value>1</value></item>
+    <item name="Default">   <value>2</value></item>
+  </enum>
+
   <request name="SetScreenSaver" opcode="107">
     <pad bytes="1" />
     <field type="INT16" name="timeout" />
@@ -1746,6 +1919,20 @@ authorization from the authors.
       <field type="BYTE" name="allow_exposures" />
     </reply>
   </request>
+
+  <enum name="Host">
+    <item name="Insert"><value>0</value></item>
+    <item name="Delete"><value>1</value></item>
+  </enum>
+
+  <!-- also used and extended for Xau authentication -->
+  <enum name="Family">
+    <item name="Internet">         <value>0</value></item>
+    <item name="DECnet">           <value>1</value></item>
+    <item name="Chaos">            <value>2</value></item>
+    <item name="ServerInterpreted"><value>5</value></item>
+    <item name="Internet6">        <value>6</value></item>
+  </enum>
 
   <request name="ChangeHosts" opcode="109">
     <field type="CARD8" name="mode" />
@@ -1777,13 +1964,28 @@ authorization from the authors.
     </reply>
   </request>
 
+  <enum name="AccessControl">
+    <item name="Disable"><value>0</value></item>
+    <item name="Enable"> <value>1</value></item>
+  </enum>
+
   <request name="SetAccessControl" opcode="111">
     <field type="CARD8" name="mode" />
   </request>
 
+  <enum name="CloseDown">
+    <item name="DestroyAll">     <value>0</value></item>
+    <item name="RetainPermanent"><value>1</value></item>
+    <item name="RetainTemporary"><value>2</value></item>
+  </enum>
+
   <request name="SetCloseDownMode" opcode="112">
     <field type="CARD8" name="mode" />
   </request>
+
+  <enum name="Kill">
+    <item name="AllTemporary"><value>0</value></item>
+  </enum>
 
   <request name="KillClient" opcode="113">
     <pad bytes="1" />
@@ -1799,9 +2001,21 @@ authorization from the authors.
     </list>
   </request>
 
+  <enum name="ScreenSaver">
+    <item name="Reset"> <value>0</value></item>
+    <item name="Active"><value>1</value></item>
+  </enum>
+
   <request name="ForceScreenSaver" opcode="115">
     <field type="CARD8" name="mode" />
   </request>
+
+  <!-- Reply from SetPointerMapping or SetModifierMapping -->
+  <enum name="MappingStatus">
+    <item name="Success"><value>0</value></item>
+    <item name="Busy">   <value>1</value></item>
+    <item name="Failure"><value>2</value></item>
+  </enum>
 
   <request name="SetPointerMapping" opcode="116">
     <field type="CARD8" name="map_len" />

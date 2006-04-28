@@ -107,6 +107,15 @@ authorization from the authors.
     <pad bytes="5" />
   </struct>
 
+  <enum name="VisualClass">
+    <item name="StaticGray"> <value>0</value></item>
+    <item name="GrayScale">  <value>1</value></item>
+    <item name="StaticColor"><value>2</value></item>
+    <item name="PseudoColor"><value>3</value></item>
+    <item name="TrueColor">  <value>4</value></item>
+    <item name="DirectColor"><value>5</value></item>
+  </enum>
+
   <struct name="VISUALTYPE">
     <field type="VISUALID" name="visual_id" />
     <field type="CARD8" name="class" />
@@ -187,6 +196,11 @@ authorization from the authors.
       </op>
     </list>
   </struct>
+
+  <enum name="ImageOrder">
+    <item name="LSBFirst"><value>0</value></item>
+    <item name="MSBFirst"><value>1</value></item>
+  </enum>
 
   <struct name="Setup">
     <field type="CARD8" name="status" /> <!-- always 1 -> Success -->
