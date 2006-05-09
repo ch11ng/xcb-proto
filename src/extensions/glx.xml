@@ -247,7 +247,7 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<field type="CARD32" name="num_visuals" />
-			<field type="CARD32" name="num_props" />
+			<field type="CARD32" name="num_properties" />
                         <pad bytes="16" />
                         <list type="CARD32" name="property_list" />
 		</reply>
