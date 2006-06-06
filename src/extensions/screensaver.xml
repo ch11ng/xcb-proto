@@ -58,8 +58,8 @@ Draft Standard Version 1.1
     <pad bytes="2"/>
     <reply>
       <pad bytes="1"/>
-      <field type="CARD8" name="server_major_version"/>
-      <field type="CARD8" name="server_minor_version"/>
+      <field type="CARD16" name="server_major_version"/>
+      <field type="CARD16" name="server_minor_version"/>
       <pad bytes="20"/>
     </reply>
   </request>
