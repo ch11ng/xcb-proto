@@ -24,7 +24,7 @@ institutions shall not be used in advertising or otherwise to promote the
 sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
-<!-- This file describes version 3 of XFixes. -->
+<!-- This file describes version 4 of XFixes. -->
 <xcb header="xfixes" extension-xname="XFIXES" extension-name="XFixes">
   <import>render</import>
   <import>shape</import>
@@ -71,15 +71,9 @@ authorization from the authors.
   </enum>
 
   <enum name="SelectionEventMask">
-    <item name="SetSelectionOwner">
-      <op op="&lt;&lt;"><value>1</value><value>0</value></op>
-    </item>
-    <item name="SelectionWindowDestroy">
-      <op op="&lt;&lt;"><value>1</value><value>1</value></op>
-    </item>
-    <item name="SelectionClientClose">
-      <op op="&lt;&lt;"><value>1</value><value>2</value></op>
-    </item>
+    <item name="SetSelectionOwner">     <bit>0</bit></item>
+    <item name="SelectionWindowDestroy"><bit>1</bit></item>
+    <item name="SelectionClientClose">  <bit>2</bit></item>
   </enum>
 
   <event name="SelectionNotify" number="0">
@@ -103,9 +97,7 @@ authorization from the authors.
   </enum>
 
   <enum name="CursorNotifyMask">
-    <item name="DisplayCursor">
-      <op op="&lt;&lt;"><value>1</value><value>0</value></op>
-    </item>
+    <item name="DisplayCursor"><bit>0</bit></item>
   </enum>
 
   <event name="CursorNotify" number="1">
@@ -318,5 +310,14 @@ authorization from the authors.
     <field type="CARD16" name="right" />
     <field type="CARD16" name="top" />
     <field type="CARD16" name="bottom" />
+  </request>
+  
+  <!-- Version 4 -->
+  <request name="HideCursor" opcode="29">
+    <field type="WINDOW" name="window" />
+  </request>
+
+  <request name="ShowCursor" opcode="30">
+    <field type="WINDOW" name="window" />
   </request>
 </xcb>
