@@ -24,7 +24,7 @@ institutions shall not be used in advertising or otherwise to promote the
 sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
-<!-- This file describes version 0.2 of COMPOSITE. -->
+<!-- This file describes version 0.3 of COMPOSITE. -->
 <xcb header="composite" extension-xname="Composite" extension-name="Composite">
   <import>xfixes</import>
 
@@ -76,5 +76,20 @@ authorization from the authors.
   <request name="NameWindowPixmap" opcode="6">
     <field type="WINDOW" name="window" />
     <field type="PIXMAP" name="pixmap" />
+  </request>
+  
+  <!-- new in version 0.3 -->
+  
+  <request name="GetOverlayWindow" opcode="7">
+    <field type="WINDOW" name="window" />
+    <reply>
+      <pad bytes="1" />
+      <field type="WINDOW" name="overlay_win" />
+      <pad bytes="20" />
+    </reply>
+  </request>
+
+  <request name="ReleaseOverlayWindow" opcode="8">
+    <field type="WINDOW" name="window" />
   </request>
 </xcb>
