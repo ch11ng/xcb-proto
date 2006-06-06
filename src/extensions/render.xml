@@ -5,7 +5,7 @@ All Rights Reserved.  See the file COPYING in this directory
 for licensing information.
 -->
 <xcb header="render" extension-xname="RENDER" extension-name="Render">
-  <!-- supports version 0.8 -->
+  <!-- supports version 0.10 -->
 
   <enum name="PictType">
     <item name="Indexed" />
@@ -67,45 +67,19 @@ for licensing information.
   </enum>
 
   <enum name="CP">
-    <item name="Repeat">
-      <op op="&lt;&lt;"><value>1</value><value>0</value></op>
-    </item>
-    <item name="AlphaMap">
-      <op op="&lt;&lt;"><value>1</value><value>1</value></op>
-    </item>
-    <item name="AlphaXOrigin">
-      <op op="&lt;&lt;"><value>1</value><value>2</value></op>
-    </item>
-    <item name="AlphaYOrigin">
-      <op op="&lt;&lt;"><value>1</value><value>3</value></op>
-    </item>
-    <item name="ClipXOrigin">
-      <op op="&lt;&lt;"><value>1</value><value>4</value></op>
-    </item>
-    <item name="ClipYOrigin">
-      <op op="&lt;&lt;"><value>1</value><value>5</value></op>
-    </item>
-    <item name="ClipMask">
-      <op op="&lt;&lt;"><value>1</value><value>6</value></op>
-    </item>
-    <item name="GraphicsExposure">
-      <op op="&lt;&lt;"><value>1</value><value>7</value></op>
-    </item>
-    <item name="SubwindowMode">
-      <op op="&lt;&lt;"><value>1</value><value>8</value></op>
-    </item>
-    <item name="PolyEdge">
-      <op op="&lt;&lt;"><value>1</value><value>9</value></op>
-    </item>
-    <item name="PolyMode">
-      <op op="&lt;&lt;"><value>1</value><value>10</value></op>
-    </item>
-    <item name="Dither">
-      <op op="&lt;&lt;"><value>1</value><value>11</value></op>
-    </item>
-    <item name="ComponentAlpha">
-      <op op="&lt;&lt;"><value>1</value><value>12</value></op>
-    </item>
+    <item name="Repeat">          <bit>0</bit></item>
+    <item name="AlphaMap">        <bit>1</bit></item>
+    <item name="AlphaXOrigin">    <bit>2</bit></item>
+    <item name="AlphaYOrigin">    <bit>3</bit></item>
+    <item name="ClipXOrigin">     <bit>4</bit></item>
+    <item name="ClipYOrigin">     <bit>5</bit></item>
+    <item name="ClipMask">        <bit>6</bit></item>
+    <item name="GraphicsExposure"><bit>7</bit></item>
+    <item name="SubwindowMode">   <bit>8</bit></item>
+    <item name="PolyEdge">        <bit>9</bit></item>
+    <item name="PolyMode">        <bit>10</bit></item>
+    <item name="Dither">          <bit>11</bit></item>
+    <item name="ComponentAlpha">  <bit>12</bit></item>
   </enum>
 
   <enum name="SubPixel">
@@ -205,7 +179,7 @@ for licensing information.
     <field type="POINTFIX" name="p3" />
   </struct>
 
-  <struct name="TRAP">
+  <struct name="TRAPEZOID">
     <field type="FIXED" name="top" />
     <field type="FIXED" name="bottom" />
     <field type="LINEFIX" name="left" />
@@ -322,7 +296,7 @@ for licensing information.
     <field type="PICTFORMAT" name="mask_format" />
     <field type="INT16" name="src_x" />
     <field type="INT16" name="src_y" />
-    <list type="TRAP" name="traps" />
+    <list type="TRAPEZOID" name="traps" />
   </request>
 
   <request name="Triangles" opcode="11">
@@ -565,5 +539,55 @@ for licensing information.
   <request name="CreateAnimCursor" opcode="31">
     <field type="CURSOR" name="cid" />
     <list type="ANIMCURSORELT" name="cursors" />
+  </request>
+
+  <!-- new in version 0.9 -->
+ 
+  <struct name="SPANFIX">
+    <field type="FIXED" name="l" />
+    <field type="FIXED" name="r" />
+    <field type="FIXED" name="y" />
+  </struct>
+
+  <struct name="TRAP">
+    <field type="SPANFIX" name="top" />
+    <field type="SPANFIX" name="bot" />
+  </struct>
+
+  <request name="AddTraps" opcode="32">
+    <field type="PICTURE" name="picture" />
+    <field type="INT16" name="x_off" />
+    <field type="INT16" name="y_off" />
+    <list type="TRAP" name="traps" />
+  </request>
+  
+  <!-- new in version 0.10 -->
+
+  <request name="CreateSolidFill" opcode="33">
+    <field type="PICTURE" name="picture" />
+    <field type="COLOR" name="color" />
+  </request>
+
+  <request name="CreateLinearGradient" opcode="34">
+    <field type="PICTURE" name="picture" />
+    <field type="POINTFIX" name="p1" />
+    <field type="POINTFIX" name="p2" />
+    <field type="CARD32" name="num_stops" />
+  </request>
+
+  <request name="CreateRadialGradient" opcode="35">
+    <field type="PICTURE" name="picture" />
+    <field type="POINTFIX" name="inner" />
+    <field type="POINTFIX" name="outer" />
+    <field type="FIXED" name="inner_radius" />
+    <field type="FIXED" name="outer_radius" />
+    <field type="CARD32" name="num_stops" />
+  </request>
+
+  <request name="CreateConicalGradient" opcode="36">
+    <field type="PICTURE" name="picture" />
+    <field type="POINTFIX" name="center" />
+    <field type="FIXED" name="angle" />        <!-- degrees -->
+    <field type="CARD32" name="num_stops" />
   </request>
 </xcb>
