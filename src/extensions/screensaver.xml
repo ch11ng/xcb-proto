@@ -27,37 +27,27 @@ authorization from the authors.
 -->
 <!--
 Screen Saver Extension to the X Protocol
-Draft Standard Version 1.0
+Draft Standard Version 1.1
 -->
 <xcb header="screensaver" extension-xname="MIT-SCREEN-SAVER" extension-name="ScreenSaver">
   <!-- Types -->
 
-  <enum name="KIND">
+  <enum name="Kind">
     <item name="Blanked" />
     <item name="Internal" />
     <item name="External" />
   </enum>
 
-  <enum name="EVENT">
-    <item name="NotifyMask">
-      <op op="&lt;&lt;"><value>1</value><value>0</value></op>
-    </item>
-    <item name="CycleMask">
-      <op op="&lt;&lt;"><value>1</value><value>1</value></op>
-    </item>
+  <enum name="Event">
+    <item name="NotifyMask"><bit>0</bit></item>
+    <item name="CycleMask"> <bit>1</bit></item>
   </enum>
 
-  <enum name="STATE">
+  <enum name="State">
     <item name="Off" />
     <item name="On" />
     <item name="Cycle" />
     <item name="Disabled" />
-  </enum>
-
-  <enum name="CLASS">
-    <item name="CopyFromParent" />
-    <item name="InputOutput" />
-    <item name="InputOnly" />
   </enum>
 
   <!-- Errors -->
@@ -70,7 +60,7 @@ Draft Standard Version 1.0
       <pad bytes="1"/>
       <field type="CARD8" name="server_major_version"/>
       <field type="CARD8" name="server_minor_version"/>
-      <pad bytes="22"/>
+      <pad bytes="20"/>
     </reply>
   </request>
 
@@ -81,15 +71,15 @@ Draft Standard Version 1.0
       <field type="WINDOW" name="saver_window"/>
       <field type="CARD32" name="ms_until_server"/>
       <field type="CARD32" name="ms_since_user_input"/>
-      <field type="CARD16" name="event_mask" />
-      <field type="KIND" name="kind"/>
-      <pad bytes="10"/>
+      <field type="CARD32" name="event_mask" />
+      <field type="BYTE" name="kind"/>  <!-- enum Kind -->
+      <pad bytes="7"/>
     </reply>
   </request>
 
   <request name="SelectInput" opcode="2">
     <field type="DRAWABLE" name="drawable"/>
-    <field type="EVENT" name="event_mask" />
+    <field type="CARD32" name="event_mask" />   <!-- enum Event -->
   </request>
 
   <request name="SetAttributes" opcode="3">
@@ -99,7 +89,7 @@ Draft Standard Version 1.0
     <field type="CARD16" name="width"/>
     <field type="CARD16" name="height"/>
     <field type="CARD16" name="border_width"/>
-    <field type="CLASS" name="class"/>
+    <field type="BYTE" name="class"/>   <!-- enum XCBWindowClass -->
     <field type="CARD8" name="depth"/>
     <field type="VISUALID" name="visual"/>
     <valueparam value-mask-type="CARD32"
@@ -110,17 +100,23 @@ Draft Standard Version 1.0
   <request name="UnsetAttributes" opcode="4">
     <field type="DRAWABLE" name="drawable"/>
   </request>
+  
+  <!-- version 1.1 -->
+  <request name="Suspend" opcode="5">
+    <field type="BOOL" name="suspend" />
+    <pad bytes="3" />
+  </request>
 
   <!-- Events -->
 
   <event name="Notify" number="0">
     <field type="CARD8" name="code"/>
-    <field type="STATE" name="state"/>
+    <field type="BYTE" name="state"/>    <!-- enum State -->
     <field type="CARD16" name="sequence_number"/>
     <field type="TIMESTAMP" name="time"/>
     <field type="WINDOW" name="root"/>
     <field type="WINDOW" name="window"/>
-    <field type="KIND" name="kind"/>
+    <field type="BYTE" name="kind"/>     <!-- enum Kind -->
     <field type="BOOL" name="forced"/>
     <pad bytes="14"/>
   </event>
