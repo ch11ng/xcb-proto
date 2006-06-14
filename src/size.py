@@ -36,6 +36,10 @@ class AnnotateSize(XMLFilterBase):
 			elif self.union is not None:
 				self.totalsize = max(self.totalsize, size)
 			attrs = AttributesUnion(attrs, bytes=str(size))
+		elif name == 'pad':
+			assert self.union is None
+			if self.struct is not None:
+				self.totalsize += int(attrs['bytes'])
 		elif name == 'xidtype':
 			self.setTypeSize(attrs['name'], 4)
 		elif name == 'typedef':
