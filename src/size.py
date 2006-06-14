@@ -5,11 +5,10 @@ from xml.sax.xmlreader import AttributesImpl
 from xml.sax import make_parser
 import sys
 
-class AttributesUnion(AttributesImpl):
-	def __init__(self, base, **values):
-		baseitems = dict(base)
-		baseitems.update(values)
-		AttributesImpl.__init__(self, baseitems)
+def AttributesUnion(base, **values):
+	baseitems = dict(base)
+	baseitems.update(values)
+	return AttributesImpl(baseitems)
 
 class AnnotateSize(XMLFilterBase):
 	types = {
