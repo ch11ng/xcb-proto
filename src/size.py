@@ -12,21 +12,17 @@ def AttributesUnion(base, **values):
 
 class AnnotateSize(XMLFilterBase):
 	types = {
-		'BYTE': 1,
-		'BOOL': 1,
-		'CARD8': 1,
-		'CARD16': 2,
-		'CARD32': 4,
-		'INT8': 1,
-		'INT16': 2,
-		'INT32': 4,
-		'float': 4,
-		'double': 8,
+		'BYTE': 1, 'BOOL': 1,
+		'CARD8': 1, 'CARD16': 2, 'CARD32': 4,
+		'INT8': 1, 'INT16': 2, 'INT32': 4,
+		'char': 1, 'void': 1,
+		'float': 4, 'double': 8,
+		'XID': 4,
 	}
 	header = []
 	def setTypeSize(self, name, size):
+		assert not self.types.has_key(name)
 		self.types[name] = size
-		self.types[self.header[0] + ':' + name] = size
 
 	struct = None
 	union = None
@@ -49,7 +45,7 @@ class AnnotateSize(XMLFilterBase):
 			setattr(self, name, attrs['name'])
 			self.totalsize = 0
 
-		if len(self.header) == 1:
+		if len(self.header) == 1 or name == 'xcb':
 			XMLFilterBase.startElement(self, name, attrs)
 
 	def characters(self, content):
@@ -57,7 +53,7 @@ class AnnotateSize(XMLFilterBase):
 			XMLFilterBase.characters(self, content)
 
 	def endElement(self, name):
-		if len(self.header) == 1:
+		if len(self.header) == 1 or name == 'xcb':
 			XMLFilterBase.endElement(self, name)
 
 		if name == 'xcb':
