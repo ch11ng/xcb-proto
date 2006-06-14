@@ -23,16 +23,16 @@ class AnnotateSize(XMLFilterBase):
 		'float': 4,
 		'double': 8,
 	}
-	header = None
+	header = []
 	def setTypeSize(self, name, size):
 		self.types[name] = size
-		self.types[self.header + ':' + name] = size
+		self.types[self.header[0] + ':' + name] = size
 
 	struct = None
 	union = None
 	def startElement(self, name, attrs):
 		if name == 'xcb':
-			self.header = attrs['header']
+			self.header.insert(0, attrs['header'])
 		elif name == 'field':
 			size = self.types.get(attrs['type'], 0)
 			if self.struct is not None:
@@ -48,17 +48,29 @@ class AnnotateSize(XMLFilterBase):
 			assert self.struct is None and self.union is None
 			setattr(self, name, attrs['name'])
 			self.totalsize = 0
-		XMLFilterBase.startElement(self, name, attrs)
+
+		if len(self.header) == 1:
+			XMLFilterBase.startElement(self, name, attrs)
+
+	def characters(self, content):
+		if len(self.header) == 1:
+			XMLFilterBase.characters(self, content)
 
 	def endElement(self, name):
-		if name == 'struct' or name == 'union':
+		if len(self.header) == 1:
+			XMLFilterBase.endElement(self, name)
+
+		if name == 'xcb':
+			self.header.pop(0)
+		elif name == 'struct' or name == 'union':
 			assert getattr(self, name) is not None
 			self.setTypeSize(getattr(self, name), self.totalsize)
 			setattr(self, name, None)
 			del self.totalsize
-		XMLFilterBase.endElement(self, name)
 
 annotator = AnnotateSize(make_parser())
 annotator.setContentHandler(XMLGenerator())
-for f in sys.argv[1:]:
-	annotator.parse(f)
+if len(sys.argv) > 1:
+	annotator.parse(sys.argv[1])
+else:
+	annotator.parse(sys.stdin)
