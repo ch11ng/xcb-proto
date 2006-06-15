@@ -21,7 +21,7 @@ class AnnotateSize(XMLFilterBase):
 	}
 	header = []
 	def setTypeSize(self, name, size):
-		assert not self.types.has_key(name)
+		assert not self.types.has_key(name), "size of " + name + " declared as both " + str(size) + " and " + str(self.types[name])
 		self.types[name] = size
 
 	struct = None
