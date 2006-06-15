@@ -25,7 +25,7 @@ class AnnotateType(XMLFilterBase):
 	def declareType(self, name):
 		assert ':' not in name
 		qname = self.scopes[0] + ':' + name
-		self.map.setdefault(name, []).append(qname)
+		self.map.setdefault(name, []).insert(0, qname)
 	def getQualifiedType(self, name):
 		if ':' in name:
 			return name
