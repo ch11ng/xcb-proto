@@ -54,7 +54,7 @@ The patch that fixed this server bug in X.org CVS is here:
         <xidtype name="FBCONFIG" />
 
         <union name="DRAWABLE">
-            <field type="xcb_types:WINDOW" name="window" />
+            <field type="xproto:WINDOW" name="window" />
             <field type="PBUFFER" name="glx_pbuffer" />
             <field type="glx:PIXMAP" name="glx_pixmap" />
             <field type="glx:WINDOW" name="glx_window" />
@@ -237,7 +237,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	<request name="CreateGLXPixmap" opcode="13">
 		<field type="CARD32" name="screen" />
 		<field type="VISUALID" name="visual" />
-		<field type="xcb_types:PIXMAP" name="pixmap" />
+		<field type="xproto:PIXMAP" name="pixmap" />
 		<field type="glx:PIXMAP" name="glx_pixmap" />
 	</request>
 
@@ -336,7 +336,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	<request name="CreatePixmap" opcode="22">
 		<field type="CARD32" name="screen" />
 		<field type="CARD32" name="fbconfig" />
-		<field type="xcb_types:PIXMAP" name="pixmap" />
+		<field type="xproto:PIXMAP" name="pixmap" />
 		<field type="glx:PIXMAP" name="glx_pixmap" />
 		<field type="CARD32" name="num_attribs" />  
 	</request>
@@ -417,7 +417,7 @@ The patch that fixed this server bug in X.org CVS is here:
 	<request name="CreateWindow" opcode="31">
 		<field type="SCREEN" name="screen" />
 		<field type="FBCONFIG" name="fbconfig" />
-		<field type="xcb_types:WINDOW" name="window" />
+		<field type="xproto:WINDOW" name="window" />
 		<field type="glx:WINDOW" name="glx_window" />
 		<field type="CARD32" name="num_attribs" />
 		<valueparam value-mask-type="CARD32"

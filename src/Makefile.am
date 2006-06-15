@@ -1,5 +1,4 @@
 nobase_xcbinclude_HEADERS = xcb.xsd \
-                            xcb_types.xml \
                             xproto.xml \
                             extensions/bigreq.xml \
                             extensions/composite.xml \

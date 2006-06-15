@@ -86,8 +86,8 @@ Top-Level Elements
   The import element allows the protocol description to reference types
   declared in another extension.  The content is be the basename of the
   extension XML file, which is also the header attribute of the extension's
-  root node.  Note that types from xcb_types and xproto are automatically
-  available, without explicitly importing them.
+  root node.  Note that types from xproto are automatically available, without
+  explicitly importing them.
 
 <struct name="identifier">structure contents</struct>
 
@@ -197,14 +197,14 @@ Structure Contents
 ------------------
 
 Note: "type" attributes below refer to types defined by previous elements,
-either in the current extension, xproto, xcb_types, or one of the imported
-extensions.  The type name must refer to only one possible type; if more than
-one type matches, an error occurs.  To avoid this, the type may be explicitly
-prefixed with a namespace, which should be the value of the header attribute
-on the protocol description containing the desired type.  The namespace and
-type are separated by a single colon.  For example, to refer to the PIXMAP
-type defined in glx rather than the one defined in xcb_types, use
-type="glx:PIXMAP" rather than type="PIXMAP".
+either in the current extension, xproto, or one of the imported extensions.
+The type name must refer to only one possible type; if more than one type
+matches, an error occurs.  To avoid this, the type may be explicitly prefixed
+with a namespace, which should be the value of the header attribute on the
+protocol description containing the desired type.  The namespace and type are
+separated by a single colon.  For example, to refer to the PIXMAP type defined
+in glx rather than the one defined in xproto, use type="glx:PIXMAP" rather
+than type="PIXMAP".
 
 <pad bytes="integer" />
 

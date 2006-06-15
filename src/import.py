@@ -40,9 +40,7 @@ class ProcessImports(XMLFilterBase):
 		XMLFilterBase.startElement(self, name, attrs)
 		if name == 'xcb':
 			seen[attrs['header']] = True
-			if attrs['header'] != 'xcb_types':
-				self.ensure('xcb_types')
-				self.ensure('xproto')
+			self.ensure('xproto')
 
 	def characters(self, content):
 		if self.inimport is not None:
