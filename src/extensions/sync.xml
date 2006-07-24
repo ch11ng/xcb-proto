@@ -27,6 +27,15 @@ for licensing information.
     <item name="Relative" />
   </enum>
 
+  <enum name="CA">
+    <item name="Counter">  <bit>0</bit></item>
+    <item name="ValueType"><bit>1</bit></item>
+    <item name="Value">    <bit>2</bit></item>
+    <item name="TestType"> <bit>3</bit></item>
+    <item name="Delta">    <bit>4</bit></item>
+    <item name="Events">   <bit>5</bit></item>
+  </enum>
+
   <struct name="INT64">
     <field type="INT32" name="hi" />
     <field type="CARD32" name="lo" />
