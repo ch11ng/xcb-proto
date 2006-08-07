@@ -1559,7 +1559,8 @@ authorization from the authors.
     <item name="Previous"><value>1</value></item>
   </enum>
 
-  <request name="PolyPoint" opcode="64" combine-adjacent="true">
+  <!-- combine-adjacent doesn't work for mode==Relative -->
+  <request name="PolyPoint" opcode="64">
     <field type="BYTE" name="coordinate_mode" />
     <field type="DRAWABLE" name="drawable" />
     <field type="GCONTEXT" name="gc" />
