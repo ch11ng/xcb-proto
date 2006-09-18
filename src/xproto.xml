@@ -159,7 +159,7 @@ authorization from the authors.
     </list>
   </struct>
 
-  <struct name="SetupReq">
+  <struct name="SetupRequest">
     <field type="CARD8" name="byte_order" />
     <pad bytes="1" />
     <field type="CARD16" name="protocol_major_version" />
@@ -1029,7 +1029,7 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
   </request>
 
-  <enum name="Button">
+  <enum name="ButtonIndex">
      <item name="Any"><value>0</value></item>
      <item name="1">  <value>1</value></item>
      <item name="2">  <value>2</value></item>
@@ -2129,7 +2129,7 @@ authorization from the authors.
     </reply>
   </request>
 
-  <enum name="Host">
+  <enum name="HostMode">
     <item name="Insert"><value>0</value></item>
     <item name="Delete"><value>1</value></item>
   </enum>
