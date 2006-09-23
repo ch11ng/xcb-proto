@@ -153,7 +153,7 @@ authorization from the authors.
   <request name="CreateRegionFromWindow" opcode="7">
     <field type="REGION"     name="region" />
     <field type="WINDOW"     name="window" />
-    <field type="SHAPE_KIND" name="kind" />
+    <field type="shape:KIND" name="kind" />
     <pad bytes="3" />
   </request>
 
@@ -235,7 +235,7 @@ authorization from the authors.
 
   <request name="SetWindowShapeRegion" opcode="21">
     <field type="WINDOW"     name="dest" />
-    <field type="SHAPE_KIND" name="dest_kind" />
+    <field type="shape:KIND" name="dest_kind" />
     <pad bytes="3" />
     <field type="INT16"      name="x_offset" />
     <field type="INT16"      name="y_offset" />

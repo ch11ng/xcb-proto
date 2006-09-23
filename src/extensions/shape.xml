@@ -27,10 +27,10 @@ authorization from the authors.
 -->
 <!-- This file describes version 1.1 of the Shape extension. -->
 <xcb header="shape" extension-xname="SHAPE" extension-name="Shape">
-  <typedef oldname="CARD8" newname="SHAPE_OP" />
-  <typedef oldname="CARD8" newname="SHAPE_KIND" />
+  <typedef oldname="CARD8" newname="OP" />
+  <typedef oldname="CARD8" newname="KIND" />
 
-  <!-- Shape attributes of type SHAPE_OP. -->
+  <!-- Shape attributes of type OP. -->
   <enum name="SO">
     <item name="Set" />
     <item name="Union" />
@@ -39,7 +39,7 @@ authorization from the authors.
     <item name="Invert" />
   </enum>
 
-  <!-- Shape attributes of type SHAPE_KIND. -->
+  <!-- Shape attributes of type KIND. -->
   <enum name="SK">
     <item name="Bounding" />
     <item name="Clip" />
@@ -47,7 +47,7 @@ authorization from the authors.
   </enum>
 
   <event name="Notify" number="0">
-    <field type="SHAPE_KIND" name="shape_kind" />
+    <field type="KIND" name="shape_kind" />
     <field type="WINDOW" name="affected_window" />
     <field type="INT16" name="extents_x" />
     <field type="INT16" name="extents_y" />
@@ -66,8 +66,8 @@ authorization from the authors.
   </request>
 
   <request name="Rectangles" opcode="1">
-    <field type="SHAPE_OP" name="operation" />
-    <field type="SHAPE_KIND" name="destination_kind" />
+    <field type="OP" name="operation" />
+    <field type="KIND" name="destination_kind" />
     <field type="BYTE" name="ordering" />
     <pad bytes="1" />
     <field type="WINDOW" name="destination_window" />
@@ -77,8 +77,8 @@ authorization from the authors.
   </request>
 
   <request name="Mask" opcode="2">
-    <field type="SHAPE_OP" name="operation" />
-    <field type="SHAPE_KIND" name="destination_kind" />
+    <field type="OP" name="operation" />
+    <field type="KIND" name="destination_kind" />
     <pad bytes="2" />
     <field type="WINDOW" name="destination_window" />
     <field type="INT16" name="x_offset" />
@@ -87,9 +87,9 @@ authorization from the authors.
   </request>
 
   <request name="Combine" opcode="3">
-    <field type="SHAPE_OP" name="operation" />
-    <field type="SHAPE_KIND" name="destination_kind" />
-    <field type="SHAPE_KIND" name="source_kind" />
+    <field type="OP" name="operation" />
+    <field type="KIND" name="destination_kind" />
+    <field type="KIND" name="source_kind" />
     <pad bytes="1" />
     <field type="WINDOW" name="destination_window" />
     <field type="INT16" name="x_offset" />
@@ -98,7 +98,7 @@ authorization from the authors.
   </request>
 
   <request name="Offset" opcode="4">
-    <field type="SHAPE_KIND" name="destination_kind" />
+    <field type="KIND" name="destination_kind" />
     <pad bytes="3" />
     <field type="WINDOW" name="destination_window" />
     <field type="INT16" name="x_offset" />
@@ -137,7 +137,7 @@ authorization from the authors.
 
   <request name="GetRectangles" opcode="8">
     <field type="WINDOW" name="window" />
-    <field type="SHAPE_KIND" name="source_kind" />
+    <field type="KIND" name="source_kind" />
     <reply>
       <field type="BYTE" name="ordering" />
       <field type="CARD32" name="rectangles_len" />

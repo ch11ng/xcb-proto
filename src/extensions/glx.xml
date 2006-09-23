@@ -198,27 +198,27 @@ The patch that fixed this server bug in X.org CVS is here:
 
 	<!-- Enum for CopyContext: mask -->
 	<enum name="GC">
-		<item name="_GL_CURRENT_BIT"><value>0x00000001</value></item>
-		<item name="_GL_POINT_BIT"><value>0x00000002</value></item>
-		<item name="_GL_LINE_BIT"><value>0x00000004</value></item>
-		<item name="_GL_POLYGON_BIT"><value>0x00000008</value></item>
-		<item name="_GL_POLYGON_STIPPLE_BIT"><value>0x00000010</value></item>
-		<item name="_GL_PIXEL_MODE_BIT"><value>0x00000020</value></item>
-		<item name="_GL_LIGHTING_BIT"><value>0x00000040</value></item>
-		<item name="_GL_FOG_BIT"><value>0x00000080</value></item>
-		<item name="_GL_DEPTH_BUFFER_BIT"><value>0x00000100</value></item>
-		<item name="_GL_ACCUM_BUFFER_BIT"><value>0x00000200</value></item>
-		<item name="_GL_STENCIL_BUFFER_BIT"><value>0x00000400</value></item>
-		<item name="_GL_VIEWPORT_BIT"><value>0x00000800</value></item>
-		<item name="_GL_TRANSFORM_BIT"><value>0x00001000</value></item>
-		<item name="_GL_ENABLE_BIT"><value>0x00002000</value></item>
-		<item name="_GL_COLOR_BUFFER_BIT"><value>0x00004000</value></item>
-		<item name="_GL_HINT_BIT"><value>0x00008000</value></item>
-		<item name="_GL_EVAL_BIT"><value>0x00010000</value></item>
-		<item name="_GL_LIST_BIT"><value>0x00020000</value></item>
-		<item name="_GL_TEXTURE_BIT"><value>0x00040000</value></item>
-		<item name="_GL_SCISSOR_BIT"><value>0x00080000</value></item>
-		<item name="_GL_ALL_ATTRIB_BITS"><value>0x000ffffff</value></item>
+		<item name="GL_CURRENT_BIT"><value>0x00000001</value></item>
+		<item name="GL_POINT_BIT"><value>0x00000002</value></item>
+		<item name="GL_LINE_BIT"><value>0x00000004</value></item>
+		<item name="GL_POLYGON_BIT"><value>0x00000008</value></item>
+		<item name="GL_POLYGON_STIPPLE_BIT"><value>0x00000010</value></item>
+		<item name="GL_PIXEL_MODE_BIT"><value>0x00000020</value></item>
+		<item name="GL_LIGHTING_BIT"><value>0x00000040</value></item>
+		<item name="GL_FOG_BIT"><value>0x00000080</value></item>
+		<item name="GL_DEPTH_BUFFER_BIT"><value>0x00000100</value></item>
+		<item name="GL_ACCUM_BUFFER_BIT"><value>0x00000200</value></item>
+		<item name="GL_STENCIL_BUFFER_BIT"><value>0x00000400</value></item>
+		<item name="GL_VIEWPORT_BIT"><value>0x00000800</value></item>
+		<item name="GL_TRANSFORM_BIT"><value>0x00001000</value></item>
+		<item name="GL_ENABLE_BIT"><value>0x00002000</value></item>
+		<item name="GL_COLOR_BUFFER_BIT"><value>0x00004000</value></item>
+		<item name="GL_HINT_BIT"><value>0x00008000</value></item>
+		<item name="GL_EVAL_BIT"><value>0x00010000</value></item>
+		<item name="GL_LIST_BIT"><value>0x00020000</value></item>
+		<item name="GL_TEXTURE_BIT"><value>0x00040000</value></item>
+		<item name="GL_SCISSOR_BIT"><value>0x00080000</value></item>
+		<item name="GL_ALL_ATTRIB_BITS"><value>0x000ffffff</value></item>
 	</enum>
 
 	<request name="SwapBuffers" opcode="11">
@@ -491,9 +491,9 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<enum name="RM">
-		<item name="_GL_RENDER"><value>0x1C00</value></item>
-		<item name="_GL_FEEDBACK"><value>0x1C01</value></item>
-		<item name="_GL_SELECT"><value>0x1C02</value></item>
+		<item name="GL_RENDER"><value>0x1C00</value></item>
+		<item name="GL_FEEDBACK"><value>0x1C01</value></item>
+		<item name="GL_SELECT"><value>0x1C02</value></item>
 	</enum>
 
 	<request name="Finish" opcode="108">
