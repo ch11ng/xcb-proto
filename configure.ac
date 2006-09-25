@@ -14,7 +14,7 @@ if test "$XMLLINT" = "no"; then
    AC_MSG_WARN([xmllint not found; unable to validate against schema.])
 fi
 
-xcbincludedir='${includedir}/X11/XCB'
+xcbincludedir='${datadir}/xcb'
 AC_SUBST(xcbincludedir)
 
 AC_OUTPUT([Makefile src/Makefile xcb-proto.pc])

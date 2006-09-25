@@ -1,5 +1,6 @@
 prefix=@prefix@
-includedir=@includedir@
+datarootdir=@datarootdir@
+datadir=@datadir@
 xcbincludedir=@xcbincludedir@
 
 Name: XCB Proto
