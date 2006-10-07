@@ -47,15 +47,15 @@ authorization from the authors.
   
   <xidtype name="ATOM" />
   
-  <union name="DRAWABLE">
-    <field type="WINDOW" name="window" />
-    <field type="PIXMAP" name="pixmap" />
-  </union>
+  <xidunion name="DRAWABLE">
+    <type>WINDOW</type>
+    <type>PIXMAP</type>
+  </xidunion>
   
-  <union name="FONTABLE">
-    <field type="FONT" name="font" />
-    <field type="GCONTEXT" name="gcontext" />
-  </union>
+  <xidunion name="FONTABLE">
+    <type>FONT</type>
+    <type>GCONTEXT</type>
+  </xidunion>
   
   <typedef oldname="CARD32" newname="VISUALID" />
 

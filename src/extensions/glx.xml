@@ -53,12 +53,12 @@ The patch that fixed this server bug in X.org CVS is here:
 	<xidtype name="WINDOW" />
         <xidtype name="FBCONFIG" />
 
-        <union name="DRAWABLE">
-            <field type="xproto:WINDOW" name="window" />
-            <field type="PBUFFER" name="glx_pbuffer" />
-            <field type="glx:PIXMAP" name="glx_pixmap" />
-            <field type="glx:WINDOW" name="glx_window" />
-        </union>
+        <xidunion name="DRAWABLE">
+            <type>xproto:WINDOW</type>
+            <type>PBUFFER</type>
+            <type>glx:PIXMAP</type>
+            <type>glx:WINDOW</type>
+        </xidunion>
 
 	<typedef oldname="float" newname="FLOAT32" />
 	<typedef oldname="double" newname="FLOAT64" />
