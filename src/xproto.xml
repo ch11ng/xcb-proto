@@ -57,25 +57,15 @@ authorization from the authors.
     <field type="GCONTEXT" name="gcontext" />
   </union>
   
-  <struct name="VISUALID">
-    <field type="CARD32" name="id" />
-  </struct>
+  <typedef oldname="CARD32" newname="VISUALID" />
 
-  <struct name="TIMESTAMP">
-    <field type="CARD32" name="id" />
-  </struct>
+  <typedef oldname="CARD32" newname="TIMESTAMP" />
 
-  <struct name="KEYSYM">
-    <field type="CARD32" name="id" />
-  </struct>
+  <typedef oldname="CARD32" newname="KEYSYM" />
 
-  <struct name="KEYCODE">
-    <field type="CARD8" name="id" />
-  </struct>
+  <typedef oldname="CARD32" newname="KEYCODE" />
 
-  <struct name="BUTTON">
-    <field type="CARD8" name="id" />
-  </struct>
+  <typedef oldname="CARD32" newname="BUTTON" />
 
   <struct name="POINT">
     <field type="INT16" name="x" />
