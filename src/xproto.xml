@@ -63,9 +63,9 @@ authorization from the authors.
 
   <typedef oldname="CARD32" newname="KEYSYM" />
 
-  <typedef oldname="CARD32" newname="KEYCODE" />
+  <typedef oldname="CARD8" newname="KEYCODE" />
 
-  <typedef oldname="CARD32" newname="BUTTON" />
+  <typedef oldname="CARD8" newname="BUTTON" />
 
   <struct name="POINT">
     <field type="INT16" name="x" />
