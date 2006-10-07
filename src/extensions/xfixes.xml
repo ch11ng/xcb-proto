@@ -26,6 +26,7 @@ authorization from the authors.
 -->
 <!-- This file describes version 4 of XFixes. -->
 <xcb header="xfixes" extension-xname="XFIXES" extension-name="XFixes">
+  <import>xproto</import>
   <import>render</import>
   <import>shape</import>
 

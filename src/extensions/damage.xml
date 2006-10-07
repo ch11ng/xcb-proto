@@ -26,6 +26,7 @@ authorization from the authors.
 -->
 <!-- This file describes version 1 of DAMAGE. -->
 <xcb header="damage" extension-xname="DAMAGE" extension-name="Damage">
+  <import>xproto</import>
   <import>xfixes</import>
 
   <xidtype name="DAMAGE" />

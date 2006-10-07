@@ -27,6 +27,7 @@ authorization from the authors.
 -->
 
 <xcb header="xv" extension-xname="XVideo" extension-name="Xv">
+    <import>xproto</import>
     <import>shm</import>
     <!-- Implements version 2.2 of XV -->
 

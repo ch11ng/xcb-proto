@@ -27,8 +27,9 @@ authorization from the authors.
 -->
 
 <xcb header="xprint" extension-xname="XpExtension" extension-name="XP">
-
     <!-- Conforms to XPRINT 1.0 -->
+
+    <import>xproto</import>
     
     <!-- Types -->
     <struct name="PRINTER">

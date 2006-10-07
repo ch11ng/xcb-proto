@@ -26,6 +26,7 @@ authorization from the authors.
 -->
 <!-- This file describes version 0.3 of COMPOSITE. -->
 <xcb header="composite" extension-xname="Composite" extension-name="Composite">
+  <import>xproto</import>
   <import>xfixes</import>
 
   <enum name="Redirect">

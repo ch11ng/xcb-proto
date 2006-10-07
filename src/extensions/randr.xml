@@ -28,7 +28,9 @@ authorization from the authors.
 
 <xcb header="randr" extension-xname="RANDR" extension-name="RandR">
 	<!-- Implements version 1.1 of RANDR -->	
-	
+
+	<import>xproto</import>
+
 	<enum name="Rotation">
 		<item name="Rotate_0"><value>1</value></item>
 		<item name="Rotate_90"><value>2</value></item>

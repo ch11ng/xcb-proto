@@ -27,8 +27,9 @@ authorization from the authors.
 -->
 
 <xcb header="xtest" extension-xname="XTEST" extension-name="Test">
-
     <!-- Conforms to XTEST 2.1 -->
+
+    <import>xproto</import>
     
     <!-- Requests -->
     <request name="GetVersion" opcode="0">

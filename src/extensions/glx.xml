@@ -47,6 +47,8 @@ The patch that fixed this server bug in X.org CVS is here:
 <xcb header="glx" extension-xname="GLX" extension-name="Glx">
 	<!-- target support: 1.3 -->
 
+	<import>xproto</import>
+
 	<xidtype name="PIXMAP" />
 	<xidtype name="CONTEXT" />
 	<xidtype name="PBUFFER" />

@@ -32,6 +32,8 @@ Draft Standard Version 1.1
 <xcb header="screensaver" extension-xname="MIT-SCREEN-SAVER" extension-name="ScreenSaver">
   <!-- Types -->
 
+  <import>xproto</import>
+
   <enum name="Kind">
     <item name="Blanked" />
     <item name="Internal" />

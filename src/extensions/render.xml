@@ -7,6 +7,8 @@ for licensing information.
 <xcb header="render" extension-xname="RENDER" extension-name="Render">
   <!-- supports version 0.10 -->
 
+  <import>xproto</import>
+
   <enum name="PictType">
     <item name="Indexed" />
     <item name="Direct" />

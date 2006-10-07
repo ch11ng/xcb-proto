@@ -27,6 +27,8 @@ authorization from the authors.
 -->
 <!-- This file describes version 1.1 of the Shape extension. -->
 <xcb header="shape" extension-xname="SHAPE" extension-name="Shape">
+  <import>xproto</import>
+
   <typedef oldname="CARD8" newname="OP" />
   <typedef oldname="CARD8" newname="KIND" />
 

@@ -5,6 +5,8 @@ All Rights Reserved.  See the file COPYING in this directory
 for licensing information.
 -->
 <xcb header="sync" extension-xname="SYNC" extension-name="Sync">
+  <import>xproto</import>
+
   <xidtype name="ALARM" />
 
   <enum name="ALARMSTATE">

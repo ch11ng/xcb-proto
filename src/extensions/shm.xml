@@ -26,6 +26,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 <xcb header="shm" extension-xname="MIT-SHM" extension-name="Shm">
+  <import>xproto</import>
+
   <xidtype name="SEG" />
 
   <event name="Completion" number="0">
