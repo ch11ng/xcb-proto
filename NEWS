@@ -1,0 +1,48 @@
+Release 1.0 RC2 (2006-10-07)
+============================
+
+* Add <import>xproto</import> explicitly to extensions that use xproto;
+  this goes along with the change in the code generator for libxcb 1.0 RC2 to
+  stop implicitly importing xproto.
+* Change "union" to "xidunion" for XID unions like DRAWABLE and FONTABLE,
+  so that the code generator can more easily declare these XID unions as
+  integer typedefs rather than unions.
+* Replace structures attempting to provide C type safety with CARD32 typedefs
+* render.xml no longer describes the CompositeGlyphs* requests as taking lists
+  of complicated unions of structures of lists: it says instead that they take
+  a LISTofBYTE. The caller is responsible for constructing an appropriate
+  sequence of glyph elements. Previously, the requests could not actually be
+  used because XCB did not correctly compute the length of the provided data.
+
+
+Release 1.0 RC1 (2006-09-25)
+============================
+
+The Great XCB Renaming
+----------------------
+
+* Rename shape_op and shape_kind to drop the "shape_" prefix, since
+  otherwise these types end up as xcb_shape_shape_{op,kind}_t.
+* Remove leading underscores from enums in the GLX protocol description,
+  previously needed to ensure a word separator, but now redundant.
+* The XML-XCB protocol descriptions have moved to /usr/share/xcb, with
+  extension descriptions no longer relegated to an extensions/ subdirectory.
+
+GIT Repository split
+--------------------
+
+Previously, several XCB-related projects all existed under the umbrella
+of a single monolithic GIT repository with per-project subdirectories.
+We have split this repository into individual per-project repositories.
+
+Josh Triplett and Jamey Sharp wrote a tool called git-split to
+accomplish this repository split. git-split reconstructs the history of
+a sub-project previously stored in a subdirectory of a larger
+repository. It constructs new commit objects based on the existing tree
+objects for the subtree in each commit, and discards commits which do
+not affect the history of the sub-project, as well as merges made
+unnecessary due to these discarded commits.
+
+We would like to acknowledge the work of the gobby team in creating a
+collaborative editor which greatly aided the development of git-split
+(as well as these release notes).
