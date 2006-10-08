@@ -1,6 +1,8 @@
 xcb-proto (0.9.92-1) experimental; urgency=low
 
   * New upstream release.
+  
+  [ Josh Triplett ]
   * No longer installs files to /usr/include/X11, so remove Pre-Depends on
     x11-common.
   * Update to Standards-Version 3.7.2 (no changes required).
