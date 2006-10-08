@@ -93,6 +93,14 @@ for licensing information.
     <item name="None" />
   </enum>
 
+  <!-- Extended repeat attributes introduced in 0.10 -->
+  <enum name="Repeat">
+    <item name="None" />
+    <item name="Normal" />
+    <item name="Pad" />
+    <item name="Reflect" />
+  </enum>
+
   <typedef oldname="CARD32" newname="GLYPH" />
   <xidtype name="GLYPHSET" />
 
