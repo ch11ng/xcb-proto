@@ -373,31 +373,6 @@ for licensing information.
     <list type="GLYPH" name="glyphs" />
   </request>
 
-  <struct name="GLYPHSETELT">
-    <field type="CARD8" name="len" />
-    <pad bytes="3" />
-    <field type="INT16" name="deltax" />
-    <field type="INT16" name="deltay" />
-    <field type="GLYPHSET" name="glyphset" />
-  </struct>
-
-  <!-- CompositeGlyphs8 -->
-
-  <struct name="GLYPHELT8">
-    <field type="CARD8" name="len" />
-    <pad bytes="3" />
-    <field type="INT16" name="deltax" />
-    <field type="INT16" name="deltay" />
-    <list type="CARD8" name="glyphs">
-      <fieldref>len</fieldref>
-    </list>
-  </struct>
-
-  <union name="GLYPHITEM8">
-    <field type="GLYPHELT8" name="glyphelt" />
-    <field type="GLYPHSETELT" name="glyphset" />
-  </union>
-
   <request name="CompositeGlyphs8" opcode="23">
     <field type="CARD8" name="op" />
     <pad bytes="3" />
@@ -407,25 +382,8 @@ for licensing information.
     <field type="GLYPHSET" name="glyphset" />
     <field type="INT16" name="src_x" />
     <field type="INT16" name="src_y" />
-    <list type="GLYPHITEM8" name="glyphcmds" />
+    <list type="BYTE" name="glyphcmds" />
   </request>
-
-  <!-- CompositeGlyphs16 -->
-
-  <struct name="GLYPHELT16">
-    <field type="CARD8" name="len" />
-    <pad bytes="3" />
-    <field type="INT16" name="deltax" />
-    <field type="INT16" name="deltay" />
-    <list type="CARD16" name="glyphs">
-      <fieldref>len</fieldref>
-    </list>
-  </struct>
-
-  <union name="GLYPHITEM16">
-    <field type="GLYPHELT16" name="glyphelt" />
-    <field type="GLYPHSETELT" name="glyphset" />
-  </union>
 
   <request name="CompositeGlyphs16" opcode="24">
     <field type="CARD8" name="op" />
@@ -436,25 +394,8 @@ for licensing information.
     <field type="GLYPHSET" name="glyphset" />
     <field type="INT16" name="src_x" />
     <field type="INT16" name="src_y" />
-    <list type="GLYPHITEM16" name="glyphcmds" />
+    <list type="BYTE" name="glyphcmds" />
   </request>
-
-  <!-- CompositeGlyphs32 -->
-
-  <struct name="GLYPHELT32">
-    <field type="CARD8" name="len" />
-    <pad bytes="3" />
-    <field type="INT16" name="deltax" />
-    <field type="INT16" name="deltay" />
-    <list type="CARD32" name="glyphs">
-      <fieldref>len</fieldref>
-    </list>
-  </struct>
-
-  <union name="GLYPHITEM32">
-    <field type="GLYPHELT32" name="glyphelt" />
-    <field type="GLYPHSETELT" name="glyphset" />
-  </union>
 
   <request name="CompositeGlyphs32" opcode="25">
     <field type="CARD8" name="op" />
@@ -465,7 +406,7 @@ for licensing information.
     <field type="GLYPHSET" name="glyphset" />
     <field type="INT16" name="src_x" />
     <field type="INT16" name="src_y" />
-    <list type="GLYPHITEM32" name="glyphcmds" />
+    <list type="BYTE" name="glyphcmds" />
   </request>
 
   <!-- new in version 0.1 -->
