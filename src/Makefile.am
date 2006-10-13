@@ -18,7 +18,6 @@ xcbinclude_HEADERS = \
 	extensions/xevie.xml \
 	extensions/xinerama.xml \
 	extensions/xf86dri.xml \
-	extensions/xf86vidmode.xml \
 	extensions/xfixes.xml \
 	extensions/xprint.xml \
 	extensions/xtest.xml \
