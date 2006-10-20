@@ -988,8 +988,8 @@ authorization from the authors.
   </request>
 
   <enum name="GrabMode">
-    <item name="Async"><value>0</value></item>
-    <item name="Sync"> <value>1</value></item>
+    <item name="Sync"> <value>0</value></item>
+    <item name="Async"><value>1</value></item>
   </enum>
 
   <enum name="GrabStatus">
