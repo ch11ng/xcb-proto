@@ -4,7 +4,8 @@ Copyright (C) 2002-2004 Carl D. Worth, Jamey Sharp, Bart Massey, Josh Triplett
 All Rights Reserved.  See the file COPYING in this directory
 for licensing information.
 -->
-<xcb header="render" extension-xname="RENDER" extension-name="Render">
+<xcb header="render" extension-xname="RENDER" extension-name="Render"
+    major-version="0" minor-version="10">
   <!-- supports version 0.10 -->
 
   <import>xproto</import>

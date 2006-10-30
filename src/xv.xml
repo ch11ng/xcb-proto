@@ -26,7 +26,7 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="xv" extension-xname="XVideo" extension-name="Xv">
+<xcb header="xv" extension-xname="XVideo" extension-name="Xv" major-version="2" minor-version="2">
     <import>xproto</import>
     <import>shm</import>
     <!-- Implements version 2.2 of XV -->

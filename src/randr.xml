@@ -26,7 +26,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="randr" extension-xname="RANDR" extension-name="RandR">
+<xcb header="randr" extension-xname="RANDR" extension-name="RandR"
+    major-version="1" minor-version="1">
 	<!-- Implements version 1.1 of RANDR -->	
 
 	<import>xproto</import>

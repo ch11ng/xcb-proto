@@ -25,7 +25,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 <!-- This file describes version 1 of XEVIE. -->
-<xcb header="xevie" extension-xname="XEVIE" extension-name="Xevie">
+<xcb header="xevie" extension-xname="XEVIE" extension-name="Xevie"
+    major-version="1" minor-version="0">
   <request name="QueryVersion" opcode="0">
     <field type="CARD16" name="client_major_version" />
     <field type="CARD16" name="client_minor_version" />

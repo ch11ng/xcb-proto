@@ -25,7 +25,9 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 <!-- This file describes version 0.3 of COMPOSITE. -->
-<xcb header="composite" extension-xname="Composite" extension-name="Composite">
+<xcb header="composite" extension-xname="Composite" extension-name="Composite"
+    major-version="0" minor-version="3">
+
   <import>xproto</import>
   <import>xfixes</import>
 

@@ -26,7 +26,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="xtest" extension-xname="XTEST" extension-name="Test">
+<xcb header="xtest" extension-xname="XTEST" extension-name="Test"
+    major-version="2" minor-version="1">
     <!-- Conforms to XTEST 2.1 -->
 
     <import>xproto</import>
