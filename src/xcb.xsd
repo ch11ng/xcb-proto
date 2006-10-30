@@ -33,6 +33,8 @@ authorization from the authors.
       <xsd:attribute name="header" type="xsd:string" use="required" />
       <xsd:attribute name="extension-xname" type="xsd:string" use="optional" />
       <xsd:attribute name="extension-name"  type="xsd:string" use="optional" />
+      <xsd:attribute name="major-version"   type="xsd:integer" use="optional" />
+      <xsd:attribute name="minor-version"   type="xsd:integer" use="optional" />
     </xsd:complexType>
   </xsd:element>
 
