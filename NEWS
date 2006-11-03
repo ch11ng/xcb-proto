@@ -1,3 +1,20 @@
+Release 1.0 RC3 (2006-11-02)
+============================
+
+* Add support for the Xinerama extension, version 1.1
+* Protocol descriptions now document the major and minor version numbers
+  of the extension version they support, through major-version and
+  minor-version attributes on the xcb tag.  XML Schema updated
+  accordingly.
+* Minor source reorganization: Now that the extensions do not get
+  installed to an extensions/ subdirectory, move them out of the
+  extensions/ subdirectory in the source as well.
+* Various protocol description fixes:
+    * Add REPEAT enumeration to Render extension to fix bug #8535
+    * Fix core xproto GrabMode enumeration (reported by Yang JianJun)
+    * Fix core xproto cap style enumeration (bug #8857).
+
+
 Release 1.0 RC2 (2006-10-07)
 ============================
 
