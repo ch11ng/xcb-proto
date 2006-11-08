@@ -342,6 +342,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="xproto:PIXMAP" name="pixmap" />
 		<field type="glx:PIXMAP" name="glx_pixmap" />
 		<field type="CARD32" name="num_attribs" />  
+		<list type="CARD32" name="attribs">
+			<op op="*">
+				<fieldref>num_attribs</fieldref>
+				<value>2</value>
+			</op>
+		</list>
 	</request>
 
 	<request name="DestroyPixmap" opcode="23">
@@ -365,9 +371,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="1" />
 			<field type="CARD32" name="num_attributes"/>
 			<pad bytes="20" />
-			<valueparam value-mask-type="CARD32"
-				value-mask-name="value_mask"
-				value-list-name="value_list" />
+			<list type="CARD32" name="attribs">
+				<op op="*">
+					<fieldref>num_attributes</fieldref>
+					<value>2</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -388,9 +397,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="FBCONFIG" name="fbconfig" />
 		<field type="PBUFFER" name="pbuffer" />
 		<field type="CARD32" name="num_attribs" />
-		<valueparam value-mask-type="CARD32"
-			value-mask-name="value_mask"
-			value-list-name="value_list" />
+		<list type="CARD32" name="attribs">
+			<op op="*">
+				<fieldref>num_attribs</fieldref>
+				<value>2</value>
+			</op>
+		</list>
 	</request>
 
 	<request name="DestroyPbuffer" opcode="28">
@@ -403,18 +415,24 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="1" />
 			<field type="CARD32" name="num_attribs" />
 			<pad bytes="20" />
-			<valueparam value-mask-type="CARD32"
-				value-mask-name="value_mask"
-				value-list-name="value_list" />
+			<list type="CARD32" name="attribs">
+				<op op="*">
+					<fieldref>num_attribs</fieldref>
+					<value>2</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
 	<request name="ChangeDrawableAttributes" opcode="30">
 		<field type="glx:DRAWABLE" name="drawable" />
 		<field type="CARD32" name="num_attribs" />
-		<valueparam value-mask-type="CARD32"
-			value-mask-name="value_mask"
-			value-list-name="value_list" />
+		<list type="CARD32" name="attribs">
+			<op op="*">
+				<fieldref>num_attribs</fieldref>
+				<value>2</value>
+			</op>
+		</list>
 	</request>
 
 	<request name="CreateWindow" opcode="31">
@@ -423,9 +441,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="xproto:WINDOW" name="window" />
 		<field type="glx:WINDOW" name="glx_window" />
 		<field type="CARD32" name="num_attribs" />
-		<valueparam value-mask-type="CARD32"
-			value-mask-name="value_mask"
-			value-list-name="value_list" />
+		<list type="CARD32" name="attribs">
+			<op op="*">
+				<fieldref>num_attribs</fieldref>
+				<value>2</value>
+			</op>
+		</list>
 	</request>
 
 	<request name="DeleteWindow" opcode="32">
