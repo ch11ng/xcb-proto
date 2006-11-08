@@ -369,11 +369,11 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="glx:CONTEXT" name="context" />
 		<reply>
 			<pad bytes="1" />
-			<field type="CARD32" name="num_attributes"/>
+			<field type="CARD32" name="num_attribs"/>
 			<pad bytes="20" />
 			<list type="CARD32" name="attribs">
 				<op op="*">
-					<fieldref>num_attributes</fieldref>
+					<fieldref>num_attribs</fieldref>
 					<value>2</value>
 				</op>
 			</list>
