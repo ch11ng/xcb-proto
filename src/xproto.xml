@@ -1086,7 +1086,7 @@ authorization from the authors.
   </request>
 
   <request name="UngrabKey" opcode="34">
-    <field type="CARD8" name="key" />
+    <field type="KEYCODE" name="key" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" />
   </request>
