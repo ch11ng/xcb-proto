@@ -402,10 +402,7 @@ authorization from the authors.
         <field type="CARD16" name="drw_h" />
         <field type="CARD16" name="width" />
         <field type="CARD16" name="height" />
-        <localfield type="CARD32" name="data_size" />
-        <list type="CARD8" name="data">
-            <fieldref>data_size</fieldref>
-        </list>
+	<list type="CARD8" name="data" />
     </request>
 
     <request name="ShmPutImage" opcode="19">

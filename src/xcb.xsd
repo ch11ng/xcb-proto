@@ -67,9 +67,6 @@ authorization from the authors.
     </xsd:complexType>
   </xsd:element>
 
-  <!-- Parameters in requests that are not sent with the request. -->
-  <xsd:element name="localfield" type="var" />
-  
   <!-- Expressions -->
   <xsd:group name="expression">
     <xsd:choice>
@@ -162,7 +159,6 @@ authorization from the authors.
           <xsd:sequence>
             <xsd:choice minOccurs="0" maxOccurs="unbounded">
               <xsd:group ref="fields" />
-              <xsd:element ref="localfield" />
               <xsd:element ref="exprfield" />
               <xsd:element ref="valueparam" />
             </xsd:choice>
