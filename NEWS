@@ -1,3 +1,19 @@
+Release 1.0 (2006-11-23)
+========================
+
+The "Thanksgiving" release: We feel thankful to have it released.
+
+* Fix Bug #8990: randr type fixes
+* Fixed screen parameter type in several GLX requests to use CARD32 instead
+  of the SCREEN structure.
+* Corrected valueparam arguments to attribute lists in several requests and
+  a reply.
+* Estethic change for attribute parameter name
+* Remove support for the <localfield> tag: nothing needs it.
+* Fix Bug #8973: In UngrabKey, the 'key' field should have type KEYCODE, not
+  the more general CARD8.
+
+
 Release 1.0 RC3 (2006-11-02)
 ============================
 
