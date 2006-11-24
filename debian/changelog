@@ -3,6 +3,7 @@ xcb-proto (1.0-1) experimental; urgency=low
   * New upstream release.
   * The "Thanksgiving" release: We feel thankful to have it released.
   * Add XS-X-Vcs-Git field.
+  * Bump debhelper version requirement to 5, to satisfy cdbs and lintian.
 
  -- Josh Triplett <josh@freedesktop.org>  Fri, 24 Nov 2006 00:28:05 -0800
 
