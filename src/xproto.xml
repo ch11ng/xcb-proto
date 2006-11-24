@@ -988,8 +988,8 @@ authorization from the authors.
   </request>
 
   <enum name="GrabMode">
-    <item name="Async"><value>0</value></item>
-    <item name="Sync"> <value>1</value></item>
+    <item name="Sync"> <value>0</value></item>
+    <item name="Async"><value>1</value></item>
   </enum>
 
   <enum name="GrabStatus">
@@ -1086,7 +1086,7 @@ authorization from the authors.
   </request>
 
   <request name="UngrabKey" opcode="34">
-    <field type="CARD8" name="key" />
+    <field type="KEYCODE" name="key" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" />
   </request>
@@ -1421,8 +1421,8 @@ authorization from the authors.
 
   <enum name="CapStyle">
     <item name="NotLast">   <value>0</value></item>
-    <item name="Cap">       <value>1</value></item>
-    <item name="Butt">      <value>2</value></item>
+    <item name="Butt">      <value>1</value></item>
+    <item name="Round">     <value>2</value></item>
     <item name="Projecting"><value>3</value></item>
   </enum>
 

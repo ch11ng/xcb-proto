@@ -26,7 +26,7 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 <!-- This file describes version 1.1 of the Shape extension. -->
-<xcb header="shape" extension-xname="SHAPE" extension-name="Shape">
+<xcb header="shape" extension-xname="SHAPE" extension-name="Shape" major-version="1" minor-version="1">
   <import>xproto</import>
 
   <typedef oldname="CARD8" newname="OP" />

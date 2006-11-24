@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Copyright (C) 2001-2004 Bart Massey, Jamey Sharp, and Josh Triplett.
-All Rights Reserved.
+Copyright (C) 2004 Josh Triplett.  All Rights Reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,52 +24,62 @@ institutions shall not be used in advertising or otherwise to promote the
 sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
-<xcb header="dpms" extension-xname="DPMS" extension-name="DPMS">
-  <request name="GetVersion" opcode="0">
+<!-- This file describes version 1 of XEVIE. -->
+<xcb header="xevie" extension-xname="XEVIE" extension-name="Xevie"
+    major-version="1" minor-version="0">
+  <request name="QueryVersion" opcode="0">
     <field type="CARD16" name="client_major_version" />
     <field type="CARD16" name="client_minor_version" />
     <reply>
       <pad bytes="1" />
       <field type="CARD16" name="server_major_version" />
       <field type="CARD16" name="server_minor_version" />
+      <pad bytes="20" />
     </reply>
   </request>
 
-  <request name="Capable" opcode="1">
+  <request name="Start" opcode="1">
+    <field type="CARD32" name="screen" />
     <reply>
       <pad bytes="1" />
-      <field type="BOOL" name="capable" />
+      <pad bytes="24" />
     </reply>
   </request>
 
-  <request name="GetTimeouts" opcode="2">
+  <request name="End" opcode="2">
+    <field type="CARD32" name="cmap" />
     <reply>
       <pad bytes="1" />
-      <field type="CARD16" name="standby_timeout" />
-      <field type="CARD16" name="suspend_timeout" />
-      <field type="CARD16" name="off_timeout" />
+      <pad bytes="24" />
     </reply>
   </request>
 
-  <request name="SetTimeouts" opcode="3">
-    <field type="CARD16" name="standby_timeout" />
-    <field type="CARD16" name="suspend_timeout" />
-    <field type="CARD16" name="off_timeout" />
-  </request>
+  <enum name="Datatype">
+    <item name="Unmodified" />
+    <item name="Modified" />
+  </enum>
 
-  <request name="Enable" opcode="4" />
+  <!-- The Send request needs to send an arbitrary Event; this type is used
+       to reserve the necessary structure size. -->
+  <struct name="Event">
+    <pad bytes="32" />
+  </struct>
 
-  <request name="Disable" opcode="5" />
-
-  <request name="ForceLevel" opcode="6">
-    <field type="CARD16" name="power_level" />
-  </request>
-
-  <request name="Info" opcode="7">
+  <request name="Send" opcode="3">
+    <field type="Event" name="event" />
+    <field type="CARD32" name="data_type" /> <!-- Datatype -->
+    <pad bytes="64" />
     <reply>
       <pad bytes="1" />
-      <field type="CARD16" name="power_level" />
-      <field type="BOOL" name="state" />
+      <pad bytes="24" />
+    </reply>
+  </request>
+
+  <request name="SelectInput" opcode="4">
+    <field type="CARD32" name="event_mask" />
+    <reply>
+      <pad bytes="1" />
+      <pad bytes="24" />
     </reply>
   </request>
 </xcb>

@@ -4,7 +4,8 @@ Copyright (C) 2004 Mikko Torni and Josh Triplett.
 All Rights Reserved.  See the file COPYING in this directory
 for licensing information.
 -->
-<xcb header="xc_misc" extension-xname="XC-MISC" extension-name="XCMisc">
+<xcb header="xc_misc" extension-xname="XC-MISC" extension-name="XCMisc"
+    major-version="1" minor-version="1">
   <request name="GetVersion" opcode="0">
     <field type="CARD16" name="client_major_version" />
     <field type="CARD16" name="client_minor_version" />

@@ -26,7 +26,7 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="xv" extension-xname="XVideo" extension-name="Xv">
+<xcb header="xv" extension-xname="XVideo" extension-name="Xv" major-version="2" minor-version="2">
     <import>xproto</import>
     <import>shm</import>
     <!-- Implements version 2.2 of XV -->
@@ -402,10 +402,7 @@ authorization from the authors.
         <field type="CARD16" name="drw_h" />
         <field type="CARD16" name="width" />
         <field type="CARD16" name="height" />
-        <localfield type="CARD32" name="data_size" />
-        <list type="CARD8" name="data">
-            <fieldref>data_size</fieldref>
-        </list>
+	<list type="CARD8" name="data" />
     </request>
 
     <request name="ShmPutImage" opcode="19">

@@ -26,7 +26,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="record" extension-xname="RECORD" extension-name="Record">
+<xcb header="record" extension-xname="RECORD" extension-name="Record"
+    major-version="1" minor-version="13">
 
     <!-- Types -->
     <xidtype name="CONTEXT" />

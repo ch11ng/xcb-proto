@@ -26,7 +26,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="randr" extension-xname="RANDR" extension-name="RandR">
+<xcb header="randr" extension-xname="RANDR" extension-name="RandR"
+    major-version="1" minor-version="1">
 	<!-- Implements version 1.1 of RANDR -->	
 
 	<import>xproto</import>
@@ -70,17 +71,17 @@ authorization from the authors.
 	BEWARE: the docs lie!
 	-->
 	<request name="SetScreenConfig" opcode="2">
-		<field type="WINDOW" name="drawable" />
-		<field type="CARD32" name="timestamp" />
-		<field type="CARD32" name="config_timestamp" />
+		<field type="DRAWABLE" name="drawable" />
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="TIMESTAMP" name="config_timestamp" />
 		<field type="CARD16" name="sizeID" />
 		<field type="INT16" name="rotation" />
-		<field type="CARD16" name="refresh" />
+		<field type="CARD16" name="rate" />
 		<pad bytes="2" />
 		<reply>
 			<field type="CARD8" name="status" />
-			<field type="CARD32" name="timestamp" />
-			<field type="CARD32" name="config_timestamp" />
+			<field type="TIMESTAMP" name="new_timestamp" />
+			<field type="TIMESTAMP" name="config_timestamp" />
 			<field type="WINDOW" name="root" />
 			<field type="CARD16" name="subpixel_order" />
 			<pad bytes="10" />
@@ -108,8 +109,8 @@ authorization from the authors.
 		<reply>
 			<field type="CARD8" name="rotations" />
 			<field type="WINDOW" name="root" />
-			<field type="CARD32" name="timestamp" />
-			<field type="CARD32" name="config_timestamp" />
+			<field type="TIMESTAMP" name="timestamp" />
+			<field type="TIMESTAMP" name="config_timestamp" />
 			<field type="CARD16" name="nSizes" />
 			<field type="CARD16" name="sizeID" />
 			<field type="INT16" name="rotation" />
@@ -134,16 +135,16 @@ authorization from the authors.
 	
 	<event name="ScreenChangeNotify" number="0">
 		<field type="CARD8" name="rotation" />
-		<field type="CARD32" name="timestamp" />
-		<field type="CARD32" name="config_timestamp" />
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="TIMESTAMP" name="config_timestamp" />
 		<field type="WINDOW" name="root" />
 		<field type="WINDOW" name="request_window" />
 		<field type="CARD16" name="sizeID" />
 		<field type="CARD16" name="subpixel_order" />
-		<field type="CARD16" name="width" />
-		<field type="CARD16" name="height" />
-		<field type="CARD16" name="mwidth" />
-		<field type="CARD16" name="mheight" />
+		<field type="INT16" name="width" />
+		<field type="INT16" name="height" />
+		<field type="INT16" name="mwidth" />
+		<field type="INT16" name="mheight" />
 	</event>
 		
 </xcb>

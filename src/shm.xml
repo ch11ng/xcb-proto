@@ -25,7 +25,8 @@ institutions shall not be used in advertising or otherwise to promote the
 sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
-<xcb header="shm" extension-xname="MIT-SHM" extension-name="Shm">
+<xcb header="shm" extension-xname="MIT-SHM" extension-name="Shm"
+    major-version="1" minor-version="1">
   <import>xproto</import>
 
   <xidtype name="SEG" />

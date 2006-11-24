@@ -24,15 +24,22 @@ institutions shall not be used in advertising or otherwise to promote the
 sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
-<!-- This file describes version 0.3 of COMPOSITE. -->
-<xcb header="composite" extension-xname="Composite" extension-name="Composite">
+<!-- This file describes version 1 of DAMAGE. -->
+<xcb header="damage" extension-xname="DAMAGE" extension-name="Damage"
+    major-version="1" minor-version="0">
   <import>xproto</import>
   <import>xfixes</import>
 
-  <enum name="Redirect">
-    <item name="Automatic" />
-    <item name="Manual" />
+  <xidtype name="DAMAGE" />
+
+  <enum name="ReportLevel">
+    <item name="RawRectangles" />
+    <item name="DeltaRectangles" />
+    <item name="BoundingBox" />
+    <item name="NonEmpty" />
   </enum>
+
+  <error name="BadDamage" number="0" />
 
   <request name="QueryVersion" opcode="0">
     <field type="CARD32" name="client_major_version" />
@@ -45,52 +52,29 @@ authorization from the authors.
     </reply>
   </request>
 
-  <request name="RedirectWindow" opcode="1">
-    <field type="WINDOW" name="window" />
-    <field type="CARD8" name="update" />
+  <request name="Create" opcode="1">
+    <field type="DAMAGE"   name="damage" />
+    <field type="DRAWABLE" name="drawable" />
+    <field type="CARD8"    name="level" /> <!-- ReportLevel -->
     <pad bytes="3" />
   </request>
 
-  <request name="RedirectSubwindows" opcode="2">
-    <field type="WINDOW" name="window" />
-    <field type="CARD8" name="update" />
-    <pad bytes="3" />
+  <request name="Destroy" opcode="2">
+    <field type="DAMAGE" name="damage" />
   </request>
 
-  <request name="UnredirectWindow" opcode="3">
-    <field type="WINDOW" name="window" />
-    <field type="CARD8" name="update" />
-    <pad bytes="3" />
+  <request name="Subtract" opcode="3">
+    <field type="DAMAGE" name="damage" />
+    <field type="REGION" name="repair" />
+    <field type="REGION" name="parts" />
   </request>
 
-  <request name="UnredirectSubwindows" opcode="4">
-    <field type="WINDOW" name="window" />
-    <field type="CARD8" name="update" />
-    <pad bytes="3" />
-  </request>
-
-  <request name="CreateRegionFromBorderClip" opcode="5">
-    <field type="REGION" name="region" />
-    <field type="WINDOW" name="window" />
-  </request>
-
-  <request name="NameWindowPixmap" opcode="6">
-    <field type="WINDOW" name="window" />
-    <field type="PIXMAP" name="pixmap" />
-  </request>
-  
-  <!-- new in version 0.3 -->
-  
-  <request name="GetOverlayWindow" opcode="7">
-    <field type="WINDOW" name="window" />
-    <reply>
-      <pad bytes="1" />
-      <field type="WINDOW" name="overlay_win" />
-      <pad bytes="20" />
-    </reply>
-  </request>
-
-  <request name="ReleaseOverlayWindow" opcode="8">
-    <field type="WINDOW" name="window" />
-  </request>
+  <event name="Notify" number="0">
+    <field type="CARD8"     name="level" /> <!-- ReportLevel -->
+    <field type="DRAWABLE"  name="drawable" />
+    <field type="DAMAGE"    name="damage" />
+    <field type="TIMESTAMP" name="timestamp" />
+    <field type="RECTANGLE" name="area" />
+    <field type="RECTANGLE" name="geometry" />
+  </event>
 </xcb>

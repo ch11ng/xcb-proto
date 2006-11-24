@@ -26,7 +26,8 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 
-<xcb header="xf86dri" extension-xname="XFree86-DRI" extension-name="XF86Dri">
+<xcb header="xf86dri" extension-xname="XFree86-DRI" extension-name="XF86Dri"
+    major-version="4" minor-version="1">
 
     <!-- Using http://dri.sourceforge.net/doc/dri_extensions_low_level.txt -->
 
