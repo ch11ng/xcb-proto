@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Copyright (C) 2005 Jeremy Kolb.
+Copyright (C) 2006 Jeremy Kolb, Ian Osgood
 All Rights Reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,24 +27,31 @@ authorization from the authors.
 -->
 
 <xcb header="randr" extension-xname="RANDR" extension-name="RandR"
-    major-version="1" minor-version="1">
-	<!-- Implements version 1.1 of RANDR -->	
+    major-version="1" minor-version="2">
 
 	<import>xproto</import>
+	
+	<!-- Errors -->
+
+	<error name="BadOutput" number="0" />
+	<error name="BadCrtc"   number="1" />
+	<error name="BadMode"   number="2" />
+
+	<!-- Requests -->
 
 	<enum name="Rotation">
-		<item name="Rotate_0"><value>1</value></item>
-		<item name="Rotate_90"><value>2</value></item>
-		<item name="Rotate_180"><value>4</value></item>
-		<item name="Rotate_270"><value>8</value></item>
-		<item name="Reflect_X"><value>16</value></item>
-		<item name="Reflect_Y"><value>32</value></item>
+		<item name="Rotate_0">  <bit>0</bit></item>
+		<item name="Rotate_90"> <bit>1</bit></item>
+		<item name="Rotate_180"><bit>2</bit></item>
+		<item name="Rotate_270"><bit>3</bit></item>
+		<item name="Reflect_X"> <bit>4</bit></item>
+		<item name="Reflect_Y"> <bit>5</bit></item>
 	</enum>
 
 	<struct name="ScreenSize">
-		<field type="INT16" name="width" />
+		<field type="INT16" name="width" />   <!-- pixels -->
 		<field type="INT16" name="height" />
-		<field type="INT16" name="mwidth" />
+		<field type="INT16" name="mwidth" />  <!-- millimeters -->
 		<field type="INT16" name="mheight" />
 	</struct>
 	
@@ -54,7 +61,7 @@ authorization from the authors.
 			<fieldref>nRates</fieldref>
 		</list>
 	</struct>
-
+	
 	<request name="QueryVersion" opcode="0">
 		<field type="CARD32" name="major_version" />
 		<field type="CARD32" name="minor_version" />
@@ -65,6 +72,8 @@ authorization from the authors.
 			<pad bytes="16" />
 		</reply>
 	</request>
+	
+	<!-- Skip obsolete opcode 1 so old clients fail immediately -->
 
 	<!-- This is for the 1.1 version request.  I don't believe we need to specify a 1.0 request
 	as few things used randr 1.0.  The only difference is the removal of refresh and padding I think.
@@ -79,7 +88,7 @@ authorization from the authors.
 		<field type="CARD16" name="rate" />
 		<pad bytes="2" />
 		<reply>
-			<field type="CARD8" name="status" />
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="TIMESTAMP" name="new_timestamp" />
 			<field type="TIMESTAMP" name="config_timestamp" />
 			<field type="WINDOW" name="root" />
@@ -87,6 +96,8 @@ authorization from the authors.
 			<pad bytes="10" />
 		</reply>
 	</request>
+	
+	<!-- opcode 3 is obsolete -->
 
 	<enum name="SetConfig">
 		<item name="Success"><value>0</value></item>
@@ -97,7 +108,7 @@ authorization from the authors.
 
 	<request name="SelectInput" opcode="4">	
 		<field type="WINDOW" name="window" />
-		<field type="CARD16" name="enable" />
+		<field type="CARD16" name="enable" />  <!-- enum SetConfig -->
 		<pad bytes="2" />
 	</request>
 
@@ -129,8 +140,314 @@ authorization from the authors.
 		</reply>
 	</request>
 
-	<enum name="SM" >
-		<item name="ScreenChangeNotify"><value>1</value></item>
+	<!-- new in version 1.2 -->
+
+	<request name="GetScreenSizeRange" opcode="6">
+		<field type="WINDOW" name="window" />
+		<reply>
+			<pad bytes="1" />
+			<field type="CARD16" name="minWidth" />
+			<field type="CARD16" name="minHeight" />
+			<field type="CARD16" name="maxWidth" />
+			<field type="CARD16" name="maxHeight" />
+		</reply>
+	</request>
+
+	<request name="SetScreenSize" opcode="7">
+		<field type="WINDOW" name="window" />
+		<field type="CARD16" name="width" />    <!-- pixels -->
+		<field type="CARD16" name="height" />
+		<field type="CARD32" name="mmWidth" />  <!-- millimeters -->
+		<field type="CARD32" name="mmHeight" />
+	</request>
+
+	<!-- for GetScreenResources.ModeInfo.ModeFlag -->
+	<enum name="ModeFlag">
+		<item name="HsyncPositive"> <bit>0</bit></item>
+		<item name="HsyncNegative"> <bit>1</bit></item>
+		<item name="VsyncPositive"> <bit>2</bit></item>
+		<item name="VsyncNegative"> <bit>3</bit></item>
+		<item name="Interlace">     <bit>4</bit></item>
+		<item name="DoubleScan">    <bit>5</bit></item>
+		<item name="Csync">         <bit>6</bit></item>
+		<item name="CsyncPositive"> <bit>7</bit></item>
+		<item name="CsyncNegative"> <bit>8</bit></item>
+		<item name="HskewPresent">  <bit>9</bit></item>
+		<item name="Bcast">         <bit>10</bit></item>
+		<item name="PixelMultiplex"><bit>11</bit></item>
+		<item name="DoubleClock">   <bit>12</bit></item>
+		<item name="HalveClock">    <bit>13</bit></item>
+	</enum>
+
+	<struct name="ModeInfo">
+		<field type="CARD32" name="id" />
+		<field type="CARD16" name="width" />
+		<field type="CARD16" name="height" />
+		<field type="CARD32" name="dotClock" />
+		<field type="CARD16" name="hsyncStart" />
+		<field type="CARD16" name="hsyncEnd" />
+		<field type="CARD16" name="htotal" />
+		<field type="CARD16" name="hskew" />
+		<field type="CARD16" name="vsyncStart" />
+		<field type="CARD16" name="vsyncEnd" />
+		<field type="CARD16" name="vtotal" />
+		<field type="CARD16" name="name_len" />
+		<field type="CARD32" name="modeFlags" />	<!-- enum ModeFlag -->
+		<!-- the mode name itself -->
+	</struct>
+
+	<request name="GetScreenResources" opcode="8">
+		<field type="WINDOW" name="window" />
+		<reply>
+			<pad bytes="1" />
+			<field type="TIMESTAMP" name="timestamp" />
+			<field type="TIMESTAMP" name="config_timestamp" />
+			<field type="CARD16" name="num_crtcs" />
+			<field type="CARD16" name="num_outputs" />
+			<field type="CARD16" name="num_modes" />
+			<field type="CARD16" name="names_len" />
+			<pad bytes="8" />
+			<list type="CARD32" name="crtcs">
+			    <fieldref>num_crtcs</fieldref>
+			</list>
+			<list type="CARD32" name="outputs">
+			    <fieldref>num_outputs</fieldref>
+			</list>
+			<list type="ModeInfo" name="modes">
+			    <fieldref>num_modes</fieldref>
+			</list>
+			<!-- FIXME: this is *not* null separated!
+			     One must use ModeInfo.name_len from each previous
+			     ModeInfo to infer the position of the name. -->
+			<list type="BYTE" name="names">
+			    <fieldref>names_len</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<!-- for GetOutputInfo.connection -->
+	<enum name="Connection">
+		<item name="Connected" />
+		<item name="Disconnected" />
+		<item name="Unknown" />
+	</enum>
+
+	<request name="GetOutputInfo" opcode="9">
+		<field type="CARD32" name="output" />
+		<field type="TIMESTAMP" name="configTimestamp" />
+		<reply>
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<field type="TIMESTAMP" name="timestamp" />
+			<field type="CARD32" name="crtc" />
+			<field type="CARD32" name="mmWidth" />  <!-- millimeters -->
+			<field type="CARD32" name="mmHeight" />
+			<field type="CARD8" name="connection" /> <!-- enum Connection -->
+			<field type="CARD8" name="subpixelOrder" />
+			<field type="CARD16" name="num_crtcs" />
+			<field type="CARD16" name="num_modes" />
+			<field type="CARD16" name="num_preferred" />
+			<field type="CARD16" name="num_clones" />
+			<field type="CARD16" name="name_len" />
+			<list type="CARD32" name="crtcs">
+			    <fieldref>num_crtcs</fieldref>
+			</list>
+			<list type="CARD32" name="modes">
+			    <fieldref>num_modes</fieldref>
+			</list>
+			<list type="CARD32" name="clones">
+			    <fieldref>num_clones</fieldref>
+			</list>
+			<list type="BYTE" name="name">
+			    <fieldref>name_len</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<!-- NOTE: num_atoms is currently unused. -->
+	<request name="ListOutputProperties" opcode="10">
+		<field type="CARD32" name="output" />
+		<reply>
+			<field type="CARD8" name="num_properties" />
+			<field type="CARD16" name="num_atoms" />
+			<pad bytes="22" />
+			<list type="ATOM" name="properties">
+				<fieldref>num_properties</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<request name="QueryOutputProperty" opcode="11">
+		<field type="CARD32" name="output" />
+		<field type="ATOM" name="property" />
+		<reply>
+			<pad bytes="1" />
+			<field type="BOOL" name="pending" />
+			<field type="BOOL" name="range" />
+			<field type="BOOL" name="immutable" />
+			<pad bytes="21" />
+			<list type="INT32" name="validValues" />
+		</reply>
+	</request>
+
+	<request name="ConfigureOutputProperty" opcode="12">
+		<field type="CARD32" name="output" />
+		<field type="ATOM" name="property" />
+		<field type="BOOL" name="pending" />
+		<field type="BOOL" name="range" />
+		<pad bytes="2" />
+	</request>
+
+	<request name="ChangeOutputProperty" opcode="13">
+		<field type="CARD32" name="output" />
+		<field type="ATOM" name="property" />
+		<field type="ATOM" name="type" />
+		<field type="CARD8" name="format" />
+		<field type="CARD8" name="mode" />
+		<pad bytes="2" />
+		<field type="CARD32" name="num_units" />
+	</request>
+
+	<request name="DeleteOutputProperty" opcode="14">
+		<field type="CARD32" name="output" />
+		<field type="ATOM" name="property" />
+	</request>
+
+	<!-- NOTE: num_items depends on format (8/16/32) -->
+	<request name="GetOutputProperty" opcode="15">
+		<field type="CARD32" name="output" />
+		<field type="ATOM" name="property" />
+		<field type="ATOM" name="type" />
+		<field type="CARD32" name="longOffset" />
+		<field type="CARD32" name="longLength" />
+		<field type="BOOL" name="delete" />
+		<field type="BOOL" name="pending" />
+		<reply>
+			<field type="CARD8" name="format" />
+			<field type="ATOM" name="type" />
+			<field type="CARD32" name="bytesAfter" />
+			<field type="CARD32" name="num_items" />
+			<pad bytes="12" />
+			<list type="BYTE" name="data">
+				<!-- n * format / 8 -->
+				<op op="*">
+					<fieldref>num_items</fieldref>
+					<op op="/">
+						<fieldref>format</fieldref>
+						<value>8</value>
+					</op>
+				</op>
+			</list>
+		</reply>
+	</request>
+
+	<request name="CreateMode" opcode="16">
+		<field type="WINDOW" name="window" />
+		<field type="ModeInfo" name="modeInfo" />
+		<reply>
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<field type="CARD32" name="mode" />
+		</reply>
+	</request>
+
+	<request name="DestroyMode" opcode="17">
+		<field type="CARD32" name="mode" />
+	</request>
+
+	<request name="AddOutputMode" opcode="18">
+		<field type="CARD32" name="output" />
+		<field type="CARD32" name="mode" />
+	</request>
+
+	<request name="DeleteOutputMode" opcode="19">
+		<field type="CARD32" name="output" />
+		<field type="CARD32" name="mode" />
+	</request>
+
+	<request name="GetCrtcInfo" opcode="20">
+		<field type="CARD32" name="crtc" />
+		<field type="TIMESTAMP" name="configTimestamp" />
+		<reply>
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<field type="TIMESTAMP" name="timestamp" />
+			<field type="CARD32" name="crtc" />
+			<field type="INT16" name="x" />
+			<field type="INT16" name="y" />
+			<field type="CARD16" name="width" />
+			<field type="CARD16" name="height" />
+			<field type="CARD32" name="mode" />
+			<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
+			<field type="CARD16" name="rotations" />	<!-- mask of enum Rotation -->
+			<field type="CARD16" name="num_outputs" />
+			<field type="CARD16" name="num_possible_outputs" />
+			<list type="CARD32" name="outputs">
+				<fieldref>num_outputs</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<request name="SetCrtcConfig" opcode="21">
+		<field type="CARD32" name="crtc" />
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="TIMESTAMP" name="configTimestamp" />
+		<field type="INT16" name="x" />
+		<field type="INT16" name="y" />
+		<field type="CARD32" name="mode" />
+		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
+		<reply>
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<field type="TIMESTAMP" name="timestamp" />
+		</reply>
+	</request>
+
+	<request name="GetCrtcGammaSize" opcode="22">
+		<field type="CARD32" name="crtc" />
+		<reply>
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<field type="CARD16" name="size" />
+		</reply>
+	</request>
+
+	<request name="GetCrtcGamma" opcode="23">
+		<field type="CARD32" name="crtc" />
+		<reply>
+			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<field type="CARD16" name="size" />
+			<pad bytes="22" />
+			<list type="CARD16" name="red">
+				<fieldref>size</fieldref>
+			</list>
+			<list type="CARD16" name="green">
+				<fieldref>size</fieldref>
+			</list>
+			<list type="CARD16" name="blue">
+				<fieldref>size</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<request name="SetCrtcGamma" opcode="24">
+		<field type="CARD32" name="crtc" />
+		<field type="CARD16" name="size" />
+		<pad bytes="2"/>
+		<list type="CARD16" name="red">
+			<fieldref>size</fieldref>
+		</list>
+		<list type="CARD16" name="green">
+			<fieldref>size</fieldref>
+		</list>
+		<list type="CARD16" name="blue">
+			<fieldref>size</fieldref>
+		</list>
+	</request>
+
+	<!-- Events -->
+
+	<enum name="NotifyMask" >
+		<item name="ScreenChange">  <bit>0</bit></item>
+		<!-- new in 1.2 -->
+		<item name="CrtcChange">    <bit>1</bit></item>
+		<item name="OutputChange">  <bit>2</bit></item>
+		<item name="OutputProperty"><bit>3</bit></item>
 	</enum>
 	
 	<event name="ScreenChangeNotify" number="0">
@@ -141,10 +458,63 @@ authorization from the authors.
 		<field type="WINDOW" name="request_window" />
 		<field type="CARD16" name="sizeID" />
 		<field type="CARD16" name="subpixel_order" />
-		<field type="INT16" name="width" />
-		<field type="INT16" name="height" />
-		<field type="INT16" name="mwidth" />
-		<field type="INT16" name="mheight" />
+		<field type="CARD16" name="width" />
+		<field type="CARD16" name="height" />
+		<field type="CARD16" name="mmWidth" />
+		<field type="CARD16" name="mmHeight" />
 	</event>
-		
+
+	<!-- New in version 1.2 -->
+
+	<!-- subcode -->
+	<enum name="Notify" >
+		<item name="CrtcChange">    <value>0</value></item>
+		<item name="OutputChange">  <value>1</value></item>
+		<item name="OutputProperty"><value>2</value></item>
+	</enum>
+
+	<struct name="CrtcChange">
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="WINDOW" name="window" />
+		<field type="CARD32" name="crtc" />
+		<field type="CARD32" name="mode" />
+		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
+		<pad bytes="2" />
+		<field type="INT16" name="x" />
+		<field type="INT16" name="y" />
+		<field type="CARD16" name="width" />
+		<field type="CARD16" name="height" />
+	</struct>
+
+	<struct name="OutputChange">
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="TIMESTAMP" name="configTimestamp" />
+		<field type="WINDOW" name="window" />
+		<field type="CARD32" name="output" />
+		<field type="CARD32" name="crtc" />
+		<field type="CARD32" name="mode" />
+		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
+		<field type="CARD8" name="connection" />	<!-- enum Connection -->
+		<field type="CARD8" name="subpixelOrder" />
+	</struct>
+
+	<struct name="OutputProperty">
+		<field type="WINDOW" name="window" />
+		<field type="CARD32" name="output" />
+		<field type="ATOM" name="atom" />
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="CARD8" name="status" />		<!-- core enum Property -->
+		<pad bytes="11" />
+	</struct>
+
+	<union name="NotifyData">
+		<field type="CrtcChange"     name="cc" />
+		<field type="OutputChange"   name="oc" />
+		<field type="OutputProperty" name="op" />
+	</union>
+
+	<event name="Notify" number="1">
+		<field type="CARD8" name="subCode" />		<!-- enum Notify -->
+		<field type="NotifyData" name="u" />
+	</event>
 </xcb>
