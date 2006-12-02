@@ -263,15 +263,14 @@ authorization from the authors.
 		</reply>
 	</request>
 
-	<!-- NOTE: num_atoms is currently unused. -->
 	<request name="ListOutputProperties" opcode="10">
 		<field type="CARD32" name="output" />
 		<reply>
-			<field type="CARD8" name="num_properties" />
+			<pad bytes="1" />
 			<field type="CARD16" name="num_atoms" />
 			<pad bytes="22" />
-			<list type="ATOM" name="properties">
-				<fieldref>num_properties</fieldref>
+			<list type="ATOM" name="atoms">
+				<fieldref>num_atoms</fieldref>
 			</list>
 		</reply>
 	</request>
