@@ -27,7 +27,7 @@ authorization from the authors.
 -->
 
 <xcb header="randr" extension-xname="RANDR" extension-name="RandR"
-    major-version="1" minor-version="2">
+    extension-oneword="true" major-version="1" minor-version="2">
 
 	<import>xproto</import>
 	
