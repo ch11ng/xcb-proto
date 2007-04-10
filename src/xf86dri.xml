@@ -27,7 +27,7 @@ authorization from the authors.
 -->
 
 <xcb header="xf86dri" extension-xname="XFree86-DRI" extension-name="XF86Dri"
-    extension-oneword="true" major-version="4" minor-version="1">
+    major-version="4" minor-version="1">
 
     <!-- Using http://dri.sourceforge.net/doc/dri_extensions_low_level.txt -->
 

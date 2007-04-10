@@ -29,7 +29,7 @@ authorization from the authors.
 Screen Saver Extension to the X Protocol
 Draft Standard Version 1.1
 -->
-<xcb header="screensaver" extension-xname="MIT-SCREEN-SAVER" extension-name="ScreenSaver" extension-oneword="true" major-version="1" minor-version="1">
+<xcb header="screensaver" extension-xname="MIT-SCREEN-SAVER" extension-name="ScreenSaver" major-version="1" minor-version="1">
 
   <!-- Types -->
 
