@@ -1,3 +1,11 @@
+xcb-proto (1.0-2) unstable; urgency=low
+
+  * Change XS-X-Vcs-Git to XS-Vcs-Git.
+  * Add XS-Vcs-Browse field.
+  * Upload to unstable.
+
+ -- Josh Triplett <josh@freedesktop.org>  Mon, 21 May 2007 13:06:31 -0700
+
 xcb-proto (1.0-1) experimental; urgency=low
 
   * New upstream release.
