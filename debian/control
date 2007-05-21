@@ -6,7 +6,7 @@ Uploaders: Jamey Sharp <sharpone@debian.org>, Josh Triplett <josh@freedesktop.or
 Build-Depends: cdbs, debhelper (>= 5), libxml2-utils
 Standards-Version: 3.7.2
 XS-Vcs-Git: git://anongit.freedesktop.org/git/xcb/proto
-XS-Vcs-Browse: http://gitweb.freedesktop.org/?p=xcb/proto.git
+XS-Vcs-Browser: http://gitweb.freedesktop.org/?p=xcb/proto.git
 
 Package: xcb-proto
 Architecture: all
