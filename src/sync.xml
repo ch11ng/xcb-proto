@@ -48,7 +48,7 @@ for licensing information.
     <field type="COUNTER" name="counter" />
     <field type="INT64" name="resolution" />
     <field type="CARD16" name="name_len" />
-    <list type="CARD8" name="name">
+    <list type="char" name="name">
       <fieldref>name_len</fieldref>
     </list>
   </struct>

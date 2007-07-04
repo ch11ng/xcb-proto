@@ -311,7 +311,7 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="4" />
 			<field type="CARD32" name="str_len" />
 			<pad bytes="16" />
-			<list type="CARD8" name="string">
+			<list type="char" name="string">
 				<fieldref>str_len</fieldref>
 			</list>
 		</reply>
@@ -321,7 +321,7 @@ The patch that fixed this server bug in X.org CVS is here:
 		<field type="CARD32" name="major_version" />
 		<field type="CARD32" name="minor_version" />
 		<field type="CARD32" name="str_len" />
-		<list type="CARD8" name="string">
+		<list type="char" name="string">
 			<fieldref>str_len</fieldref>
 		</list>
 	</request>
@@ -841,7 +841,7 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="4" />
 			<field type="CARD32" name="n" />
 			<pad bytes="16" />
-			<list type="CARD8" name="string">
+			<list type="char" name="string">
 				<fieldref>n</fieldref>
 			</list>
 		</reply>

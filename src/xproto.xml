@@ -899,7 +899,7 @@ authorization from the authors.
       <pad bytes="1" />
       <field type="CARD16" name="name_len" />
       <pad bytes="22" />
-      <list type="CARD8" name="name">
+      <list type="char" name="name">
         <fieldref>name_len</fieldref>
       </list>
     </reply>

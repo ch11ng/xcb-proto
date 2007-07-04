@@ -68,7 +68,7 @@ authorization from the authors.
 	    <field type="CARD32" name="sarea_handle_high" />
 	    <field type="CARD32" name="bus_id_len" />
 	    <pad bytes="12" />
-	    <list type="CARD8" name="bus_id">
+	    <list type="char" name="bus_id">
 		<fieldref>bus_id_len</fieldref>
 	    </list>
 	</reply>
@@ -87,7 +87,7 @@ authorization from the authors.
 	    <field type="CARD32" name="client_driver_patch_version" />
 	    <field type="CARD32" name="client_driver_name_len" />
 	    <pad bytes="8" />
-	    <list type="CARD8" name="client_driver_name">
+	    <list type="char" name="client_driver_name">
 		<fieldref>client_driver_name_len</fieldref>
 	    </list>
 	</reply>
