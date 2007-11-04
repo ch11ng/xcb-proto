@@ -1,3 +1,23 @@
+Release 1.1 (2007-11-04)
+========================
+
+Incompatible change to the XML schema: rather than special-casing the
+treatment of protocol extension names, use the new extension-multiword
+attribute.  Normally, XCB prefixes C extension functions with
+xcb_extname_.  However, some of the existing extensions used multi-word
+names, such as xcb_big_requests_ or xcb_xc_misc_. Those extensions now
+use this attribute to match their existing defined API.  This allows the
+XCB code generator to avoid special-casing those extension names.
+
+Protocol updates:
+* Update DAMAGE to 1.1
+* Update RandR to version 1.2
+
+Bug fixes:
+* fix XSync Initialize call
+* Update autogen.sh to one that does objdir != srcdir.
+
+
 Release 1.0 (2006-11-23)
 ========================
 
