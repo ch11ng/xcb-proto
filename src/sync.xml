@@ -78,6 +78,8 @@ for licensing information.
   </error>
     
   <request name="Initialize" opcode="0">
+    <field type="CARD8" name="desired_major_version" />
+    <field type="CARD8" name="desired_minor_version" />
     <reply>
       <pad bytes="1" />
       <field type="CARD8" name="major_version" />

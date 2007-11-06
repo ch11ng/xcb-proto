@@ -27,7 +27,7 @@ authorization from the authors.
 -->
 
 <xcb header="xprint" extension-xname="XpExtension" extension-name="XPrint"
-    major-version="1" minor-version="0">
+    extension-multiword="true" major-version="1" minor-version="0">
 
     <!-- Conforms to XPRINT 1.0 -->
 

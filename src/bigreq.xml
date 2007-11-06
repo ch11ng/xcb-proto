@@ -26,7 +26,7 @@ sale, use or other dealings in this Software without prior written
 authorization from the authors.
 -->
 <xcb header="bigreq" extension-xname="BIG-REQUESTS"
-    extension-name="BigRequests"
+    extension-name="BigRequests" extension-multiword="true"
     major-version="0" minor-version="0">
 
   <request name="Enable" opcode="0">
