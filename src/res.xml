@@ -27,13 +27,15 @@ authorization from the authors.
 -->
 <xcb header="res" extension-xname="X-Resource" extension-name="Res"
     major-version="1" minor-version="0">
+    <import>xproto</import>
+
     <struct name="Client">
         <field type="CARD32" name="resource_base" />
         <field type="CARD32" name="resource_mask" />
     </struct>
 
     <struct name="Type">
-        <field type="CARD32" name="resource_type" />
+        <field type="ATOM" name="resource_type" />
         <field type="CARD32" name="count" />
     </struct>
 
