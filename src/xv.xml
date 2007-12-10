@@ -306,7 +306,7 @@ authorization from the authors.
     </request>
 
     <request name="SelectPortNotify" opcode="11">
-        <field type="DRAWABLE" name="drawable" />
+        <field type="PORT" name="port" />
         <field type="BOOL" name="onoff" />
     </request>
 
