@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Except as contained in this notice, the names of the authors or their
+institutions shall not be used in advertising or otherwise to promote the
+sale, use or other dealings in this Software without prior written
+authorization from the authors.
+-->
+<xcb header="xselinux" extension-xname="SELinux" extension-name="SELinux"
+     extension-oneword="true" major-version="1" minor-version="0">
+  <import>xproto</import>
+
+  <request name="QueryVersion" opcode="0">
+    <field type="CARD8" name="client_major" />
+    <field type="CARD8" name="client_minor" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD16" name="server_major" />
+      <field type="CARD16" name="server_minor" />
+    </reply>
+  </request>
+
+  <request name="SetSecurityManager" opcode="1">
+    <field type="WINDOW" name="owner" />
+  </request>
+
+  <request name="GetSecurityManager" opcode="2">
+    <reply>
+      <pad bytes="1" />
+      <field type="WINDOW" name="owner" />
+    </reply>
+  </request>
+
+  <request name="SetDeviceCreateContext" opcode="3">
+    <field type="BOOL" name="is_permanent" />
+    <pad bytes="1" />
+    <field type="CARD16" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetDeviceCreateContext" opcode="4">
+    <reply>
+      <field type="BOOL" name="is_permanent" />
+      <field type="CARD16" name="context_len" />
+      <pad bytes="22" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="SetDeviceContext" opcode="5">
+    <field type="CARD32" name="device" />
+    <pad bytes="2" />
+    <field type="CARD16" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetDeviceContext" opcode="6">
+    <field type="CARD32" name="device" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD16" name="context_len" />
+      <pad bytes="22" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="SetPropertyCreateContext" opcode="7">
+    <field type="BOOL" name="is_permanent" />
+    <pad bytes="1" />
+    <field type="CARD16" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetPropertyCreateContext" opcode="8">
+    <reply>
+      <field type="BOOL" name="is_permanent" />
+      <field type="CARD16" name="context_len" />
+      <pad bytes="22" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="GetPropertyContext" opcode="9">
+    <field type="WINDOW" name="window" />
+    <field type="ATOM" name="property" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD16" name="context_len" />
+      <pad bytes="22" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="SetWindowCreateContext" opcode="10">
+    <field type="BOOL" name="is_permanent" />
+    <pad bytes="1" />
+    <field type="CARD16" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetWindowCreateContext" opcode="11">
+    <reply>
+      <field type="BOOL" name="is_permanent" />
+      <field type="CARD16" name="context_len" />
+      <pad bytes="22" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="GetWindowContext" opcode="12">
+    <pad bytes="1" />
+    <field type="WINDOW" name="window" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD16" name="context_len" />
+      <pad bytes="22" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+</xcb>
