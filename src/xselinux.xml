@@ -142,7 +142,6 @@ authorization from the authors.
   </request>
 
   <request name="GetWindowContext" opcode="12">
-    <pad bytes="1" />
     <field type="WINDOW" name="window" />
     <reply>
       <pad bytes="1" />
