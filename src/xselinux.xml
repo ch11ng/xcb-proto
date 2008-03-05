@@ -36,120 +36,229 @@ authorization from the authors.
     </reply>
   </request>
 
-  <request name="SetSecurityManager" opcode="1">
-    <field type="WINDOW" name="owner" />
-  </request>
-
-  <request name="GetSecurityManager" opcode="2">
-    <reply>
-      <pad bytes="1" />
-      <field type="WINDOW" name="owner" />
-    </reply>
-  </request>
-
-  <request name="SetDeviceCreateContext" opcode="3">
-    <field type="BOOL" name="is_permanent" />
-    <pad bytes="1" />
-    <field type="CARD16" name="context_len" />
+  <request name="SetDeviceCreateContext" opcode="1">
+    <field type="CARD32" name="context_len" />
     <list type="char" name="context">
       <fieldref>context_len</fieldref>
     </list>
   </request>
 
-  <request name="GetDeviceCreateContext" opcode="4">
+  <request name="GetDeviceCreateContext" opcode="2">
     <reply>
-      <field type="BOOL" name="is_permanent" />
-      <field type="CARD16" name="context_len" />
-      <pad bytes="22" />
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
       <list type="char" name="context">
 	<fieldref>context_len</fieldref>
       </list>
     </reply>
   </request>
 
-  <request name="SetDeviceContext" opcode="5">
+  <request name="SetDeviceContext" opcode="3">
     <field type="CARD32" name="device" />
-    <pad bytes="2" />
-    <field type="CARD16" name="context_len" />
+    <field type="CARD32" name="context_len" />
     <list type="char" name="context">
       <fieldref>context_len</fieldref>
     </list>
   </request>
 
-  <request name="GetDeviceContext" opcode="6">
+  <request name="GetDeviceContext" opcode="4">
     <field type="CARD32" name="device" />
     <reply>
       <pad bytes="1" />
-      <field type="CARD16" name="context_len" />
-      <pad bytes="22" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
       <list type="char" name="context">
 	<fieldref>context_len</fieldref>
       </list>
     </reply>
   </request>
 
-  <request name="SetPropertyCreateContext" opcode="7">
-    <field type="BOOL" name="is_permanent" />
-    <pad bytes="1" />
-    <field type="CARD16" name="context_len" />
+  <request name="SetWindowCreateContext" opcode="5">
+    <field type="CARD32" name="context_len" />
     <list type="char" name="context">
       <fieldref>context_len</fieldref>
     </list>
   </request>
 
-  <request name="GetPropertyCreateContext" opcode="8">
+  <request name="GetWindowCreateContext" opcode="6">
     <reply>
-      <field type="BOOL" name="is_permanent" />
-      <field type="CARD16" name="context_len" />
-      <pad bytes="22" />
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
       <list type="char" name="context">
 	<fieldref>context_len</fieldref>
       </list>
     </reply>
   </request>
 
-  <request name="GetPropertyContext" opcode="9">
+  <request name="GetWindowContext" opcode="7">
+    <field type="WINDOW" name="window" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <struct name="ListItem">
+    <field type="ATOM" name="name" />
+    <field type="CARD32" name="object_context_len" />
+    <field type="CARD32" name="data_context_len" />
+    <list type="char" name="object_context">
+      <fieldref>object_context_len</fieldref>
+    </list>
+    <list type="char" name="data_context">
+      <fieldref>data_context_len</fieldref>
+    </list>
+  </struct>
+
+  <request name="SetPropertyCreateContext" opcode="8">
+    <field type="CARD32" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetPropertyCreateContext" opcode="9">
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="SetPropertyUseContext" opcode="10">
+    <field type="CARD32" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetPropertyUseContext" opcode="11">
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="GetPropertyContext" opcode="12">
     <field type="WINDOW" name="window" />
     <field type="ATOM" name="property" />
     <reply>
       <pad bytes="1" />
-      <field type="CARD16" name="context_len" />
-      <pad bytes="22" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
       <list type="char" name="context">
 	<fieldref>context_len</fieldref>
       </list>
     </reply>
   </request>
 
-  <request name="SetWindowCreateContext" opcode="10">
-    <field type="BOOL" name="is_permanent" />
-    <pad bytes="1" />
-    <field type="CARD16" name="context_len" />
+  <request name="GetPropertyDataContext" opcode="13">
+    <field type="WINDOW" name="window" />
+    <field type="ATOM" name="property" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="ListProperties" opcode="14">
+    <field type="WINDOW" name="window" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="properties_len" />
+      <pad bytes="20" />
+      <list type="ListItem" name="properties">
+	<fieldref>properties_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="SetSelectionCreateContext" opcode="15">
+    <field type="CARD32" name="context_len" />
     <list type="char" name="context">
       <fieldref>context_len</fieldref>
     </list>
   </request>
 
-  <request name="GetWindowCreateContext" opcode="11">
+  <request name="GetSelectionCreateContext" opcode="16">
     <reply>
-      <field type="BOOL" name="is_permanent" />
-      <field type="CARD16" name="context_len" />
-      <pad bytes="22" />
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
       <list type="char" name="context">
 	<fieldref>context_len</fieldref>
       </list>
     </reply>
   </request>
 
-  <request name="GetWindowContext" opcode="12">
-    <field type="WINDOW" name="window" />
+  <request name="SetSelectionUseContext" opcode="17">
+    <field type="CARD32" name="context_len" />
+    <list type="char" name="context">
+      <fieldref>context_len</fieldref>
+    </list>
+  </request>
+
+  <request name="GetSelectionUseContext" opcode="18">
     <reply>
       <pad bytes="1" />
-      <field type="CARD16" name="context_len" />
-      <pad bytes="22" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
       <list type="char" name="context">
 	<fieldref>context_len</fieldref>
       </list>
     </reply>
   </request>
+
+  <request name="GetSelectionContext" opcode="19">
+    <field type="ATOM" name="selection" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="GetSelectionDataContext" opcode="20">
+    <field type="ATOM" name="selection" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="ListSelections" opcode="21">
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="selections_len" />
+      <pad bytes="20" />
+      <list type="ListItem" name="selections">
+	<fieldref>selections_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
 </xcb>
