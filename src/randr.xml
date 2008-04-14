@@ -284,7 +284,9 @@ authorization from the authors.
 			<field type="BOOL" name="range" />
 			<field type="BOOL" name="immutable" />
 			<pad bytes="21" />
-			<list type="INT32" name="validValues" />
+			<list type="INT32" name="validValues">
+				<fieldref>length</fieldref>
+			</list>
 		</reply>
 	</request>
 

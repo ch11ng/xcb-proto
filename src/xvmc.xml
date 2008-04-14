@@ -78,7 +78,9 @@ authorization from the authors.
             <field type="CARD16" name="height_actual" />
             <field type="CARD32" name="flags_return" />
             <pad bytes="20" />
-            <list type="CARD32" name="priv_data" />
+            <list type="CARD32" name="priv_data">
+		<fieldref>length</fieldref>
+	    </list>
         </reply>
     </request>
 
@@ -92,7 +94,9 @@ authorization from the authors.
         <reply>
             <pad bytes="1" />
             <pad bytes="24" />
-            <list type="CARD32" name="priv_data" />
+            <list type="CARD32" name="priv_data">
+		<fieldref>length</fieldref>
+	    </list>
         </reply>
     </request>
 
@@ -116,7 +120,9 @@ authorization from the authors.
                 <value>4</value>
             </list>
             <pad bytes="12" />
-            <list type="CARD32" name="priv_data" />
+            <list type="CARD32" name="priv_data">
+		<fieldref>length</fieldref>
+	    </list>
         </reply>
     </request>
 

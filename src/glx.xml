@@ -252,7 +252,9 @@ The patch that fixed this server bug in X.org CVS is here:
 			<field type="CARD32" name="num_visuals" />
 			<field type="CARD32" name="num_properties" />
                         <pad bytes="16" />
-                        <list type="CARD32" name="property_list" />
+			<list type="CARD32" name="property_list">
+				<fieldref>length</fieldref>
+			</list>
 		</reply>
 	</request>
 
@@ -281,7 +283,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<list type="BYTE" name="data1">
 				<value>24</value>
 			</list>
-			<list type="BYTE" name="data2" />
+			<list type="BYTE" name="data2">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -332,7 +339,9 @@ The patch that fixed this server bug in X.org CVS is here:
 				value-mask-name="value_mask"
                                 value-list-name="value_list" />
                             -->
-                        <list type="CARD32" name="property_list" />
+                        <list type="CARD32" name="property_list">
+				<fieldref>length</fieldref>
+			</list>
 		</reply>
 	</request>
 
@@ -552,7 +561,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<pad bytes="24" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 		
@@ -583,7 +597,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<pad bytes="24" />
-			<list type="FLOAT64" name="data" />
+			<list type="FLOAT64" name="data">
+				<op op="/">
+					<fieldref>length</fieldref>
+					<value>2</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -803,7 +822,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<pad bytes="24" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -916,7 +940,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<field type="INT32" name="height" />
 			<field type="INT32" name="depth" />
 			<pad bytes="4" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 	    
@@ -1010,7 +1039,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="1" />
 			<field type="BOOL32" name="ret_val" />
 			<pad bytes="20" />
-			<list type="BOOL" name="data" />
+			<list type="BOOL" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -1028,7 +1062,9 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<pad bytes="24" />
-			<list type="CARD32" name="data" />
+			<list type="CARD32" name="data">
+				<fieldref>length</fieldref>
+			</list>
 		</reply>
 	</request>
 
@@ -1052,7 +1088,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="8" />
 			<field type="INT32" name="width" />
 			<pad bytes="12" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 	
@@ -1100,7 +1141,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<field type="INT32" name="width" />
 			<field type="INT32" name="height" />
 			<pad bytes="8" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -1149,7 +1195,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<field type="INT32" name="row_w" />
 			<field type="INT32" name="col_h" />
 			<pad bytes="8" />
-			<list type="BYTE" name="rows_and_cols" />
+			<list type="BYTE" name="rows_and_cols">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -1165,7 +1216,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="8" />
 			<field type="INT32" name="width" />
 			<pad bytes="12" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -1212,7 +1268,12 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<pad bytes="24" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -1268,7 +1329,12 @@ The patch that fixed this server bug in X.org CVS is here:
 			<pad bytes="8" />
 			<field type="INT32" name="size" />
 			<pad bytes="12" />
-			<list type="BYTE" name="data" />
+			<list type="BYTE" name="data">
+				<op op="*">
+					<fieldref>length</fieldref>
+					<value>4</value>
+				</op>
+			</list>
 		</reply>
 	</request>
 
@@ -1292,7 +1358,9 @@ The patch that fixed this server bug in X.org CVS is here:
 		<reply>
 			<pad bytes="1" />
 			<pad bytes="24" />
-			<list type="CARD32" name="data" />
+			<list type="CARD32" name="data">
+				<fieldref>length</fieldref>
+			</list>
 		</reply>
 	</request>
 	
