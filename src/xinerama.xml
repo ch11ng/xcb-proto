@@ -68,13 +68,13 @@ authorization from the authors.
 
     <request name="GetScreenSize" opcode="3">
         <field type="WINDOW" name="window" />
-        <field type="SCREEN" name="screen" />
+        <field type="CARD32" name="screen" />
         <reply>
             <pad bytes="1" />
             <field type="CARD32" name="width" />
             <field type="CARD32" name="height" />
             <field type="WINDOW" name="window" />
-            <field type="SCREEN" name="screen" />
+            <field type="CARD32" name="screen" />
         </reply>
     </request>
 
