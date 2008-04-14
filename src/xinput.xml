@@ -851,7 +851,6 @@ authorization from the authors.
 	<list type="CARD32" name="resolution_values">
 	    <fieldref>num_valuators</fieldref>
 	</list>
-	<pad bytes="2" />
     </struct>
 
     <struct name="DeviceAbsCalibCtl">
