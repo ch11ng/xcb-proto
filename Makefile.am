@@ -1,4 +1,4 @@
-SUBDIRS=src
+SUBDIRS = src xcbgen
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xcb-proto.pc
