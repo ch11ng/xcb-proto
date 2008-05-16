@@ -25,6 +25,7 @@ class Type(object):
         self.resolved = False
 
         # Screw isinstance().
+        self.is_simple = False
         self.is_list = False
         self.is_expr = False
         self.is_container = False
@@ -82,6 +83,7 @@ class SimpleType(Type):
     '''
     def __init__(self, name, size):
         Type.__init__(self, name)
+        self.is_simple = True
         self.size = size
         self.nmemb = 1
 
