@@ -318,7 +318,7 @@ class ComplexType(Type):
             if not m.wire:
                 continue
             if m.type.fixed_size():
-                self.size = self.size + m.type.size
+                self.size = self.size + (m.type.size * m.type.nmemb)
             else:
                 self.size = None
                 break
