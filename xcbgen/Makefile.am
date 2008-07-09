@@ -1,3 +1,3 @@
 pkgpythondir = $(pythondir)/xcbgen
 
-pkgpython_PYTHON = __init__.py error.py expr.py matcher.py state.py types.py
+pkgpython_PYTHON = __init__.py error.py expr.py matcher.py state.py xtypes.py

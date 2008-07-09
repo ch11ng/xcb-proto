@@ -6,7 +6,7 @@ from xml.etree.cElementTree import parse
 
 import matcher
 from error import *
-from types import *
+from xtypes import *
 
 import __main__
 

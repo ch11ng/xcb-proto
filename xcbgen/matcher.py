@@ -10,7 +10,7 @@ from os.path import join
 from xml.etree.cElementTree import parse
 
 import state
-from types import *
+from xtypes import *
 
 def import_(node, module, namespace):
     '''
