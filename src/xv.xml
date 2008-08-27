@@ -84,11 +84,12 @@ authorization from the authors.
         <field type="CARD16" name="name_size" />
         <field type="CARD16" name="width" />
         <field type="CARD16" name="height" />
-        <field type="Rational" name="rate" />
         <!--
-        Xvproto.h has a padding CARD16 here but the name
-        overlaps.
+        Some versions of Xvproto.h incorrectly have
+        this padding after "rate".
         -->
+        <pad bytes="2" />
+        <field type="Rational" name="rate" />
         <list type="char" name="name">
             <fieldref>name_size</fieldref>
         </list>
@@ -97,6 +98,7 @@ authorization from the authors.
     <struct name="Format">
         <field type="VISUALID" name="visual" />
         <field type="CARD8" name="depth" />
+        <pad bytes="3" />
     </struct>
 
     <struct name="Image">
