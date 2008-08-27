@@ -69,7 +69,7 @@ authorization from the authors.
         <field type="CARD16" name="num_ports" />
         <field type="CARD16" name="num_formats" />
         <field type="CARD8" name="type" />
-        <field type="CARD8" name="pad" />
+        <pad bytes="1" />
         <list type="char" name="name">
             <fieldref>name_size</fieldref>
         </list>
@@ -133,22 +133,20 @@ authorization from the authors.
         <field type="CARD32" name="id" />
         <field type="CARD8" name="type" />
         <field type="CARD8" name="byte_order" />
-        <field type="CARD16" name="pad1" />
+        <pad bytes="2" />
         <list type="CARD8" name="guid">
             <value>16</value>
         </list>
         <field type="CARD8" name="bpp" />
         <field type="CARD8" name="num_planes" />
-        <field type="CARD16" name="pad2" />
+        <pad bytes="2" />
         <field type="CARD8" name="depth" />
-        <field type="CARD8" name="pad3" />
-        <field type="CARD16" name="pad4" />
+        <pad bytes="3" />
         <field type="CARD32" name="red_mask" />
         <field type="CARD32" name="green_mask" />
         <field type="CARD32" name="blue_mask" />
         <field type="CARD8" name="format" />
-        <field type="CARD8" name="pad5" />
-        <field type="CARD16" name="pad6" />
+        <pad bytes="3" />
         <field type="CARD32" name="y_sample_bits" />
         <field type="CARD32" name="u_sample_bits" />
         <field type="CARD32" name="v_sample_bits" />
@@ -162,10 +160,7 @@ authorization from the authors.
             <value>32</value>
         </list>
         <field type="CARD8" name="vscanline_order" />
-        <field type="CARD8" name="vpad7" />
-        <field type="CARD16" name="vpad8" />
-        <field type="CARD32" name="vpad9" />
-        <field type="CARD32" name="vpad10" />
+        <pad bytes="11" />
     </struct>
 
 
