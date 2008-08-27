@@ -2189,6 +2189,7 @@ authorization from the authors.
   </request>
 
   <request name="RotateProperties" opcode="114">
+    <pad bytes="1" />
     <field type="WINDOW" name="window" />
     <field type="CARD16" name="atoms_len" />
     <field type="INT16" name="delta" />
