@@ -115,6 +115,7 @@ Draft Standard Version 1.1
   <event name="Notify" number="0">
     <field type="CARD8" name="code"/>
     <field type="BYTE" name="state"/>    <!-- enum State -->
+    <pad bytes="1" />
     <field type="CARD16" name="sequence_number"/>
     <field type="TIMESTAMP" name="time"/>
     <field type="WINDOW" name="root"/>
