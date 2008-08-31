@@ -815,6 +815,7 @@ authorization from the authors.
     <field type="WINDOW" name="window" />
     <valueparam value-mask-type="CARD16"
                 value-mask-name="value_mask"
+                value-mask-pad="2"
                 value-list-name="value_list" />
   </request>
 
