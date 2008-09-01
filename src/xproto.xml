@@ -249,6 +249,7 @@ authorization from the authors.
     <field type="INT16" name="event_y" />
     <field type="CARD16" name="state" />
     <field type="BOOL" name="same_screen" />
+    <pad bytes="1" />
   </event>
 
   <eventcopy name="KeyRelease" number="3" ref="KeyPress" />
@@ -274,6 +275,7 @@ authorization from the authors.
     <field type="INT16" name="event_y" />
     <field type="CARD16" name="state" />
     <field type="BOOL" name="same_screen" />
+    <pad bytes="1" />
   </event>
 
   <eventcopy name="ButtonRelease" number="5" ref="ButtonPress" />
@@ -296,6 +298,7 @@ authorization from the authors.
     <field type="INT16" name="event_y" />
     <field type="CARD16" name="state" />
     <field type="BOOL" name="same_screen" />
+    <pad bytes="1" />
   </event>
 
   <enum name="NotifyDetail">
@@ -337,6 +340,7 @@ authorization from the authors.
     <field type="BYTE" name="detail" />
     <field type="WINDOW" name="event" />
     <field type="BYTE" name="mode" />
+    <pad bytes="3" />
   </event>
 
   <eventcopy name="FocusOut" number="10" ref="FocusIn" />
@@ -353,6 +357,7 @@ authorization from the authors.
     <field type="CARD16" name="width" />
     <field type="CARD16" name="height" />
     <field type="CARD16" name="count" />
+    <pad bytes="2" />
   </event>
 
   <event name="GraphicsExposure" number="13">
@@ -365,6 +370,7 @@ authorization from the authors.
     <field type="CARD16" name="minor_opcode" />
     <field type="CARD16" name="count" />
     <field type="CARD8" name="major_opcode" />
+    <pad bytes="3" />
   </event>
 
   <event name="NoExposure" number="14">
@@ -372,6 +378,7 @@ authorization from the authors.
     <field type="DRAWABLE" name="drawable" />
     <field type="CARD16" name="minor_opcode" />
     <field type="CARD8" name="major_opcode" />
+    <pad bytes="1" />
   </event>
 
   <enum name="Visibility">
@@ -384,6 +391,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
     <field type="BYTE" name="state" />
+    <pad bytes="3" />
   </event>
 
   <event name="CreateNotify" number="16">
@@ -396,6 +404,7 @@ authorization from the authors.
     <field type="CARD16" name="height" />
     <field type="CARD16" name="border_width" />
     <field type="BOOL" name="override_redirect" />
+    <pad bytes="1" />
   </event>
 
   <event name="DestroyNotify" number="17">
@@ -409,6 +418,7 @@ authorization from the authors.
     <field type="WINDOW" name="event" />
     <field type="WINDOW" name="window" />
     <field type="BOOL" name="from_configure" />
+    <pad bytes="3" />
   </event>
 
   <event name="MapNotify" number="19">
@@ -416,6 +426,7 @@ authorization from the authors.
     <field type="WINDOW" name="event" />
     <field type="WINDOW" name="window" />
     <field type="BOOL" name="override_redirect" />
+    <pad bytes="3" />
   </event>
 
   <event name="MapRequest" number="20">
@@ -432,6 +443,7 @@ authorization from the authors.
     <field type="INT16" name="x" />
     <field type="INT16" name="y" />
     <field type="BOOL" name="override_redirect" />
+    <pad bytes="3" />
   </event>
 
   <event name="ConfigureNotify" number="22">
@@ -445,6 +457,7 @@ authorization from the authors.
     <field type="CARD16" name="height" />
     <field type="CARD16" name="border_width" />
     <field type="BOOL" name="override_redirect" />
+    <pad bytes="1" />
   </event>
 
   <event name="ConfigureRequest" number="23">
@@ -486,6 +499,7 @@ authorization from the authors.
     <field type="WINDOW" name="window" />
     <pad bytes="4" />
     <field type="BYTE" name="place" />
+    <pad bytes="3" />
   </event>
 
   <eventcopy name="CirculateRequest" number="27" ref="CirculateNotify" />
@@ -501,6 +515,7 @@ authorization from the authors.
     <field type="ATOM" name="atom" />
     <field type="TIMESTAMP" name="time" />
     <field type="BYTE" name="state" />
+    <pad bytes="3" />
   </event>
 
   <event name="SelectionClear" number="29">
@@ -540,6 +555,7 @@ authorization from the authors.
     <field type="COLORMAP" name="colormap" />
     <field type="BOOL" name="new" />
     <field type="BYTE" name="state" />
+    <pad bytes="2" />
   </event>
 
   <union name="ClientMessageData">
@@ -568,6 +584,7 @@ authorization from the authors.
     <field type="BYTE" name="request" />
     <field type="KEYCODE" name="first_keycode" />
     <field type="CARD8" name="count" />
+    <pad bytes="1" />
   </event>
 
 
@@ -580,12 +597,14 @@ authorization from the authors.
     <field type="CARD32" name="bad_value" />
     <field type="CARD16" name="minor_opcode" />
     <field type="CARD8" name="major_opcode" />
+    <pad bytes="1" />
   </error>
 
   <error name="Value" number="2">
     <field type="CARD32" name="bad_value" />
     <field type="CARD16" name="minor_opcode" />
     <field type="CARD8" name="major_opcode" />
+    <pad bytes="1" />
   </error>
 
   <errorcopy name="Window" number="3" ref="Value" />
@@ -741,6 +760,7 @@ authorization from the authors.
       <field type="CARD32" name="all_event_masks" />
       <field type="CARD32" name="your_event_mask" />
       <field type="CARD16" name="do_not_propagate_mask" />
+      <pad bytes="2" />
     </reply>
   </request>
 
@@ -840,6 +860,7 @@ authorization from the authors.
       <field type="CARD16" name="width" />
       <field type="CARD16" name="height" />
       <field type="CARD16" name="border_width" />
+      <pad bytes="2" />
     </reply>
   </request>
 
@@ -1054,6 +1075,7 @@ authorization from the authors.
     <field type="CURSOR" name="cursor" />
     <field type="TIMESTAMP" name="time" />
     <field type="CARD16" name="event_mask" />
+    <pad bytes="2" />
   </request>
 
   <request name="GrabKeyboard" opcode="31">
@@ -1062,6 +1084,7 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
     <field type="BYTE" name="pointer_mode" />
     <field type="BYTE" name="keyboard_mode" />
+    <pad bytes="2" />
     <reply>
       <field type="BYTE" name="status" />
     </reply>
@@ -1084,12 +1107,14 @@ authorization from the authors.
     <field type="KEYCODE" name="key" />
     <field type="CARD8" name="pointer_mode" />
     <field type="CARD8" name="keyboard_mode" />
+    <pad bytes="3" />
   </request>
 
   <request name="UngrabKey" opcode="34">
     <field type="KEYCODE" name="key" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" />
+    <pad bytes="2" />
   </request>
 
   <enum name="Allow">
@@ -1124,6 +1149,7 @@ authorization from the authors.
       <field type="INT16" name="win_x" />
       <field type="INT16" name="win_y" />
       <field type="CARD16" name="mask" />
+      <pad bytes="2" />
     </reply>
   </request>
 
@@ -1205,6 +1231,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="FONT" name="fid" />
     <field type="CARD16" name="name_len" />
+    <pad bytes="2" />
     <list type="char" name="name">
       <fieldref>name_len</fieldref>
     </list>
@@ -1610,6 +1637,7 @@ authorization from the authors.
     <field type="GCONTEXT" name="gc" />
     <field type="CARD8" name="shape" />
     <field type="CARD8" name="coordinate_mode" />
+    <pad bytes="2" />
     <list type="POINT" name="points" />
   </request>
 
@@ -1643,6 +1671,7 @@ authorization from the authors.
     <field type="INT16" name="dst_y" />
     <field type="CARD8" name="left_pad" />
     <field type="CARD8" name="depth" />
+    <pad bytes="2" />
     <list type="BYTE" name="data" />
   </request>
 
@@ -1760,6 +1789,7 @@ authorization from the authors.
     <field type="CARD16" name="red" />
     <field type="CARD16" name="green" />
     <field type="CARD16" name="blue" />
+    <pad bytes="2" />
     <reply>
       <pad bytes="1" />
       <field type="CARD16" name="red" />
@@ -1774,6 +1804,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="COLORMAP" name="cmap" />
     <field type="CARD16" name="name_len" />
+    <pad bytes="2" />
     <list type="char" name="name">
       <fieldref>name_len</fieldref>
     </list>
@@ -1862,6 +1893,7 @@ authorization from the authors.
     <field type="COLORMAP" name="cmap" />
     <field type="CARD32" name="pixel" />
     <field type="CARD16" name="name_len" />
+    <pad bytes="2" />
     <list type="char" name="name">
       <fieldref>name_len</fieldref>
     </list>
@@ -1892,6 +1924,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="COLORMAP" name="cmap" />
     <field type="CARD16" name="name_len" />
+    <pad bytes="2" />
     <list type="char" name="name">
       <fieldref>name_len</fieldref>
     </list>
@@ -2081,6 +2114,7 @@ authorization from the authors.
       <field type="CARD16" name="acceleration_numerator" />
       <field type="CARD16" name="acceleration_denominator" />
       <field type="CARD16" name="threshold" />
+      <pad bytes="18" />
     </reply>
   </request>
 
@@ -2114,6 +2148,7 @@ authorization from the authors.
       <field type="CARD16" name="interval" />
       <field type="BYTE" name="prefer_blanking" />
       <field type="BYTE" name="allow_exposures" />
+      <pad bytes="18" />
     </reply>
   </request>
 
