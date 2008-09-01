@@ -41,6 +41,7 @@ authorization from the authors.
     <reply>
       <pad bytes="1" />
       <field type="BOOL" name="capable" />
+      <pad bytes="23" />
     </reply>
   </request>
 
@@ -50,6 +51,7 @@ authorization from the authors.
       <field type="CARD16" name="standby_timeout" />
       <field type="CARD16" name="suspend_timeout" />
       <field type="CARD16" name="off_timeout" />
+      <pad bytes="18" />
     </reply>
   </request>
 
@@ -72,6 +74,7 @@ authorization from the authors.
       <pad bytes="1" />
       <field type="CARD16" name="power_level" />
       <field type="BOOL" name="state" />
+      <pad bytes="21" />
     </reply>
   </request>
 </xcb>
