@@ -57,6 +57,7 @@ authorization from the authors.
     <field type="CARD16" name="extents_height" />
     <field type="TIMESTAMP" name="server_time" />
     <field type="BOOL" name="shaped" />
+    <pad bytes="11" />
   </event>
 
   <request name="QueryVersion" opcode="0">
@@ -128,6 +129,7 @@ authorization from the authors.
   <request name="SelectInput" opcode="6">
     <field type="WINDOW" name="destination_window" />
     <field type="BOOL" name="enable" />
+    <pad bytes="3" />
   </request>
 
   <request name="InputSelected" opcode="7">
@@ -140,6 +142,7 @@ authorization from the authors.
   <request name="GetRectangles" opcode="8">
     <field type="WINDOW" name="window" />
     <field type="KIND" name="source_kind" />
+    <pad bytes="3" />
     <reply>
       <field type="BYTE" name="ordering" />
       <field type="CARD32" name="rectangles_len" />
