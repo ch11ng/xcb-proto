@@ -84,6 +84,7 @@ for licensing information.
       <pad bytes="1" />
       <field type="CARD8" name="major_version" />
       <field type="CARD8" name="minor_version" />
+      <pad bytes="22" />
     </reply>
   </request>
 
@@ -155,6 +156,7 @@ for licensing information.
       <field type="INT64" name="delta" />
       <field type="BOOL" name="events" />
       <field type="CARD8" name="state" />
+      <pad bytes="2" />
     </reply>
   </request>
 
@@ -179,6 +181,7 @@ for licensing information.
     <field type="TIMESTAMP" name="timestamp" />
     <field type="CARD16" name="count" />
     <field type="BOOL" name="destroyed" />
+    <pad bytes="1" />
   </event>
 
   <event name="AlarmNotify" number="1">
