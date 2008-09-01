@@ -300,11 +300,13 @@ authorization from the authors.
     <request name="SelectVideoNotify" opcode="10">
         <field type="DRAWABLE" name="drawable" />
         <field type="BOOL" name="onoff" />
+        <pad bytes="3" />
     </request>
 
     <request name="SelectPortNotify" opcode="11">
         <field type="PORT" name="port" />
         <field type="BOOL" name="onoff" />
+        <pad bytes="3" />
     </request>
 
     <request name="QueryBestSize" opcode="12">
@@ -314,6 +316,7 @@ authorization from the authors.
         <field type="CARD16" name="drw_w" />
         <field type="CARD16" name="drw_h" />
         <field type="BOOL" name="motion" />
+        <pad bytes="3" />
         <reply>
             <pad bytes="1" />
             <field type="CARD16" name="actual_width" />
@@ -420,5 +423,6 @@ authorization from the authors.
         <field type="CARD16" name="width" />
         <field type="CARD16" name="height" />
         <field type="CARD8" name="send_event" />
+        <pad bytes="3" />
     </request>
 </xcb>
