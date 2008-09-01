@@ -322,6 +322,7 @@ authorization from the authors.
 		<field type="CARD32" name="long_length" />
 		<field type="BOOL" name="delete" />
 		<field type="BOOL" name="pending" />
+		<pad bytes="2" />
 		<reply>
 			<field type="CARD8" name="format" />
 			<field type="ATOM" name="type" />
@@ -394,6 +395,7 @@ authorization from the authors.
 		<field type="INT16" name="y" />
 		<field type="CARD32" name="mode" />
 		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
+		<pad bytes="2" />
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="TIMESTAMP" name="timestamp" />
@@ -405,6 +407,7 @@ authorization from the authors.
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="CARD16" name="size" />
+			<pad bytes="22" />
 		</reply>
 	</request>
 
