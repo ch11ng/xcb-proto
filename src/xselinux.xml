@@ -261,4 +261,16 @@ authorization from the authors.
     </reply>
   </request>
 
+  <request name="GetClientContext" opcode="22">
+    <field type="CARD32" name="resource" />
+    <reply>
+      <pad bytes="1" />
+      <field type="CARD32" name="context_len" />
+      <pad bytes="20" />
+      <list type="char" name="context">
+	<fieldref>context_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
 </xcb>
