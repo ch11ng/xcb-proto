@@ -129,8 +129,7 @@ class Enum(SimpleType):
             if value.tag == 'value':
                 self.values.append((item.get('name'), value.text))
             elif value.tag == 'bit':
-                # XXX replace this with a simple number, please.
-                self.values.append((item.get('name'), '(1 << %s)' % value.text))
+                self.values.append((item.get('name'), '%u' % (1 << int(value.text))))
 
     def resolve(self, module):
         self.resolved = True
