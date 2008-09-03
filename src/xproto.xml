@@ -1396,22 +1396,22 @@ authorization from the authors.
 
   <!-- GC Function values -->
   <enum name="GX">
-    <item name="clear">       <value>0x0</value></item>
-    <item name="and">         <value>0x1</value></item>
-    <item name="andReverse">  <value>0x2</value></item>
-    <item name="copy">        <value>0x3</value></item>
-    <item name="andInverted"> <value>0x4</value></item>
-    <item name="noop">        <value>0x5</value></item>
-    <item name="xor">         <value>0x6</value></item>
-    <item name="or">          <value>0x7</value></item>
-    <item name="nor">         <value>0x8</value></item>
-    <item name="equiv">       <value>0x9</value></item>
-    <item name="invert">      <value>0xa</value></item>
-    <item name="orReverse">   <value>0xb</value></item>
-    <item name="copyInverted"><value>0xc</value></item>
-    <item name="orInverted">  <value>0xd</value></item>
-    <item name="nand">        <value>0xe</value></item>
-    <item name="set">         <value>0xf</value></item>
+    <item name="clear">       <value>0</value></item>
+    <item name="and">         <value>1</value></item>
+    <item name="andReverse">  <value>2</value></item>
+    <item name="copy">        <value>3</value></item>
+    <item name="andInverted"> <value>4</value></item>
+    <item name="noop">        <value>5</value></item>
+    <item name="xor">         <value>6</value></item>
+    <item name="or">          <value>7</value></item>
+    <item name="nor">         <value>8</value></item>
+    <item name="equiv">       <value>9</value></item>
+    <item name="invert">      <value>10</value></item>
+    <item name="orReverse">   <value>11</value></item>
+    <item name="copyInverted"><value>12</value></item>
+    <item name="orInverted">  <value>13</value></item>
+    <item name="nand">        <value>14</value></item>
+    <item name="set">         <value>15</value></item>
   </enum>
 
   <enum name="LineStyle">
