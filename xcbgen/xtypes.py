@@ -114,10 +114,12 @@ class Enum(SimpleType):
 
     Public fields added:
     values contains a list of (name, value) tuples.  value is empty, or a number.
+    bits contains a list of (name, bitnum) tuples.  items only appear if specified as a bit. bitnum is a number.
     '''
     def __init__(self, name, elt):
         SimpleType.__init__(self, name, 4)
         self.values = []
+        self.bits = []
         for item in list(elt):
             # First check if we're using a default value
             if len(list(item)) == 0:
@@ -130,6 +132,7 @@ class Enum(SimpleType):
                 self.values.append((item.get('name'), value.text))
             elif value.tag == 'bit':
                 self.values.append((item.get('name'), '%u' % (1 << int(value.text))))
+                self.bits.append((item.get('name'), value.text))
 
     def resolve(self, module):
         self.resolved = True
