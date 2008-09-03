@@ -109,19 +109,19 @@ The patch that fixed this server bug in X.org CVS is here:
 	<!-- enums for PbufferClobber event/draw type -->
 	<enum name="PBCET">
 		<item name="Damaged">
-			<value>0x8017</value>
+			<value>32791</value>
 		</item>
 		<item name="Saved">
-			<value>0x8018</value>
+			<value>32792</value>
 		</item>
 	</enum>
 
 	<enum name="PBCDT">
 		<item name="Window">
-			<value>0x8019</value>
+			<value>32793</value>
 		</item>
 		<item name="Pbuffer">
-			<value>0x801A</value>
+			<value>32794</value>
 		</item>
 	</enum>
 
@@ -222,7 +222,7 @@ The patch that fixed this server bug in X.org CVS is here:
 		<item name="GL_LIST_BIT"><bit>17</bit></item>
 		<item name="GL_TEXTURE_BIT"><bit>18</bit></item>
 		<item name="GL_SCISSOR_BIT"><bit>19</bit></item>
-		<item name="GL_ALL_ATTRIB_BITS"><value>0x000ffffff</value></item>
+		<item name="GL_ALL_ATTRIB_BITS"><value>16777215<!--0x000ffffff--></value></item>
 	</enum>
 
 	<request name="SwapBuffers" opcode="11">
@@ -525,9 +525,9 @@ The patch that fixed this server bug in X.org CVS is here:
 	</request>
 
 	<enum name="RM">
-		<item name="GL_RENDER"><value>0x1C00</value></item>
-		<item name="GL_FEEDBACK"><value>0x1C01</value></item>
-		<item name="GL_SELECT"><value>0x1C02</value></item>
+		<item name="GL_RENDER"><value>7168</value></item>
+		<item name="GL_FEEDBACK"><value>7169</value></item>
+		<item name="GL_SELECT"><value>7170</value></item>
 	</enum>
 
 	<request name="Finish" opcode="108">
