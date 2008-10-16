@@ -64,6 +64,14 @@ authorization from the authors.
 
     <!-- ListInputDevices -->
 
+    <struct name="DeviceInfo">
+	<field type="ATOM" name="device_type" />
+	<field type="CARD8" name="device_id" />
+	<field type="CARD8" name="num_class_info" />
+	<field type="CARD8" name="device_use" />
+	<pad bytes="1" />
+    </struct>
+
     <request name="ListInputDevices" opcode="2">
 	<reply>
 	    <pad bytes="1" />
@@ -76,14 +84,6 @@ authorization from the authors.
 	    <!-- Uninterpreted: list of null-terminated strings -->
 	</reply>
     </request>
-
-    <struct name="DeviceInfo">
-	<field type="ATOM" name="device_type" />
-	<field type="CARD8" name="device_id" />
-	<field type="CARD8" name="num_class_info" />
-	<field type="CARD8" name="device_use" />
-	<pad bytes="1" />
-    </struct>
 
     <enum name="DeviceUse">
 	<item name="IsXPointer"><value>0</value></item>
@@ -113,6 +113,12 @@ authorization from the authors.
 	<field type="CARD16" name="num_buttons" />
     </struct>
 
+    <struct name="AxisInfo">
+	<field type="CARD32" name="resolution" />
+	<field type="CARD32" name="minimum" />
+	<field type="CARD32" name="maximum" />
+    </struct>
+
     <struct name="ValuatorInfo">
 	<field type="CARD8" name="class_id" />
 	<field type="CARD8" name="len" />
@@ -124,13 +130,12 @@ authorization from the authors.
 	</list>
     </struct>
 
-    <struct name="AxisInfo">
-	<field type="CARD32" name="resolution" />
-	<field type="CARD32" name="minimum" />
-	<field type="CARD32" name="maximum" />
-    </struct>
-
     <!-- OpenDevice -->
+
+    <struct name="InputClassInfo">
+	<field type="CARD8" name="class_id" />
+	<field type="CARD8" name="event_type_base" />
+    </struct>
 
     <request name="OpenDevice" opcode="3">
 	<field type="CARD8" name="device_id" />
@@ -144,11 +149,6 @@ authorization from the authors.
 	    </list>
 	</reply>
     </request>
-
-    <struct name="InputClassInfo">
-	<field type="CARD8" name="class_id" />
-	<field type="CARD8" name="event_type_base" />
-    </struct>
 
     <enum name="InputClass">
 	<item name="Key"><value>0</value></item>
