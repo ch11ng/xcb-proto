@@ -526,6 +526,12 @@ for licensing information.
     <field type="POINTFIX" name="p1" />
     <field type="POINTFIX" name="p2" />
     <field type="CARD32" name="num_stops" />
+    <list type="FIXED" name="stops">
+      <fieldref>num_stops</fieldref>
+    </list>
+    <list type="COLOR" name="colors">
+      <fieldref>num_stops</fieldref>
+    </list>
   </request>
 
   <request name="CreateRadialGradient" opcode="35">
@@ -535,6 +541,12 @@ for licensing information.
     <field type="FIXED" name="inner_radius" />
     <field type="FIXED" name="outer_radius" />
     <field type="CARD32" name="num_stops" />
+    <list type="FIXED" name="stops">
+      <fieldref>num_stops</fieldref>
+    </list>
+    <list type="COLOR" name="colors">
+      <fieldref>num_stops</fieldref>
+    </list>
   </request>
 
   <request name="CreateConicalGradient" opcode="36">
@@ -542,5 +554,11 @@ for licensing information.
     <field type="POINTFIX" name="center" />
     <field type="FIXED" name="angle" />        <!-- degrees -->
     <field type="CARD32" name="num_stops" />
+    <list type="FIXED" name="stops">
+      <fieldref>num_stops</fieldref>
+    </list>
+    <list type="COLOR" name="colors">
+      <fieldref>num_stops</fieldref>
+    </list>
   </request>
 </xcb>
