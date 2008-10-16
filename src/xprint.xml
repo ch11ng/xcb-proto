@@ -33,6 +33,8 @@ authorization from the authors.
 
     <import>xproto</import>
     
+    <typedef oldname="char" newname="STRING8" />
+
     <!-- Types -->
     <struct name="PRINTER">
         <field type="CARD32" name="nameLen" />
@@ -49,7 +51,6 @@ authorization from the authors.
 
     <!--<typedef oldname="CARD32" newname="PCONTEXT" />-->
     <xidtype name="PCONTEXT" />
-    <typedef oldname="char" newname="STRING8" />
 
     <!-- "PrintGetDocumentData" -->
     <enum name="GetDoc">
