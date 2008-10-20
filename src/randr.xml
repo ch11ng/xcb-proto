@@ -371,7 +371,6 @@ authorization from the authors.
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="TIMESTAMP" name="timestamp" />
-			<field type="CARD32" name="crtc" />
 			<field type="INT16" name="x" />
 			<field type="INT16" name="y" />
 			<field type="CARD16" name="width" />
