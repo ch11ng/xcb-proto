@@ -383,6 +383,9 @@ authorization from the authors.
 			<list type="CARD32" name="outputs">
 				<fieldref>num_outputs</fieldref>
 			</list>
+			<list type="CARD32" name="possible">
+				<fieldref>num_possible_outputs</fieldref>
+			</list>
 		</reply>
 	</request>
 
