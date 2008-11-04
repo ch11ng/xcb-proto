@@ -30,6 +30,11 @@ authorization from the authors.
     major-version="1" minor-version="2">
 
 	<import>xproto</import>
+
+	<!-- XIDs -->
+	<xidtype name="MODE" />
+	<xidtype name="CRTC" />
+	<xidtype name="OUTPUT" />
 	
 	<!-- Errors -->
 
@@ -208,10 +213,10 @@ authorization from the authors.
 			<field type="CARD16" name="num_modes" />
 			<field type="CARD16" name="names_len" />
 			<pad bytes="8" />
-			<list type="CARD32" name="crtcs">
+			<list type="CRTC" name="crtcs">
 			    <fieldref>num_crtcs</fieldref>
 			</list>
-			<list type="CARD32" name="outputs">
+			<list type="OUTPUT" name="outputs">
 			    <fieldref>num_outputs</fieldref>
 			</list>
 			<list type="ModeInfo" name="modes">
@@ -234,12 +239,12 @@ authorization from the authors.
 	</enum>
 
 	<request name="GetOutputInfo" opcode="9">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="TIMESTAMP" name="config_timestamp" />
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="TIMESTAMP" name="timestamp" />
-			<field type="CARD32" name="crtc" />
+			<field type="CRTC" name="crtc" />
 			<field type="CARD32" name="mm_width" />  <!-- millimeters -->
 			<field type="CARD32" name="mm_height" />
 			<field type="CARD8" name="connection" /> <!-- enum Connection -->
@@ -249,13 +254,13 @@ authorization from the authors.
 			<field type="CARD16" name="num_preferred" />
 			<field type="CARD16" name="num_clones" />
 			<field type="CARD16" name="name_len" />
-			<list type="CARD32" name="crtcs">
+			<list type="CRTC" name="crtcs">
 			    <fieldref>num_crtcs</fieldref>
 			</list>
-			<list type="CARD32" name="modes">
+			<list type="MODE" name="modes">
 			    <fieldref>num_modes</fieldref>
 			</list>
-			<list type="CARD32" name="clones">
+			<list type="OUTPUT" name="clones">
 			    <fieldref>num_clones</fieldref>
 			</list>
 			<list type="BYTE" name="name">
@@ -265,7 +270,7 @@ authorization from the authors.
 	</request>
 
 	<request name="ListOutputProperties" opcode="10">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<reply>
 			<pad bytes="1" />
 			<field type="CARD16" name="num_atoms" />
@@ -277,7 +282,7 @@ authorization from the authors.
 	</request>
 
 	<request name="QueryOutputProperty" opcode="11">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="ATOM" name="property" />
 		<reply>
 			<pad bytes="1" />
@@ -292,7 +297,7 @@ authorization from the authors.
 	</request>
 
 	<request name="ConfigureOutputProperty" opcode="12">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="ATOM" name="property" />
 		<field type="BOOL" name="pending" />
 		<field type="BOOL" name="range" />
@@ -301,7 +306,7 @@ authorization from the authors.
 	</request>
 
 	<request name="ChangeOutputProperty" opcode="13">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="ATOM" name="property" />
 		<field type="ATOM" name="type" />
 		<field type="CARD8" name="format" />
@@ -320,13 +325,13 @@ authorization from the authors.
 	</request>
 
 	<request name="DeleteOutputProperty" opcode="14">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="ATOM" name="property" />
 	</request>
 
 	<!-- NOTE: num_items depends on format (8/16/32) -->
 	<request name="GetOutputProperty" opcode="15">
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="ATOM" name="property" />
 		<field type="ATOM" name="type" />
 		<field type="CARD32" name="long_offset" />
@@ -359,27 +364,27 @@ authorization from the authors.
 		<list type="char" name="name" />
 		<reply>
 			<pad bytes="1" />
-			<field type="CARD32" name="mode" />
+			<field type="MODE" name="mode" />
 			<pad bytes="20" />
 		</reply>
 	</request>
 
 	<request name="DestroyMode" opcode="17">
-		<field type="CARD32" name="mode" />
+		<field type="MODE" name="mode" />
 	</request>
 
 	<request name="AddOutputMode" opcode="18">
-		<field type="CARD32" name="output" />
-		<field type="CARD32" name="mode" />
+		<field type="OUTPUT" name="output" />
+		<field type="MODE" name="mode" />
 	</request>
 
 	<request name="DeleteOutputMode" opcode="19">
-		<field type="CARD32" name="output" />
-		<field type="CARD32" name="mode" />
+		<field type="OUTPUT" name="output" />
+		<field type="MODE" name="mode" />
 	</request>
 
 	<request name="GetCrtcInfo" opcode="20">
-		<field type="CARD32" name="crtc" />
+		<field type="CRTC" name="crtc" />
 		<field type="TIMESTAMP" name="config_timestamp" />
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
@@ -388,30 +393,30 @@ authorization from the authors.
 			<field type="INT16" name="y" />
 			<field type="CARD16" name="width" />
 			<field type="CARD16" name="height" />
-			<field type="CARD32" name="mode" />
+			<field type="MODE" name="mode" />
 			<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 			<field type="CARD16" name="rotations" />	<!-- mask of enum Rotation -->
 			<field type="CARD16" name="num_outputs" />
 			<field type="CARD16" name="num_possible_outputs" />
-			<list type="CARD32" name="outputs">
+			<list type="OUTPUT" name="outputs">
 				<fieldref>num_outputs</fieldref>
 			</list>
-			<list type="CARD32" name="possible">
+			<list type="OUTPUT" name="possible">
 				<fieldref>num_possible_outputs</fieldref>
 			</list>
 		</reply>
 	</request>
 
 	<request name="SetCrtcConfig" opcode="21">
-		<field type="CARD32" name="crtc" />
+		<field type="CRTC" name="crtc" />
 		<field type="TIMESTAMP" name="timestamp" />
 		<field type="TIMESTAMP" name="config_timestamp" />
 		<field type="INT16" name="x" />
 		<field type="INT16" name="y" />
-		<field type="CARD32" name="mode" />
+		<field type="MODE" name="mode" />
 		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 		<pad bytes="2" />
-		<list type="CARD32" name="outputs" />
+		<list type="OUTPUT" name="outputs" />
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="TIMESTAMP" name="timestamp" />
@@ -420,7 +425,7 @@ authorization from the authors.
 	</request>
 
 	<request name="GetCrtcGammaSize" opcode="22">
-		<field type="CARD32" name="crtc" />
+		<field type="CRTC" name="crtc" />
 		<reply>
 			<pad bytes="1" />
 			<field type="CARD16" name="size" />
@@ -429,7 +434,7 @@ authorization from the authors.
 	</request>
 
 	<request name="GetCrtcGamma" opcode="23">
-		<field type="CARD32" name="crtc" />
+		<field type="CRTC" name="crtc" />
 		<reply>
 			<pad bytes="1" />
 			<field type="CARD16" name="size" />
@@ -447,7 +452,7 @@ authorization from the authors.
 	</request>
 
 	<request name="SetCrtcGamma" opcode="24">
-		<field type="CARD32" name="crtc" />
+		<field type="CRTC" name="crtc" />
 		<field type="CARD16" name="size" />
 		<pad bytes="2"/>
 		<list type="CARD16" name="red">
@@ -497,8 +502,8 @@ authorization from the authors.
 	<struct name="CrtcChange">
 		<field type="TIMESTAMP" name="timestamp" />
 		<field type="WINDOW" name="window" />
-		<field type="CARD32" name="crtc" />
-		<field type="CARD32" name="mode" />
+		<field type="CRTC" name="crtc" />
+		<field type="MODE" name="mode" />
 		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 		<pad bytes="2" />
 		<field type="INT16" name="x" />
@@ -511,9 +516,9 @@ authorization from the authors.
 		<field type="TIMESTAMP" name="timestamp" />
 		<field type="TIMESTAMP" name="config_timestamp" />
 		<field type="WINDOW" name="window" />
-		<field type="CARD32" name="output" />
-		<field type="CARD32" name="crtc" />
-		<field type="CARD32" name="mode" />
+		<field type="OUTPUT" name="output" />
+		<field type="CRTC" name="crtc" />
+		<field type="MODE" name="mode" />
 		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 		<field type="CARD8" name="connection" />	<!-- enum Connection -->
 		<field type="CARD8" name="subpixel_order" />	<!-- enum SubPixel (from Render) -->
@@ -521,7 +526,7 @@ authorization from the authors.
 
 	<struct name="OutputProperty">
 		<field type="WINDOW" name="window" />
-		<field type="CARD32" name="output" />
+		<field type="OUTPUT" name="output" />
 		<field type="ATOM" name="atom" />
 		<field type="TIMESTAMP" name="timestamp" />
 		<field type="CARD8" name="status" />		<!-- core enum Property -->
