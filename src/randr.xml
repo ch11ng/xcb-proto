@@ -49,10 +49,10 @@ authorization from the authors.
 	</enum>
 
 	<struct name="ScreenSize">
-		<field type="INT16" name="width" />   <!-- pixels -->
-		<field type="INT16" name="height" />
-		<field type="INT16" name="mwidth" />  <!-- millimeters -->
-		<field type="INT16" name="mheight" />
+		<field type="CARD16" name="width" />   <!-- pixels -->
+		<field type="CARD16" name="height" />
+		<field type="CARD16" name="mwidth" />  <!-- millimeters -->
+		<field type="CARD16" name="mheight" />
 	</struct>
 	
 	<struct name="RefreshRates">
@@ -80,11 +80,11 @@ authorization from the authors.
 	BEWARE: the docs lie!
 	-->
 	<request name="SetScreenConfig" opcode="2">
-		<field type="DRAWABLE" name="drawable" />
+		<field type="WINDOW" name="window" />
 		<field type="TIMESTAMP" name="timestamp" />
 		<field type="TIMESTAMP" name="config_timestamp" />
 		<field type="CARD16" name="sizeID" />
-		<field type="INT16" name="rotation" />
+		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 		<field type="CARD16" name="rate" />
 		<pad bytes="2" />
 		<reply>
@@ -92,7 +92,7 @@ authorization from the authors.
 			<field type="TIMESTAMP" name="new_timestamp" />
 			<field type="TIMESTAMP" name="config_timestamp" />
 			<field type="WINDOW" name="root" />
-			<field type="CARD16" name="subpixel_order" />
+			<field type="CARD16" name="subpixel_order" />	<!-- enum SubPixel (from Render) -->
 			<pad bytes="10" />
 		</reply>
 	</request>
@@ -124,7 +124,7 @@ authorization from the authors.
 			<field type="TIMESTAMP" name="config_timestamp" />
 			<field type="CARD16" name="nSizes" />
 			<field type="CARD16" name="sizeID" />
-			<field type="INT16" name="rotation" />
+			<field type="CARD16" name="rotation" />
 			<field type="CARD16" name="rate" />
 			<field type="CARD16" name="nInfo" />
 			<pad bytes="2" />
@@ -150,6 +150,7 @@ authorization from the authors.
 			<field type="CARD16" name="min_height" />
 			<field type="CARD16" name="max_width" />
 			<field type="CARD16" name="max_height" />
+			<pad bytes="16" />
 		</reply>
 	</request>
 
@@ -242,7 +243,7 @@ authorization from the authors.
 			<field type="CARD32" name="mm_width" />  <!-- millimeters -->
 			<field type="CARD32" name="mm_height" />
 			<field type="CARD8" name="connection" /> <!-- enum Connection -->
-			<field type="CARD8" name="subpixel_order" />
+			<field type="CARD8" name="subpixel_order" /> <!-- enum SubPixel (from Render) -->
 			<field type="CARD16" name="num_crtcs" />
 			<field type="CARD16" name="num_modes" />
 			<field type="CARD16" name="num_preferred" />
@@ -296,6 +297,7 @@ authorization from the authors.
 		<field type="BOOL" name="pending" />
 		<field type="BOOL" name="range" />
 		<pad bytes="2" />
+		<list type="INT32" name="values" />
 	</request>
 
 	<request name="ChangeOutputProperty" opcode="13">
@@ -306,6 +308,15 @@ authorization from the authors.
 		<field type="CARD8" name="mode" />
 		<pad bytes="2" />
 		<field type="CARD32" name="num_units" />
+		<list type="void" name="data">
+		    <op op="/">
+			<op op="*">
+			    <fieldref>num_units</fieldref>
+			    <fieldref>format</fieldref>
+			</op>
+			<value>8</value>
+		    </op>
+		</list>
 	</request>
 
 	<request name="DeleteOutputProperty" opcode="14">
@@ -345,9 +356,11 @@ authorization from the authors.
 	<request name="CreateMode" opcode="16">
 		<field type="WINDOW" name="window" />
 		<field type="ModeInfo" name="mode_info" />
+		<list type="char" name="name" />
 		<reply>
-			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<pad bytes="1" />
 			<field type="CARD32" name="mode" />
+			<pad bytes="20" />
 		</reply>
 	</request>
 
@@ -398,16 +411,18 @@ authorization from the authors.
 		<field type="CARD32" name="mode" />
 		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 		<pad bytes="2" />
+		<list type="CARD32" name="outputs" />
 		<reply>
 			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
 			<field type="TIMESTAMP" name="timestamp" />
+			<pad bytes="20" />
 		</reply>
 	</request>
 
 	<request name="GetCrtcGammaSize" opcode="22">
 		<field type="CARD32" name="crtc" />
 		<reply>
-			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<pad bytes="1" />
 			<field type="CARD16" name="size" />
 			<pad bytes="22" />
 		</reply>
@@ -416,7 +431,7 @@ authorization from the authors.
 	<request name="GetCrtcGamma" opcode="23">
 		<field type="CARD32" name="crtc" />
 		<reply>
-			<field type="CARD8" name="status" />	<!-- enum SetConfig -->
+			<pad bytes="1" />
 			<field type="CARD16" name="size" />
 			<pad bytes="22" />
 			<list type="CARD16" name="red">
@@ -463,7 +478,7 @@ authorization from the authors.
 		<field type="WINDOW" name="root" />
 		<field type="WINDOW" name="request_window" />
 		<field type="CARD16" name="sizeID" />
-		<field type="CARD16" name="subpixel_order" />
+		<field type="CARD16" name="subpixel_order" />	<!-- enum SubPixel (from Render) -->
 		<field type="CARD16" name="width" />
 		<field type="CARD16" name="height" />
 		<field type="CARD16" name="mwidth" />
@@ -501,7 +516,7 @@ authorization from the authors.
 		<field type="CARD32" name="mode" />
 		<field type="CARD16" name="rotation" />		<!-- enum Rotation -->
 		<field type="CARD8" name="connection" />	<!-- enum Connection -->
-		<field type="CARD8" name="subpixel_order" />
+		<field type="CARD8" name="subpixel_order" />	<!-- enum SubPixel (from Render) -->
 	</struct>
 
 	<struct name="OutputProperty">
