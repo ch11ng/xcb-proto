@@ -1,3 +1,17 @@
+Release 1.2 (2008-07-17)
+========================
+New extensions:
+* XInput 1.4
+* SELinux 1.0
+
+Various fixes in protocol description:
+* X proto
+* X-Resource
+* XVMC
+* GLX
+
+New Python parser language-independent parts.
+
 Release 1.1 (2007-11-04)
 ========================
 
