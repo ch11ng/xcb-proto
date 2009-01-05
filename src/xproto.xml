@@ -108,7 +108,7 @@ authorization from the authors.
 
   <struct name="VISUALTYPE">
     <field type="VISUALID" name="visual_id" />
-    <field type="CARD8" name="class" />
+    <field type="CARD8" name="class" enum="VisualClass" />
     <field type="CARD8" name="bits_per_rgb_value" />
     <field type="CARD16" name="colormap_entries" />
     <field type="CARD32" name="red_mask" />
@@ -132,7 +132,7 @@ authorization from the authors.
     <field type="COLORMAP" name="default_colormap" />
     <field type="CARD32" name="white_pixel" />
     <field type="CARD32" name="black_pixel" />
-    <field type="CARD32" name="current_input_masks" />
+    <field type="CARD32" name="current_input_masks" mask="EventMask" />
     <field type="CARD16" name="width_in_pixels" />
     <field type="CARD16" name="height_in_pixels" />
     <field type="CARD16" name="width_in_millimeters" />
@@ -140,7 +140,7 @@ authorization from the authors.
     <field type="CARD16" name="min_installed_maps" />
     <field type="CARD16" name="max_installed_maps" />
     <field type="VISUALID" name="root_visual" />
-    <field type="BYTE" name="backing_stores" />
+    <field type="BYTE" name="backing_stores" enum="BackingStore" />
     <field type="BOOL" name="save_unders" />
     <field type="CARD8" name="root_depth" />
     <field type="CARD8" name="allowed_depths_len" />
@@ -207,8 +207,8 @@ authorization from the authors.
     <field type="CARD16" name="maximum_request_length" />
     <field type="CARD8" name="roots_len" />
     <field type="CARD8" name="pixmap_formats_len" />
-    <field type="CARD8" name="image_byte_order" />
-    <field type="CARD8" name="bitmap_format_bit_order" />
+    <field type="CARD8" name="image_byte_order" enum="ImageOrder" />
+    <field type="CARD8" name="bitmap_format_bit_order" enum="ImageOrder" />
     <field type="CARD8" name="bitmap_format_scanline_unit" />
     <field type="CARD8" name="bitmap_format_scanline_pad" />
     <field type="KEYCODE" name="min_keycode" />
@@ -721,7 +721,7 @@ authorization from the authors.
     <field type="CARD16" name="width" />
     <field type="CARD16" name="height" />
     <field type="CARD16" name="border_width" />
-    <field type="CARD16" name="class" />
+    <field type="CARD16" name="class" enum="WindowClass" />
     <field type="VISUALID" name="visual" />
     <valueparam value-mask-type="CARD32"
                 value-mask-name="value_mask"
@@ -746,21 +746,21 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
     <reply>
-      <field type="CARD8" name="backing_store" />
+      <field type="CARD8" name="backing_store" enum="BackingStore" />
       <field type="VISUALID" name="visual" />
-      <field type="CARD16" name="class" />
+      <field type="CARD16" name="class" enum="WindowClass" />
       <field type="CARD8" name="bit_gravity" />
       <field type="CARD8" name="win_gravity" />
       <field type="CARD32" name="backing_planes" />
       <field type="CARD32" name="backing_pixel" />
       <field type="BOOL" name="save_under" />
       <field type="BOOL" name="map_is_installed" />
-      <field type="CARD8" name="map_state" />
+      <field type="CARD8" name="map_state" enum="MapState" />
       <field type="BOOL" name="override_redirect" />
       <field type="COLORMAP" name="colormap" />
-      <field type="CARD32" name="all_event_masks" />
-      <field type="CARD32" name="your_event_mask" />
-      <field type="CARD16" name="do_not_propagate_mask" />
+      <field type="CARD32" name="all_event_masks" mask="EventMask" />
+      <field type="CARD32" name="your_event_mask" mask="EventMask" />
+      <field type="CARD16" name="do_not_propagate_mask" mask="EventMask" />
       <pad bytes="2" />
     </reply>
   </request>
@@ -781,7 +781,7 @@ authorization from the authors.
   </enum>
 
   <request name="ChangeSaveSet" opcode="6">
-    <field type="BYTE" name="mode" />
+    <field type="BYTE" name="mode" enum="SetMode" />
     <field type="WINDOW" name="window" />
   </request>
 
@@ -846,7 +846,7 @@ authorization from the authors.
   </enum>
 
   <request name="CirculateWindow" opcode="13">
-    <field type="CARD8" name="direction" />
+    <field type="CARD8" name="direction" enum="Circulate" />
     <field type="WINDOW" name="window" />
   </request>
 
@@ -913,7 +913,7 @@ authorization from the authors.
   </enum>
 
   <request name="ChangeProperty" opcode="18">
-    <field type="CARD8" name="mode" />
+    <field type="CARD8" name="mode" enum="PropMode" />
     <field type="WINDOW" name="window" />
     <field type="ATOM" name="property" />
     <field type="ATOM" name="type" />
@@ -1006,7 +1006,7 @@ authorization from the authors.
   <request name="SendEvent" opcode="25">
     <field type="BOOL" name="propagate" />
     <field type="WINDOW" name="destination" />
-    <field type="CARD32" name="event_mask" />
+    <field type="CARD32" name="event_mask" mask="EventMask" />
     <list type="char" name="event"><value>32</value></list>
   </request>
 
@@ -1026,14 +1026,14 @@ authorization from the authors.
   <request name="GrabPointer" opcode="26">
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
-    <field type="CARD16" name="event_mask" />
-    <field type="BYTE" name="pointer_mode" />
-    <field type="BYTE" name="keyboard_mode" />
+    <field type="CARD16" name="event_mask" mask="EventMask" />
+    <field type="BYTE" name="pointer_mode" enum="GrabMode" />
+    <field type="BYTE" name="keyboard_mode" enum="GrabMode" />
     <field type="WINDOW" name="confine_to" />
     <field type="CURSOR" name="cursor" />
     <field type="TIMESTAMP" name="time" />
     <reply>
-      <field type="BYTE" name="status" />
+      <field type="BYTE" name="status" enum="GrabStatus" />
     </reply>
   </request>
 
@@ -1054,18 +1054,18 @@ authorization from the authors.
   <request name="GrabButton" opcode="28">
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
-    <field type="CARD16" name="event_mask" />
-    <field type="CARD8" name="pointer_mode" />
-    <field type="CARD8" name="keyboard_mode" />
+    <field type="CARD16" name="event_mask" mask="EventMask" />
+    <field type="CARD8" name="pointer_mode" enum="GrabMode" />
+    <field type="CARD8" name="keyboard_mode" enum="GrabMode" />
     <field type="WINDOW" name="confine_to" />
     <field type="CURSOR" name="cursor" />
-    <field type="CARD8" name="button" />
+    <field type="CARD8" name="button" enum="ButtonIndex" />
     <pad bytes="1" />
     <field type="CARD16" name="modifiers" />
   </request>
 
   <request name="UngrabButton" opcode="29">
-    <field type="CARD8" name="button" />
+    <field type="CARD8" name="button" enum="ButtonIndex" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" />
     <pad bytes="2" />
@@ -1075,7 +1075,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="CURSOR" name="cursor" />
     <field type="TIMESTAMP" name="time" />
-    <field type="CARD16" name="event_mask" />
+    <field type="CARD16" name="event_mask" mask="EventMask" />
     <pad bytes="2" />
   </request>
 
@@ -1083,11 +1083,11 @@ authorization from the authors.
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
     <field type="TIMESTAMP" name="time" />
-    <field type="BYTE" name="pointer_mode" />
-    <field type="BYTE" name="keyboard_mode" />
+    <field type="BYTE" name="pointer_mode" enum="GrabMode" />
+    <field type="BYTE" name="keyboard_mode" enum="GrabMode" />
     <pad bytes="2" />
     <reply>
-      <field type="BYTE" name="status" />
+      <field type="BYTE" name="status" enum="GrabStatus" />
     </reply>
   </request>
 
@@ -1106,8 +1106,8 @@ authorization from the authors.
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" />
     <field type="KEYCODE" name="key" />
-    <field type="CARD8" name="pointer_mode" />
-    <field type="CARD8" name="keyboard_mode" />
+    <field type="CARD8" name="pointer_mode" enum="GrabMode" />
+    <field type="CARD8" name="keyboard_mode" enum="GrabMode" />
     <pad bytes="3" />
   </request>
 
@@ -1130,7 +1130,7 @@ authorization from the authors.
   </enum>
 
   <request name="AllowEvents" opcode="35">
-    <field type="CARD8" name="mode" />
+    <field type="CARD8" name="mode" enum="Allow" />
     <field type="TIMESTAMP" name="time" />
   </request>
 
@@ -1209,14 +1209,14 @@ authorization from the authors.
   </enum>
 
   <request name="SetInputFocus" opcode="42">
-    <field type="CARD8" name="revert_to" />
+    <field type="CARD8" name="revert_to" enum="InputFocus" />
     <field type="WINDOW" name="focus" />
     <field type="TIMESTAMP" name="time" />
   </request>
 
   <request name="GetInputFocus" opcode="43">
     <reply>
-      <field type="CARD8" name="revert_to" />
+      <field type="CARD8" name="revert_to" enum="InputFocus" />
       <field type="WINDOW" name="focus" />
     </reply>
   </request>
@@ -1275,7 +1275,7 @@ authorization from the authors.
       <field type="CARD16" name="max_char_or_byte2" />
       <field type="CARD16" name="default_char" />
       <field type="CARD16" name="properties_len" />
-      <field type="BYTE" name="draw_direction" />
+      <field type="BYTE" name="draw_direction" enum="FontDraw" />
       <field type="CARD8" name="min_byte1" />
       <field type="CARD8" name="max_byte1" />
       <field type="BOOL" name="all_chars_exist" />
@@ -1298,7 +1298,7 @@ authorization from the authors.
     <field type="FONTABLE" name="font" />
     <list type="CHAR2B" name="string" />
     <reply>
-      <field type="BYTE" name="draw_direction" />
+      <field type="BYTE" name="draw_direction" enum="FontDraw" />
       <field type="INT16" name="font_ascent" />
       <field type="INT16" name="font_descent" />
       <field type="INT16" name="overall_ascent" />
@@ -1350,7 +1350,7 @@ authorization from the authors.
       <field type="CARD16" name="max_char_or_byte2" />
       <field type="CARD16" name="default_char" />
       <field type="CARD16" name="properties_len" />
-      <field type="BYTE" name="draw_direction" />
+      <field type="BYTE" name="draw_direction" enum="FontDraw" />
       <field type="CARD8" name="min_byte1" />
       <field type="CARD8" name="max_byte1" />
       <field type="BOOL" name="all_chars_exist" />
@@ -1525,7 +1525,7 @@ authorization from the authors.
   </enum>
 
   <request name="SetClipRectangles" opcode="59">
-    <field type="BYTE" name="ordering" />
+    <field type="BYTE" name="ordering" enum="ClipOrdering" />
     <field type="GCONTEXT" name="gc" />
     <field type="INT16" name="clip_x_origin" />
     <field type="INT16" name="clip_y_origin" />
@@ -1580,14 +1580,14 @@ authorization from the authors.
 
   <!-- combine-adjacent doesn't work for mode==Relative -->
   <request name="PolyPoint" opcode="64">
-    <field type="BYTE" name="coordinate_mode" />
+    <field type="BYTE" name="coordinate_mode" enum="CoordMode" />
     <field type="DRAWABLE" name="drawable" />
     <field type="GCONTEXT" name="gc" />
     <list type="POINT" name="points" />
   </request>
 
   <request name="PolyLine" opcode="65" combine-adjacent="true">
-    <field type="BYTE" name="coordinate_mode" />
+    <field type="BYTE" name="coordinate_mode" enum="CoordMode" />
     <field type="DRAWABLE" name="drawable" />
     <field type="GCONTEXT" name="gc" />
     <list type="POINT" name="points" />
@@ -1636,8 +1636,8 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="DRAWABLE" name="drawable" />
     <field type="GCONTEXT" name="gc" />
-    <field type="CARD8" name="shape" />
-    <field type="CARD8" name="coordinate_mode" />
+    <field type="CARD8" name="shape" enum="PolyShape" />
+    <field type="CARD8" name="coordinate_mode" enum="CoordMode" />
     <pad bytes="2" />
     <list type="POINT" name="points" />
   </request>
@@ -1663,7 +1663,7 @@ authorization from the authors.
   </enum>
 
   <request name="PutImage" opcode="72">
-    <field type="CARD8" name="format" />
+    <field type="CARD8" name="format" enum="ImageFormat" />
     <field type="DRAWABLE" name="drawable" />
     <field type="GCONTEXT" name="gc" />
     <field type="CARD16" name="width" />
@@ -1678,7 +1678,7 @@ authorization from the authors.
 
   <!-- FIXME: data array in reply will include padding, but ought not to. -->
   <request name="GetImage" opcode="73">
-    <field type="CARD8" name="format" />
+    <field type="CARD8" name="format" enum="ImageFormat" />
     <field type="DRAWABLE" name="drawable" />
     <field type="INT16" name="x" />
     <field type="INT16" name="y" />
@@ -1744,7 +1744,7 @@ authorization from the authors.
   </enum>
 
   <request name="CreateColormap" opcode="78">
-    <field type="BYTE" name="alloc" />
+    <field type="BYTE" name="alloc" enum="ColormapAlloc" />
     <field type="COLORMAP" name="mid" />
     <field type="WINDOW" name="window" />
     <field type="VISUALID" name="visual" />
@@ -1993,7 +1993,7 @@ authorization from the authors.
   </enum>
 
   <request name="QueryBestSize" opcode="97">
-    <field type="CARD8" name="class" />
+    <field type="CARD8" name="class" enum="QueryShapeOf" />
     <field type="DRAWABLE" name="drawable" />
     <field type="CARD16" name="width" />
     <field type="CARD16" name="height" />
@@ -2086,7 +2086,7 @@ authorization from the authors.
 
   <request name="GetKeyboardControl" opcode="103">
     <reply>
-      <field type="BYTE" name="global_auto_repeat" />
+      <field type="BYTE" name="global_auto_repeat" enum="AutoRepeatMode" />
       <field type="CARD32" name="led_mask" />
       <field type="CARD8" name="key_click_percent" />
       <field type="CARD8" name="bell_percent" />
@@ -2139,8 +2139,8 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="INT16" name="timeout" />
     <field type="INT16" name="interval" />
-    <field type="CARD8" name="prefer_blanking" />
-    <field type="CARD8" name="allow_exposures" />
+    <field type="CARD8" name="prefer_blanking" enum="Blanking" />
+    <field type="CARD8" name="allow_exposures" enum="Exposures" />
   </request>
 
   <request name="GetScreenSaver" opcode="108">
@@ -2148,8 +2148,8 @@ authorization from the authors.
       <pad bytes="1" />
       <field type="CARD16" name="timeout" />
       <field type="CARD16" name="interval" />
-      <field type="BYTE" name="prefer_blanking" />
-      <field type="BYTE" name="allow_exposures" />
+      <field type="BYTE" name="prefer_blanking" enum="Blanking" />
+      <field type="BYTE" name="allow_exposures" enum="Exposures" />
       <pad bytes="18" />
     </reply>
   </request>
@@ -2169,8 +2169,8 @@ authorization from the authors.
   </enum>
 
   <request name="ChangeHosts" opcode="109">
-    <field type="CARD8" name="mode" />
-    <field type="CARD8" name="family" />
+    <field type="CARD8" name="mode" enum="HostMode" />
+    <field type="CARD8" name="family" enum="Familiy" />
     <pad bytes="1" />
     <field type="CARD16" name="address_len" />
     <list type="char" name="address">
@@ -2179,7 +2179,7 @@ authorization from the authors.
   </request>
 
   <struct name="HOST">
-    <field type="CARD8" name="family" />
+    <field type="CARD8" name="family" enum="Family" />
     <pad bytes="1" />
     <field type="CARD16" name="address_len" />
     <list type="BYTE" name="address">
@@ -2189,7 +2189,7 @@ authorization from the authors.
 
   <request name="ListHosts" opcode="110">
     <reply>
-      <field type="BYTE" name="mode" />
+      <field type="BYTE" name="mode" enum="AccessControl" />
       <field type="CARD16" name="hosts_len" />
       <pad bytes="22" />
       <list type="HOST" name="hosts">
@@ -2204,7 +2204,7 @@ authorization from the authors.
   </enum>
 
   <request name="SetAccessControl" opcode="111">
-    <field type="CARD8" name="mode" />
+    <field type="CARD8" name="mode" enum="AccessControl" />
   </request>
 
   <enum name="CloseDown">
@@ -2214,7 +2214,7 @@ authorization from the authors.
   </enum>
 
   <request name="SetCloseDownMode" opcode="112">
-    <field type="CARD8" name="mode" />
+    <field type="CARD8" name="mode" enum="CloseDown" />
   </request>
 
   <enum name="Kill">
@@ -2242,7 +2242,7 @@ authorization from the authors.
   </enum>
 
   <request name="ForceScreenSaver" opcode="115">
-    <field type="CARD8" name="mode" />
+    <field type="CARD8" name="mode" enum="ScreenSaver" />
   </request>
 
   <!-- Reply from SetPointerMapping or SetModifierMapping -->
@@ -2258,7 +2258,7 @@ authorization from the authors.
       <fieldref>map_len</fieldref>
     </list>
     <reply>
-      <field type="BYTE" name="status" />
+      <field type="BYTE" name="status" enum="MappingStatus" />
     </reply>
   </request>
 
@@ -2292,7 +2292,7 @@ authorization from the authors.
       </op>
     </list>
     <reply>
-      <field type="BYTE" name="status" />
+      <field type="BYTE" name="status" enum="ModifierStatus" />
     </reply>
   </request>
 

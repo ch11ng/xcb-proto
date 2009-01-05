@@ -53,7 +53,19 @@ authorization from the authors.
   </xsd:complexType>
 
   <!-- field replaces FIELD, PARAM, and REPLY. -->
-  <xsd:element name="field" type="var" />
+  <xsd:element name="field">
+    <xsd:complexType>
+      <xsd:extension base="var">
+	<!-- Used for fields which are bitmasks. Refers to the type which
+	     describes the mask. -->
+	<xsd:attribute name="mask" type="xsd:string" use="optional" />
+
+	<!-- Used for fields which are enums.  Refers to the type which
+	     describes the enumeration. -->
+	<xsd:attribute name="enum" type="xsd:string" use="optional" />
+      </xsd:extension>
+    </xsd:complexType>
+  </xsd:element>
 
   <!-- list replaces ARRAYFIELD, LISTPARAM, and ARRAYREPLY.  The name and type
        are specified as attributes.  The content is an expression giving the
