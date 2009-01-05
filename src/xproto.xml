@@ -288,7 +288,7 @@ authorization from the authors.
   </enum>
 
   <event name="MotionNotify" number="6">
-    <field type="BYTE" name="detail" />
+    <field type="BYTE" name="detail" enum="Motion" />
     <field type="TIMESTAMP" name="time" />
     <field type="WINDOW" name="root" />
     <field type="WINDOW" name="event" />
@@ -321,7 +321,7 @@ authorization from the authors.
   </enum>
 
   <event name="EnterNotify" number="7">
-    <field type="BYTE" name="detail" />
+    <field type="BYTE" name="detail" enum="NotifyDetail" />
     <field type="TIMESTAMP" name="time" />
     <field type="WINDOW" name="root" />
     <field type="WINDOW" name="event" />
@@ -331,16 +331,16 @@ authorization from the authors.
     <field type="INT16" name="event_x" />
     <field type="INT16" name="event_y" />
     <field type="CARD16" name="state" />
-    <field type="BYTE" name="mode" />
+    <field type="BYTE" name="mode" enum="NotifyMode" />
     <field type="BYTE" name="same_screen_focus" />
   </event>
 
   <eventcopy name="LeaveNotify" number="8" ref="EnterNotify" />
 
   <event name="FocusIn" number="9">
-    <field type="BYTE" name="detail" />
+    <field type="BYTE" name="detail" enum="NotifyDetail" />
     <field type="WINDOW" name="event" />
-    <field type="BYTE" name="mode" />
+    <field type="BYTE" name="mode" enum="NotifyMode" />
     <pad bytes="3" />
   </event>
 
@@ -391,7 +391,7 @@ authorization from the authors.
   <event name="VisibilityNotify" number="15">
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
-    <field type="BYTE" name="state" />
+    <field type="BYTE" name="state" enum="Visibility" />
     <pad bytes="3" />
   </event>
 
@@ -462,7 +462,7 @@ authorization from the authors.
   </event>
 
   <event name="ConfigureRequest" number="23">
-    <field type="BYTE" name="stack_mode" />
+    <field type="BYTE" name="stack_mode" enum="StackMode" />
     <field type="WINDOW" name="parent" />
     <field type="WINDOW" name="window" />
     <field type="WINDOW" name="sibling" />
@@ -471,7 +471,7 @@ authorization from the authors.
     <field type="CARD16" name="width" />
     <field type="CARD16" name="height" />
     <field type="CARD16" name="border_width" />
-    <field type="CARD16" name="value_mask" />
+    <field type="CARD16" name="value_mask" mask="ConfigWindow" />
   </event>
 
   <event name="GravityNotify" number="24">
@@ -499,7 +499,7 @@ authorization from the authors.
     <field type="WINDOW" name="event" />
     <field type="WINDOW" name="window" />
     <pad bytes="4" />
-    <field type="BYTE" name="place" />
+    <field type="BYTE" name="place" enum="Place" />
     <pad bytes="3" />
   </event>
 
@@ -515,7 +515,7 @@ authorization from the authors.
     <field type="WINDOW" name="window" />
     <field type="ATOM" name="atom" />
     <field type="TIMESTAMP" name="time" />
-    <field type="BYTE" name="state" />
+    <field type="BYTE" name="state" enum="Property" />
     <pad bytes="3" />
   </event>
 
@@ -555,7 +555,7 @@ authorization from the authors.
     <field type="WINDOW" name="window" />
     <field type="COLORMAP" name="colormap" />
     <field type="BOOL" name="new" />
-    <field type="BYTE" name="state" />
+    <field type="BYTE" name="state" enum="ColormapState" />
     <pad bytes="2" />
   </event>
 
@@ -582,7 +582,7 @@ authorization from the authors.
 
   <event name="MappingNotify" number="34">
     <pad bytes="1" />
-    <field type="BYTE" name="request" />
+    <field type="BYTE" name="request" enum="Mapping" />
     <field type="KEYCODE" name="first_keycode" />
     <field type="CARD8" name="count" />
     <pad bytes="1" />
@@ -749,8 +749,8 @@ authorization from the authors.
       <field type="CARD8" name="backing_store" enum="BackingStore" />
       <field type="VISUALID" name="visual" />
       <field type="CARD16" name="class" enum="WindowClass" />
-      <field type="CARD8" name="bit_gravity" />
-      <field type="CARD8" name="win_gravity" />
+      <field type="CARD8" name="bit_gravity" enum="Gravity" />
+      <field type="CARD8" name="win_gravity" enum="Gravity" />
       <field type="CARD32" name="backing_planes" />
       <field type="CARD32" name="backing_pixel" />
       <field type="BOOL" name="save_under" />
@@ -945,7 +945,7 @@ authorization from the authors.
     <field type="BOOL" name="delete" />
     <field type="WINDOW" name="window" />
     <field type="ATOM" name="property" />
-    <field type="ATOM" name="type" />
+    <field type="ATOM" name="type" enum="GetPropertyType" />
     <field type="CARD32" name="long_offset" />
     <field type="CARD32" name="long_length" />
     <reply>
@@ -1061,13 +1061,13 @@ authorization from the authors.
     <field type="CURSOR" name="cursor" />
     <field type="CARD8" name="button" enum="ButtonIndex" />
     <pad bytes="1" />
-    <field type="CARD16" name="modifiers" />
+    <field type="CARD16" name="modifiers" mask="ModMask" />
   </request>
 
   <request name="UngrabButton" opcode="29">
     <field type="CARD8" name="button" enum="ButtonIndex" />
     <field type="WINDOW" name="grab_window" />
-    <field type="CARD16" name="modifiers" />
+    <field type="CARD16" name="modifiers" mask="ModMask" />
     <pad bytes="2" />
   </request>
 
@@ -1104,7 +1104,7 @@ authorization from the authors.
   <request name="GrabKey" opcode="33">
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
-    <field type="CARD16" name="modifiers" />
+    <field type="CARD16" name="modifiers" mask="ModMask" />
     <field type="KEYCODE" name="key" />
     <field type="CARD8" name="pointer_mode" enum="GrabMode" />
     <field type="CARD8" name="keyboard_mode" enum="GrabMode" />
@@ -1114,7 +1114,7 @@ authorization from the authors.
   <request name="UngrabKey" opcode="34">
     <field type="KEYCODE" name="key" />
     <field type="WINDOW" name="grab_window" />
-    <field type="CARD16" name="modifiers" />
+    <field type="CARD16" name="modifiers" mask="ModMask" />
     <pad bytes="2" />
   </request>
 
@@ -1504,7 +1504,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="GCONTEXT" name="src_gc" />
     <field type="GCONTEXT" name="dst_gc" />
-    <field type="CARD32" name="value_mask" />
+    <field type="CARD32" name="value_mask" mask="GC" />
   </request>
 
   <request name="SetDashes" opcode="58">
@@ -1879,7 +1879,7 @@ authorization from the authors.
     <field type="CARD16" name="red" />
     <field type="CARD16" name="green" />
     <field type="CARD16" name="blue" />
-    <field type="BYTE" name="flags" />
+    <field type="BYTE" name="flags" mask="ColorFlag" />
     <pad bytes="1" />
   </struct>
   
@@ -1890,7 +1890,7 @@ authorization from the authors.
   </request>
 
   <request name="StoreNamedColor" opcode="90">
-    <field type="CARD8" name="flags" />
+    <field type="CARD8" name="flags" mask="ColorFlag" />
     <field type="COLORMAP" name="cmap" />
     <field type="CARD32" name="pixel" />
     <field type="CARD16" name="name_len" />
@@ -2170,7 +2170,7 @@ authorization from the authors.
 
   <request name="ChangeHosts" opcode="109">
     <field type="CARD8" name="mode" enum="HostMode" />
-    <field type="CARD8" name="family" enum="Familiy" />
+    <field type="CARD8" name="family" enum="Family" />
     <pad bytes="1" />
     <field type="CARD16" name="address_len" />
     <list type="char" name="address">
@@ -2223,7 +2223,7 @@ authorization from the authors.
 
   <request name="KillClient" opcode="113">
     <pad bytes="1" />
-    <field type="CARD32" name="resource" />
+    <field type="CARD32" name="resource" enum="Kill" />
   </request>
 
   <request name="RotateProperties" opcode="114">
@@ -2292,7 +2292,7 @@ authorization from the authors.
       </op>
     </list>
     <reply>
-      <field type="BYTE" name="status" enum="ModifierStatus" />
+      <field type="BYTE" name="status" enum="MappingStatus" />
     </reply>
   </request>
 
