@@ -946,7 +946,7 @@ authorization from the authors.
     <field type="BOOL" name="delete" />
     <field type="WINDOW" name="window" />
     <field type="ATOM" name="property" />
-    <field type="ATOM" name="type" enum="GetPropertyType" />
+    <field type="ATOM" name="type" altenum="GetPropertyType" />
     <field type="CARD32" name="long_offset" />
     <field type="CARD32" name="long_length" />
     <reply>
@@ -1006,7 +1006,7 @@ authorization from the authors.
 
   <request name="SendEvent" opcode="25">
     <field type="BOOL" name="propagate" />
-    <field type="WINDOW" name="destination" />
+    <field type="WINDOW" name="destination" altenum="SendEventDest" />
     <field type="CARD32" name="event_mask" mask="EventMask" />
     <list type="char" name="event"><value>32</value></list>
   </request>
@@ -1106,14 +1106,14 @@ authorization from the authors.
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" mask="ModMask" />
-    <field type="KEYCODE" name="key" />
+    <field type="KEYCODE" name="key" altenum="Grab" />
     <field type="CARD8" name="pointer_mode" enum="GrabMode" />
     <field type="CARD8" name="keyboard_mode" enum="GrabMode" />
     <pad bytes="3" />
   </request>
 
   <request name="UngrabKey" opcode="34">
-    <field type="KEYCODE" name="key" />
+    <field type="KEYCODE" name="key" altenum="Grab" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="modifiers" mask="ModMask" />
     <pad bytes="2" />
@@ -1211,14 +1211,14 @@ authorization from the authors.
 
   <request name="SetInputFocus" opcode="42">
     <field type="CARD8" name="revert_to" enum="InputFocus" />
-    <field type="WINDOW" name="focus" />
+    <field type="WINDOW" name="focus" altenum="InputFocus" />
     <field type="TIMESTAMP" name="time" />
   </request>
 
   <request name="GetInputFocus" opcode="43">
     <reply>
       <field type="CARD8" name="revert_to" enum="InputFocus" />
-      <field type="WINDOW" name="focus" />
+      <field type="WINDOW" name="focus" altenum="InputFocus" />
     </reply>
   </request>
 
@@ -2224,7 +2224,7 @@ authorization from the authors.
 
   <request name="KillClient" opcode="113">
     <pad bytes="1" />
-    <field type="CARD32" name="resource" enum="Kill" />
+    <field type="CARD32" name="resource" altenum="Kill" />
   </request>
 
   <request name="RotateProperties" opcode="114">
