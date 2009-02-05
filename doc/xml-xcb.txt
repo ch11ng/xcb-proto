@@ -1,53 +1,25 @@
-                                   XML-XCB
+                                  xcb/proto
 
 Description
 ===========
 
-XML-XCB generates C bindings to the X Window System protocol based on XML
-descriptions of the protocol.  It is designed for use with XCB, the X C
-binding <http://xcb.freedesktop.org>.  XML-XCB consists of:
+xcb/proto is a set of XML files describing the  X Window System protocol
+It is designed for use with libxcb, the X C binding
+<http://xcb.freedesktop.org/>.  xcb/proto consists of:
 
 xcb.xsd      An XML Schema defining the data format for describing the X
-             protocol.  Included in xcb-proto.
+             protocol.
 
-c-client.xsl An XSLT code generator that transforms the protocol descriptions
-             into C bindings.  Included in xcb.
+*.py         Code generator helpers that read the protocol descriptions
+             into python structures. See libxcb for example usage.
 
 *.xml        XML descriptions of the core X protocol and many extensions.
-             Included in xcb-proto.
-
-
-Dependencies
-============
-
-c-client.xsl requires an XSLT processor that supports XSLT 1.0
-<http://www.w3.org/TR/1999/REC-xslt-19991116> and the EXSLT node-set extension
-<http://www.exslt.org/exsl/functions/node-set/index.html>.  The XCB build
-system currently uses xsltproc.  You can get xsltproc through your
-distribution's packaging system, or from <http://xmlsoft.org/XSLT/>.
 
 
 Generating C bindings
 =====================
 
-The C bindings for the core protocol and all the currently supported
-extensions are built as part of the xcb build system.  However, for the
-purposes of creating and debugging new protocol descriptions, it can be useful
-to generate the bindings directly by invoking c-client.xsl to the XML protocol
-description.
-
-You must provide several parameters to c-client.xsl:
-
-mode: header or source; specifies which part of the C bindings to generate.
-base-path: path to the core X protocol descriptions.
-extension-path: path to the extension descriptions.
-
-For example, using xsltproc, you can generate the header for a protocol
-description "protocol.xml" with the command:
-
-xsltproc --stringparam base-path /path/to/xcb-proto/src \
-         --stringparam extension-path /path/to/xcb-proto/src/extensions \
-         --stringparam mode header /path/to/xcb/src/c-client.xsl protocol.xml
+See libxcb <http://cgit.freedesktop.org/xcb/libxcb/>.
 
 
 Protocol Description Format
