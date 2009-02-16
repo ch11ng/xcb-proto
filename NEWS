@@ -1,3 +1,8 @@
+Release 1.4 (2009-02-16)
+========================
+* Add explicit padding in various protocol description.
+* Associate fields with the enum which describes their allowed values.
+
 Release 1.3 (2008-12-10)
 ========================
 Explicit padding was added in various protocol description.
