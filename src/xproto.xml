@@ -239,6 +239,22 @@ authorization from the authors.
     <item name="Any">    <bit>15</bit></item>
   </enum>
 
+  <enum name="KeyButMask">
+    <item name="Shift">  <bit>0</bit></item>
+    <item name="Lock">   <bit>1</bit></item>
+    <item name="Control"><bit>2</bit></item>
+    <item name="Mod1">   <bit>3</bit></item>
+    <item name="Mod2">   <bit>4</bit></item>
+    <item name="Mod3">   <bit>5</bit></item>
+    <item name="Mod4">   <bit>6</bit></item>
+    <item name="Mod5">   <bit>7</bit></item>
+    <item name="Button1"><bit>8</bit></item>
+    <item name="Button2"><bit>9</bit></item>
+    <item name="Button3"><bit>10</bit></item>
+    <item name="Button4"><bit>11</bit></item>
+    <item name="Button5"><bit>12</bit></item>
+  </enum>
+
   <event name="KeyPress" number="2">
     <field type="KEYCODE" name="detail" />
     <field type="TIMESTAMP" name="time" />
@@ -249,7 +265,7 @@ authorization from the authors.
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
     <field type="INT16" name="event_y" />
-    <field type="CARD16" name="state" />
+    <field type="CARD16" name="state" mask="KeyButMask" />
     <field type="BOOL" name="same_screen" />
     <pad bytes="1" />
   </event>
@@ -275,7 +291,7 @@ authorization from the authors.
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
     <field type="INT16" name="event_y" />
-    <field type="CARD16" name="state" />
+    <field type="CARD16" name="state" mask="KeyButMask" />
     <field type="BOOL" name="same_screen" />
     <pad bytes="1" />
   </event>
@@ -298,7 +314,7 @@ authorization from the authors.
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
     <field type="INT16" name="event_y" />
-    <field type="CARD16" name="state" />
+    <field type="CARD16" name="state" mask="KeyButMask" />
     <field type="BOOL" name="same_screen" />
     <pad bytes="1" />
   </event>
@@ -331,7 +347,7 @@ authorization from the authors.
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
     <field type="INT16" name="event_y" />
-    <field type="CARD16" name="state" />
+    <field type="CARD16" name="state" mask="KeyButMask" />
     <field type="BYTE" name="mode" enum="NotifyMode" />
     <field type="BYTE" name="same_screen_focus" />
   </event>
@@ -1154,7 +1170,7 @@ authorization from the authors.
       <field type="INT16" name="root_y" />
       <field type="INT16" name="win_x" />
       <field type="INT16" name="win_y" />
-      <field type="CARD16" name="mask" />
+      <field type="CARD16" name="mask" mask="KeyButMask" />
       <pad bytes="2" />
     </reply>
   </request>
