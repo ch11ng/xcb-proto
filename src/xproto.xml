@@ -527,9 +527,13 @@ authorization from the authors.
     <field type="ATOM" name="selection" />
   </event>
 
+  <enum name="Time">
+    <item name="CurrentTime"> <value>0</value> </item>
+  </enum>
+
   <event name="SelectionRequest" number="30">
     <pad bytes="1" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
     <field type="WINDOW" name="owner" />
     <field type="WINDOW" name="requestor" />
     <field type="ATOM" name="selection" />
@@ -539,7 +543,7 @@ authorization from the authors.
 
   <event name="SelectionNotify" number="31">
     <pad bytes="1" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
     <field type="WINDOW" name="requestor" />
     <field type="ATOM" name="selection" />
     <field type="ATOM" name="target" />
@@ -978,7 +982,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="WINDOW" name="owner" />
     <field type="ATOM" name="selection" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
   <request name="GetSelectionOwner" opcode="23">
@@ -996,7 +1000,7 @@ authorization from the authors.
     <field type="ATOM" name="selection" />
     <field type="ATOM" name="target" />
     <field type="ATOM" name="property" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
   <enum name="SendEventDest">
@@ -1032,7 +1036,7 @@ authorization from the authors.
     <field type="BYTE" name="keyboard_mode" enum="GrabMode" />
     <field type="WINDOW" name="confine_to" />
     <field type="CURSOR" name="cursor" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
     <reply>
       <field type="BYTE" name="status" enum="GrabStatus" />
     </reply>
@@ -1040,7 +1044,7 @@ authorization from the authors.
 
   <request name="UngrabPointer" opcode="27">
     <pad bytes="1" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
   <enum name="ButtonIndex">
@@ -1075,7 +1079,7 @@ authorization from the authors.
   <request name="ChangeActivePointerGrab" opcode="30">
     <pad bytes="1" />
     <field type="CURSOR" name="cursor" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
     <field type="CARD16" name="event_mask" mask="EventMask" />
     <pad bytes="2" />
   </request>
@@ -1083,7 +1087,7 @@ authorization from the authors.
   <request name="GrabKeyboard" opcode="31">
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
     <field type="BYTE" name="pointer_mode" enum="GrabMode" />
     <field type="BYTE" name="keyboard_mode" enum="GrabMode" />
     <pad bytes="2" />
@@ -1094,7 +1098,7 @@ authorization from the authors.
 
   <request name="UngrabKeyboard" opcode="32">
     <pad bytes="1" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
   <!-- Use KEYCODE any = { XCBGrabAny }; to grab any key -->
@@ -1132,7 +1136,7 @@ authorization from the authors.
 
   <request name="AllowEvents" opcode="35">
     <field type="CARD8" name="mode" enum="Allow" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
   <request name="GrabServer" opcode="36" />
@@ -1164,8 +1168,8 @@ authorization from the authors.
   <request name="GetMotionEvents" opcode="39">
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
-    <field type="TIMESTAMP" name="start" />
-    <field type="TIMESTAMP" name="stop" />
+    <field type="TIMESTAMP" name="start" altenum="Time" />
+    <field type="TIMESTAMP" name="stop" altenum="Time" />
     <reply>
       <pad bytes="1" />
       <field type="CARD32" name="events_len" />
@@ -1212,7 +1216,7 @@ authorization from the authors.
   <request name="SetInputFocus" opcode="42">
     <field type="CARD8" name="revert_to" enum="InputFocus" />
     <field type="WINDOW" name="focus" altenum="InputFocus" />
-    <field type="TIMESTAMP" name="time" />
+    <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
   <request name="GetInputFocus" opcode="43">
