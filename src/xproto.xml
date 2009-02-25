@@ -255,12 +255,16 @@ authorization from the authors.
     <item name="Button5"><bit>12</bit></item>
   </enum>
 
+  <enum name="Window">
+    <item name="None"> <value>0</value></item>
+  </enum>
+
   <event name="KeyPress" number="2">
     <field type="KEYCODE" name="detail" />
     <field type="TIMESTAMP" name="time" />
     <field type="WINDOW" name="root" />
     <field type="WINDOW" name="event" />
-    <field type="WINDOW" name="child" />
+    <field type="WINDOW" name="child" altenum="Window" />
     <field type="INT16" name="root_x" />
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
@@ -286,7 +290,7 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
     <field type="WINDOW" name="root" />
     <field type="WINDOW" name="event" />
-    <field type="WINDOW" name="child" />
+    <field type="WINDOW" name="child" altenum="Window" />
     <field type="INT16" name="root_x" />
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
@@ -309,7 +313,7 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
     <field type="WINDOW" name="root" />
     <field type="WINDOW" name="event" />
-    <field type="WINDOW" name="child" />
+    <field type="WINDOW" name="child" altenum="Window" />
     <field type="INT16" name="root_x" />
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
@@ -342,7 +346,7 @@ authorization from the authors.
     <field type="TIMESTAMP" name="time" />
     <field type="WINDOW" name="root" />
     <field type="WINDOW" name="event" />
-    <field type="WINDOW" name="child" />
+    <field type="WINDOW" name="child" altenum="Window" />
     <field type="INT16" name="root_x" />
     <field type="INT16" name="root_y" />
     <field type="INT16" name="event_x" />
@@ -468,7 +472,7 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="WINDOW" name="event" />
     <field type="WINDOW" name="window" />
-    <field type="WINDOW" name="above_sibling" />
+    <field type="WINDOW" name="above_sibling" altenum="Window" />
     <field type="INT16" name="x" />
     <field type="INT16" name="y" />
     <field type="CARD16" name="width" />
@@ -482,7 +486,7 @@ authorization from the authors.
     <field type="BYTE" name="stack_mode" enum="StackMode" />
     <field type="WINDOW" name="parent" />
     <field type="WINDOW" name="window" />
-    <field type="WINDOW" name="sibling" />
+    <field type="WINDOW" name="sibling" altenum="Window" />
     <field type="INT16" name="x" />
     <field type="INT16" name="y" />
     <field type="CARD16" name="width" />
@@ -547,6 +551,10 @@ authorization from the authors.
     <item name="CurrentTime"> <value>0</value> </item>
   </enum>
 
+  <enum name="Atom">
+    <item name="None"> <value>0</value></item>
+  </enum>
+
   <event name="SelectionRequest" number="30">
     <pad bytes="1" />
     <field type="TIMESTAMP" name="time" altenum="Time" />
@@ -554,7 +562,7 @@ authorization from the authors.
     <field type="WINDOW" name="requestor" />
     <field type="ATOM" name="selection" />
     <field type="ATOM" name="target" />
-    <field type="ATOM" name="property" />
+    <field type="ATOM" name="property" altenum="Atom" />
   </event>
 
   <event name="SelectionNotify" number="31">
@@ -563,7 +571,7 @@ authorization from the authors.
     <field type="WINDOW" name="requestor" />
     <field type="ATOM" name="selection" />
     <field type="ATOM" name="target" />
-    <field type="ATOM" name="property" />
+    <field type="ATOM" name="property" altenum="Atom" />
   </event>
 
   <enum name="ColormapState">
@@ -571,10 +579,14 @@ authorization from the authors.
     <item name="Installed">  <value>1</value></item>
   </enum>
 
+  <enum name="Colormap">
+    <item name="None"> <value>0</value></item>
+  </enum>
+
   <event name="ColormapNotify" number="32">
     <pad bytes="1" />
     <field type="WINDOW" name="window" />
-    <field type="COLORMAP" name="colormap" />
+    <field type="COLORMAP" name="colormap" altenum="Colormap" />
     <field type="BOOL" name="new" />
     <field type="BYTE" name="state" enum="ColormapState" />
     <pad bytes="2" />
@@ -778,7 +790,7 @@ authorization from the authors.
       <field type="BOOL" name="map_is_installed" />
       <field type="CARD8" name="map_state" enum="MapState" />
       <field type="BOOL" name="override_redirect" />
-      <field type="COLORMAP" name="colormap" />
+      <field type="COLORMAP" name="colormap" altenum="Colormap" />
       <field type="CARD32" name="all_event_masks" mask="EventMask" />
       <field type="CARD32" name="your_event_mask" mask="EventMask" />
       <field type="CARD16" name="do_not_propagate_mask" mask="EventMask" />
@@ -892,7 +904,7 @@ authorization from the authors.
     <reply>
       <pad bytes="1" />
       <field type="WINDOW" name="root" />
-      <field type="WINDOW" name="parent" />
+      <field type="WINDOW" name="parent" altenum="Window" />
       <field type="CARD16" name="children_len" />
       <pad bytes="14" />
       <list type="WINDOW" name="children">
@@ -910,7 +922,7 @@ authorization from the authors.
     </list>
     <reply>
       <pad bytes="1" />
-      <field type="ATOM" name="atom" />
+      <field type="ATOM" name="atom" altenum="Atom" />
     </reply>
   </request>
 
@@ -996,7 +1008,7 @@ authorization from the authors.
 
   <request name="SetSelectionOwner" opcode="22">
     <pad bytes="1" />
-    <field type="WINDOW" name="owner" />
+    <field type="WINDOW" name="owner" altenum="Window" />
     <field type="ATOM" name="selection" />
     <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
@@ -1006,7 +1018,7 @@ authorization from the authors.
     <field type="ATOM" name="selection" />
     <reply>
       <pad bytes="1" />
-      <field type="WINDOW" name="owner" />
+      <field type="WINDOW" name="owner" altenum="Window" />
     </reply>
   </request>
 
@@ -1015,7 +1027,7 @@ authorization from the authors.
     <field type="WINDOW" name="requestor" />
     <field type="ATOM" name="selection" />
     <field type="ATOM" name="target" />
-    <field type="ATOM" name="property" />
+    <field type="ATOM" name="property" altenum="Atom" />
     <field type="TIMESTAMP" name="time" altenum="Time" />
   </request>
 
@@ -1044,14 +1056,18 @@ authorization from the authors.
     <item name="Frozen">        <value>4</value></item>
   </enum>
 
+  <enum name="Cursor">
+    <item name="None"> <value>0</value></item>
+  </enum>
+
   <request name="GrabPointer" opcode="26">
     <field type="BOOL" name="owner_events" />
     <field type="WINDOW" name="grab_window" />
     <field type="CARD16" name="event_mask" mask="EventMask" />
     <field type="BYTE" name="pointer_mode" enum="GrabMode" />
     <field type="BYTE" name="keyboard_mode" enum="GrabMode" />
-    <field type="WINDOW" name="confine_to" />
-    <field type="CURSOR" name="cursor" />
+    <field type="WINDOW" name="confine_to" altenum="Window" />
+    <field type="CURSOR" name="cursor" altenum="Cursor" />
     <field type="TIMESTAMP" name="time" altenum="Time" />
     <reply>
       <field type="BYTE" name="status" enum="GrabStatus" />
@@ -1078,8 +1094,8 @@ authorization from the authors.
     <field type="CARD16" name="event_mask" mask="EventMask" />
     <field type="CARD8" name="pointer_mode" enum="GrabMode" />
     <field type="CARD8" name="keyboard_mode" enum="GrabMode" />
-    <field type="WINDOW" name="confine_to" />
-    <field type="CURSOR" name="cursor" />
+    <field type="WINDOW" name="confine_to" altenum="Window" />
+    <field type="CURSOR" name="cursor" altenum="Cursor" />
     <field type="CARD8" name="button" enum="ButtonIndex" />
     <pad bytes="1" />
     <field type="CARD16" name="modifiers" mask="ModMask" />
@@ -1094,7 +1110,7 @@ authorization from the authors.
 
   <request name="ChangeActivePointerGrab" opcode="30">
     <pad bytes="1" />
-    <field type="CURSOR" name="cursor" />
+    <field type="CURSOR" name="cursor" altenum="Cursor" />
     <field type="TIMESTAMP" name="time" altenum="Time" />
     <field type="CARD16" name="event_mask" mask="EventMask" />
     <pad bytes="2" />
@@ -1165,7 +1181,7 @@ authorization from the authors.
     <reply>
       <field type="BOOL" name="same_screen" />
       <field type="WINDOW" name="root" />
-      <field type="WINDOW" name="child" />
+      <field type="WINDOW" name="child" altenum="Window" />
       <field type="INT16" name="root_x" />
       <field type="INT16" name="root_y" />
       <field type="INT16" name="win_x" />
@@ -1204,7 +1220,7 @@ authorization from the authors.
     <field type="INT16" name="src_y" />
     <reply>
       <field type="BOOL" name="same_screen" />
-      <field type="WINDOW" name="child" />
+      <field type="WINDOW" name="child" altenum="Window" />
       <field type="CARD16" name="dst_x" />
       <field type="CARD16" name="dst_y" />
     </reply>
@@ -1212,8 +1228,8 @@ authorization from the authors.
 
   <request name="WarpPointer" opcode="41">
     <pad bytes="1" />
-    <field type="WINDOW" name="src_window" />
-    <field type="WINDOW" name="dst_window" />
+    <field type="WINDOW" name="src_window" altenum="Window" />
+    <field type="WINDOW" name="dst_window" altenum="Window" />
     <field type="INT16" name="src_x" />
     <field type="INT16" name="src_y" />
     <field type="CARD16" name="src_width" />
@@ -1961,11 +1977,15 @@ authorization from the authors.
     </reply>
   </request>
 
+  <enum name="Pixmap">
+    <item name="None"> <value>0</value></item>
+  </enum>
+
   <request name="CreateCursor" opcode="93">
     <pad bytes="1" />
     <field type="CURSOR" name="cid" />
     <field type="PIXMAP" name="source" />
-    <field type="PIXMAP" name="mask" />
+    <field type="PIXMAP" name="mask" altenum="Pixmap" />
     <field type="CARD16" name="fore_red" />
     <field type="CARD16" name="fore_green" />
     <field type="CARD16" name="fore_blue" />
@@ -1976,11 +1996,15 @@ authorization from the authors.
     <field type="CARD16" name="y" />
   </request>
 
+  <enum name="Font">
+    <item name="None"> <value>0</value></item>
+  </enum>
+
   <request name="CreateGlyphCursor" opcode="94">
     <pad bytes="1" />
     <field type="CURSOR" name="cid" />
     <field type="FONT" name="source_font" />
-    <field type="FONT" name="mask_font" />
+    <field type="FONT" name="mask_font" altenum="Font" />
     <field type="CARD16" name="source_char" />
     <field type="CARD16" name="mask_char" />
     <field type="CARD16" name="fore_red" />
