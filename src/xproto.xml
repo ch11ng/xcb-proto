@@ -1242,6 +1242,7 @@ authorization from the authors.
     <item name="None">       <value>0</value></item>
     <item name="PointerRoot"><value>1</value></item>
     <item name="Parent">     <value>2</value></item>  <!-- revert_to only -->
+    <item name="FollowKeyboard"><value>3</value></item>  <!-- xinput extension only -->
   </enum>
 
   <request name="SetInputFocus" opcode="42">
