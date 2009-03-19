@@ -57,7 +57,7 @@ authorization from the authors.
 	    <pad bytes="1" />
 	    <field type="CARD16" name="server_major" />
 	    <field type="CARD16" name="server_minor" />
-	    <field type="CARD8" name="present" />
+	    <field type="BOOL" name="present" />
 	    <pad bytes="19" />
 	</reply>
     </request>
@@ -115,8 +115,8 @@ authorization from the authors.
 
     <struct name="AxisInfo">
 	<field type="CARD32" name="resolution" />
-	<field type="CARD32" name="minimum" />
-	<field type="CARD32" name="maximum" />
+	<field type="INT32" name="minimum" />
+	<field type="INT32" name="maximum" />
     </struct>
 
     <struct name="ValuatorInfo">
@@ -991,4 +991,12 @@ authorization from the authors.
         <field type="CARD16" name="control" />
 	<pad bytes="20" />
     </event>
+
+    <!-- ERRORS -->
+    <error name="Device" number="0" />
+    <error name="Event" number="1" />
+    <error name="Mode" number="2" />
+    <error name="DeviceBusy" number="3" />
+    <error name="Class" number="4" />
+
 </xcb>
