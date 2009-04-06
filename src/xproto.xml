@@ -1492,7 +1492,7 @@ authorization from the authors.
   </enum>
 
   <enum name="JoinStyle">
-    <item name="Mitre">     <value>0</value></item>
+    <item name="Miter">     <value>0</value></item>
     <item name="Round">     <value>1</value></item>
     <item name="Bevel">     <value>2</value></item>
   </enum>
