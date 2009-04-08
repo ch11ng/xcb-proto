@@ -987,7 +987,13 @@ authorization from the authors.
       <field type="CARD32" name="value_len" />
       <pad bytes="12" />
       <list type="void" name="value">
-        <fieldref>value_len</fieldref>
+	<op op="*">
+	  <fieldref>value_len</fieldref>
+	  <op op="/">
+	    <fieldref>format</fieldref>
+	    <value>8</value>
+	  </op>
+	</op>
       </list>
     </reply>
   </request>
