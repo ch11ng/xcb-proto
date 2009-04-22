@@ -27,7 +27,7 @@ authorization from the authors.
 -->
 
 <xcb header="randr" extension-xname="RANDR" extension-name="RandR"
-    major-version="1" minor-version="2">
+    major-version="1" minor-version="3">
 
 	<import>xproto</import>
 	<import>render</import>
@@ -473,6 +473,130 @@ authorization from the authors.
 		<list type="CARD16" name="blue">
 			<fieldref>size</fieldref>
 		</list>
+	</request>
+
+	<!-- new in 1.3 -->
+
+	<request name="GetScreenResourcesCurrent" opcode="25">
+		<field type="WINDOW" name="window" />
+		<reply>
+			<pad bytes="1" />
+			<field type="TIMESTAMP" name="timestamp" />
+			<field type="TIMESTAMP" name="config_timestamp" />
+			<field type="CARD16" name="num_crtcs" />
+			<field type="CARD16" name="num_outputs" />
+			<field type="CARD16" name="num_modes" />
+			<field type="CARD16" name="names_len" />
+			<pad bytes="8" />
+			<list type="CRTC" name="crtcs">
+			    <fieldref>num_crtcs</fieldref>
+			</list>
+			<list type="OUTPUT" name="outputs">
+			    <fieldref>num_outputs</fieldref>
+			</list>
+			<list type="ModeInfo" name="modes">
+			    <fieldref>num_modes</fieldref>
+			</list>
+			<!-- FIXME: this is *not* null separated!
+			     One must use ModeInfo.name_len from each previous
+			     ModeInfo to infer the position of the name. -->
+			<list type="BYTE" name="names">
+			    <fieldref>names_len</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<request name="SetCrtcTransform" opcode="26">
+		<field type="CRTC" name="crtc" />
+		<field type="TRANSFORM" name="transform" />
+		<field type="CARD16" name="filter_len" />
+		<pad bytes="2" />
+		<list type="char" name="filter_name">
+			<fieldref>filter_len</fieldref>
+		</list>
+		<list type="FIXED" name="filter_params" />
+	</request>
+
+	<request name="GetCrtcTransform" opcode="27">
+		<field type="CRTC" name="crtc" />
+		<reply>
+			<pad bytes="1" />
+			<field type="TRANSFORM" name="pending_transform" />
+			<field type="BOOL" name="has_transforms" />
+			<pad bytes="3" />
+			<field type="TRANSFORM" name="current_transform" />
+			<pad bytes="4" />
+			<field type="CARD16" name="pending_len" />
+			<field type="CARD16" name="pending_nparams" />
+			<field type="CARD16" name="current_len" />
+			<field type="CARD16" name="current_nparams" />
+			<list type="char" name="pending_filter_name" >
+				<fieldref>pending_len</fieldref>
+			</list>
+			<list type="FIXED" name="pending_params" >
+				<fieldref>pending_nparams</fieldref>
+			</list>
+			<list type="char" name="current_filter_name" >
+				<fieldref>current_len</fieldref>
+			</list>
+			<list type="FIXED" name="current_params" >
+				<fieldref>current_nparams</fieldref>
+			</list>
+		</reply>
+	</request>
+
+	<request name="GetPanning" opcode="28">
+		<field type="CRTC" name="crtc" />
+		<reply>
+			<field type="CARD8" name="status" enum="SetConfig" />
+			<field type="TIMESTAMP" name="timestamp" />
+			<field type="CARD16" name="left" />
+			<field type="CARD16" name="top" />
+			<field type="CARD16" name="width" />
+			<field type="CARD16" name="height" />
+			<field type="CARD16" name="track_left" />
+			<field type="CARD16" name="track_top" />
+			<field type="CARD16" name="track_width" />
+			<field type="CARD16" name="track_height" />
+			<field type="INT16" name="border_left" />
+			<field type="INT16" name="border_top" />
+			<field type="INT16" name="border_right" />
+			<field type="INT16" name="border_bottom" />
+		</reply>
+	</request>
+
+	<request name="SetPanning" opcode="29">
+		<field type="CRTC" name="crtc" />
+		<field type="TIMESTAMP" name="timestamp" />
+		<field type="CARD16" name="left" />
+		<field type="CARD16" name="top" />
+		<field type="CARD16" name="width" />
+		<field type="CARD16" name="height" />
+		<field type="CARD16" name="track_left" />
+		<field type="CARD16" name="track_top" />
+		<field type="CARD16" name="track_width" />
+		<field type="CARD16" name="track_height" />
+		<field type="INT16" name="border_left" />
+		<field type="INT16" name="border_top" />
+		<field type="INT16" name="border_right" />
+		<field type="INT16" name="border_bottom" />
+		<reply>
+			<field type="CARD8" name="status" enum="SetConfig" />
+			<field type="TIMESTAMP" name="timestamp" />
+		</reply>
+	</request>
+
+	<request name="SetOutputPrimary" opcode="30">
+		<field type="WINDOW" name="window" />
+		<field type="OUTPUT" name="output" />
+	</request>
+
+	<request name="GetOutputPrimary" opcode="31">
+		<field type="WINDOW" name="window" />
+		<reply>
+			<pad bytes="1" />
+			<field type="OUTPUT" name="output" />
+		</reply>
 	</request>
 
 	<!-- Events -->
