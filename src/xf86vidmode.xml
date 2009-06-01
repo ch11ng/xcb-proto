@@ -443,7 +443,7 @@ authorization from the authors.
 	</reply>
     </request>
 
-    <request name="GetPermissions" opcode="19">
+    <request name="GetPermissions" opcode="20">
 	<field type="CARD16" name="screen" />
 	<pad bytes="2" />
 	<reply>
