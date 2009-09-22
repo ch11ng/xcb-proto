@@ -7,6 +7,7 @@ libtool
 ltmain.sh
 missing
 mkinstalldirs
+py-compile
 config.guess
 config.h
 config.h.in
