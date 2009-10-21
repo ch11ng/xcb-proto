@@ -47,7 +47,7 @@ class AnnotateType(XMLFilterBase):
 			self.declareType(attrs['newname'])
 			attnames = ['oldname', 'newname']
 		elif name == 'valueparam':
-			attnames = ['value-mask-type', 'value-mask-pad']
+			attnames = ['value-mask-type']
 		elif attrs.has_key('type'):
 			attnames = ['type']
 		newattrs = {}
