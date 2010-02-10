@@ -153,10 +153,6 @@ authorization from the authors.
 		<field name="skopt" type="CARD16" enum="AXSKOpt" />
 	</union>
 
-	<enum name="Device">
-		<item name="UseCoreKbd"> <bit>8</bit> </item>
-		<item name="UseCorePtr"> <bit>9</bit> </item>
-	</enum>
 	<typedef oldname="CARD16" newname="DeviceSpec" />
 
 	<enum name="LedClassResult">
@@ -181,18 +177,15 @@ authorization from the authors.
 	<typedef oldname="CARD16" newname="BellClassSpec" />
 
 	<enum name="ID">
-		<item name="DfltXIId"> <bit>10</bit> </item>
+		<item name="UseCoreKbd">  <value>256</value> </item>    <!-- 0x100 -->
+		<item name="UseCorePtr">  <value>512</value> </item>    <!-- 0x200 -->
+		<item name="DfltXIClass"> <value>768</value> </item>    <!-- 0x300 -->
+		<item name="DfltXIId">   <value>1024</value> </item>    <!-- 0x400 -->
+		<item name="AllXIClass"> <value>1280</value> </item>    <!-- 0x500 -->
+		<item name="AllXIId">    <value>1536</value> </item>    <!-- 0x600 -->
+		<item name="XINone">     <value>65280</value> </item>	<!--0xff00-->
 	</enum>
 	<typedef oldname="CARD16" newname="IDSpec" />
-
-	<enum name="IDResult">
-		<item name="XINone"> <value>65280</value> </item>	<!--0xff00-->
-	</enum>
-
-	<enum name="MultiId">
-		<item name="AllXIIds"> <value>1280</value> </item>	<!--0x500-->
-	</enum>
-	<typedef oldname="CARD16" newname="MultiIdSpec" />
 
 	<enum name="Group">
 		<item name="1"> <value>0</value> </item>
@@ -354,19 +347,12 @@ authorization from the authors.
 		<item name="OtherNames">    <bit>7</bit> </item>
 	</enum>
 
-	<enum name="XIExtDevFeature">
+	<enum name="XIFeature">
+		<item name="Keyboards">      <bit>0</bit> </item>
 		<item name="ButtonActions">  <bit>1</bit> </item>
 		<item name="IndicatorNames"> <bit>2</bit> </item>
 		<item name="IndicatorMaps">  <bit>3</bit> </item>
 		<item name="IndicatorState"> <bit>4</bit> </item>
-	</enum>
-
-	<enum name="XIFeature">
-		<item name="Keyboards"> <value>1</value> </item>
-	</enum>
-
-	<enum name="XIDetail">
-		<item name="UnsupportedFeature"> <bit>15</bit> </item>
 	</enum>
 
 	<enum name="PerClientFlag">
@@ -750,8 +736,8 @@ authorization from the authors.
 	</struct>
 
 	<struct name="DeviceLedInfo">
-		<field name="ledClass" type="LedClassSpec" mask="LedClass" />
-		<field name="ledID" type="IDSpec" mask="ID" />
+		<field name="ledClass" type="LedClassSpec" enum="LedClass" />
+		<field name="ledID" type="IDSpec" altenum="ID" />
 		<field name="namesPresent" type="CARD32" />
 		<field name="mapsPresent" type="CARD32" />
 		<field name="physIndicators" type="CARD32" />
@@ -1135,8 +1121,8 @@ authorization from the authors.
 			</bitcase>
 			<bitcase>
 				<enumref ref="EventType">ExtensionDeviceNotify</enumref>
-				<field name="affectExtDev" type="CARD16" mask="XIDetail" />
-				<field name="extdevDetails" type="CARD16" mask="XIDetail" />
+				<field name="affectExtDev" type="CARD16" mask="XIFeature" />
+				<field name="extdevDetails" type="CARD16" mask="XIFeature" />
 			</bitcase>
 		</switch>
 	</request>
@@ -1543,8 +1529,8 @@ authorization from the authors.
 
 	<request name="GetNamedIndicator" opcode="15">
 		<field name="deviceSpec" type="DeviceSpec" />
-		<field name="ledClass" type="LedClassSpec" mask="LedClass" />
-		<field name="ledID" type="IDSpec" mask="ID" />
+		<field name="ledClass" type="LedClassSpec" enum="LedClass" />
+		<field name="ledID" type="IDSpec" altenum="ID" />
 		<pad bytes="2" />
 		<field name="indicator" type="ATOM" />
 		<reply>
@@ -1568,8 +1554,8 @@ authorization from the authors.
 
 	<request name="SetNamedIndicator" opcode="16" >
 		<field name="deviceSpec" type="DeviceSpec" />
-		<field name="ledClass" type="LedClassSpec" mask="LedClass" />
-		<field name="ledID" type="IDSpec" mask="ID" />
+		<field name="ledClass" type="LedClassSpec" enum="LedClass" />
+		<field name="ledID" type="IDSpec" altenum="ID" />
 		<pad bytes="2" />
 		<field name="indicator" type="ATOM" />
 		<field name="setState" type="BOOL" />
@@ -1596,7 +1582,7 @@ authorization from the authors.
 			<field name="minKeyCode" type="KEYCODE" />
 			<field name="maxKeyCode" type="KEYCODE" />
 			<field name="nTypes" type="CARD8" />
-			<field name="groupNames" type="CARD8" mask="Group" />
+			<field name="groupNames" type="CARD8" mask="SetOfGroup" />
 			<field name="virtualMods" type="CARD16" mask="VMod" />
 			<field name="firstKey" type="KEYCODE" />
 			<field name="nKeys" type="CARD8" />
@@ -2281,7 +2267,7 @@ authorization from the authors.
 					<field name="keyMinKeyCode" type="KEYCODE" />
 					<field name="keyMaxKeyCode" type="KEYCODE" />
 					<field name="nTypes" type="CARD8" />
-					<field name="groupNames" type="CARD8" mask="Group" />
+					<field name="groupNames" type="CARD8" mask="SetOfGroup" />
 					<field name="virtualMods" type="CARD16" mask="VMod" />
 					<field name="firstKey" type="KEYCODE" />
 					<field name="nKeys" type="CARD8" />
@@ -2382,7 +2368,7 @@ authorization from the authors.
 					<field name="otherMinKeyCode" type="KEYCODE" />
 					<field name="otherMaxKeyCode" type="KEYCODE" />
 					<field name="nTypes" type="CARD8" />
-					<field name="groupNames" type="CARD8" mask="Group" />
+					<field name="groupNames" type="CARD8" mask="SetOfGroup" />
 					<field name="virtualMods" type="CARD16" mask="VMod" />
 					<field name="firstKey" type="KEYCODE" />
 					<field name="nKeys" type="CARD8" />
@@ -2518,16 +2504,16 @@ authorization from the authors.
 
 	<request name="GetDeviceInfo" opcode="24">
 		<field name="deviceSpec" type="DeviceSpec" />
-		<field name="wanted" type="CARD16" mask="XIExtDevFeature" />
+		<field name="wanted" type="CARD16" mask="XIFeature" />
 		<field name="allButtons" type="BOOL" />
 		<field name="firstButton" type="CARD8" />
 		<field name="nButtons" type="CARD8" />
 		<pad bytes="1" />
-		<field name="ledClass" type="LedClassSpec" mask="LedClass" />
-		<field name="ledID" type="IDSpec" mask="ID" />
+		<field name="ledClass" type="LedClassSpec" enum="LedClass" />
+		<field name="ledID" type="IDSpec" altenum="ID" />
 		<reply>
 			<field name="deviceID" type="CARD8" />
-			<field name="present" type="CARD16" mask="XIExtDevFeature" />
+			<field name="present" type="CARD16" mask="XIFeature" />
 			<field name="supported" type="CARD16" mask="XIFeature" />
 			<field name="unsupported" type="CARD16" mask="XIFeature" />
 			<field name="nDeviceLedFBs" type="CARD16" />
@@ -2537,8 +2523,8 @@ authorization from the authors.
 			<field name="nBtnsRtrn" type="CARD8" />
 			<field name="totalBtns" type="CARD8" />
 			<field name="hasOwnState" type="BOOL" />
-			<field name="dfltKbdFB" type="CARD16" mask="IDResult" />
-			<field name="dfltLedFB" type="CARD16" mask="IDResult" />
+			<field name="dfltKbdFB" type="CARD16" altenum="ID" />
+			<field name="dfltLedFB" type="CARD16" altenum="ID" />
 			<pad bytes="2" />
 			<field name="devType" type="ATOM" />
 			<field name="nameLen" type="CARD16" />
@@ -2559,7 +2545,7 @@ authorization from the authors.
 		<field name="deviceSpec" type="DeviceSpec" />
 		<field name="firstBtn" type="CARD8" />
 		<field name="nBtns" type="CARD8" />
-		<field name="change" type="CARD16" mask="XIExtDevFeature" />
+		<field name="change" type="CARD16" mask="XIFeature" />
 		<field name="nDeviceLedFBs" type="CARD16" />
 		<list name="btnActions" type="Action">
 			<fieldref>nBtns</fieldref>
@@ -2759,8 +2745,8 @@ authorization from the authors.
 		<field name="time" type="TIMESTAMP" />
 		<field name="deviceID" type="CARD8" />
 		<pad bytes="1" />
-		<field name="reason" type="CARD16" mask="XIDetail" />
-		<field name="ledClass" type="CARD16" mask="LedClassResult" />
+		<field name="reason" type="CARD16" mask="XIFeature" />
+		<field name="ledClass" type="CARD16" enum="LedClassResult" />
 		<field name="ledID" type="CARD8" />
 		<field name="ledsDefined" type="CARD32" />
 		<field name="ledState" type="CARD32" />
