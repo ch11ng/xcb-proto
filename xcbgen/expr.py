@@ -77,7 +77,7 @@ class Expression(object):
 
         elif elt.tag == 'value':
             # Constant expression
-            self.nmemb = int(elt.text)
+            self.nmemb = int(elt.text, 0)
 
         else:
             # Notreached
