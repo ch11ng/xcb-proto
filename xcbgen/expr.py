@@ -81,14 +81,14 @@ class Expression(object):
             self.rhs = Expression(list(elt)[0], parent)
 
             self.lenfield_name = self.rhs.lenfield_name
-
+            
         elif elt.tag == 'value':
             # Constant expression
             self.nmemb = int(elt.text, 0)
 
         else:
             # Notreached
-            raise Exception('XXX')
+            raise Exception("undefined tag '%s'" % elt.tag)
 
 
     def fixed_size(self):
