@@ -152,7 +152,7 @@ class ListType(Type):
     parent is the structure type containing the list.
     expr is an Expression object containing the length information, for variable-sized lists.
     '''
-    def __init__(self, elt, member, parent):
+    def __init__(self, elt, member, *parent):
         Type.__init__(self, member.name)
         self.is_list = True
         self.member = member
@@ -177,9 +177,10 @@ class ListType(Type):
             needlen = True
 
             # See if the length field is already in the structure.
-            for field in self.parent.fields:
-                if field.field_name == lenfield_name:
-                    needlen = False
+            for parent in self.parent:
+                for field in parent.fields:
+                    if field.field_name == lenfield_name:
+                        needlen = False
 
             # It isn't, so we need to add it to the structure ourself.
             if needlen:
@@ -198,10 +199,11 @@ class ListType(Type):
         # Find my length field again.  We need the actual Field object in the expr.
         # This is needed because we might have added it ourself above.
         if not self.fixed_size():
-            for field in self.parent.fields:
-                if field.field_name == self.expr.lenfield_name and field.wire:
-                    self.expr.lenfield = field
-                    break
+            for parent in self.parent:
+                for field in parent.fields:
+                    if field.field_name == self.expr.lenfield_name and field.wire:
+                        self.expr.lenfield = field
+                        break
             
         self.resolved = True
 
@@ -215,7 +217,7 @@ class ExprType(Type):
     Public fields added:
     expr is an Expression object containing the value of the field.
     '''
-    def __init__(self, elt, member, parent):
+    def __init__(self, elt, member, *parent):
         Type.__init__(self, member.name)
         self.is_expr = True
         self.member = member
@@ -266,6 +268,7 @@ class ComplexType(Type):
         self.fields = []
         self.nmemb = 1
         self.size = 0
+        self.lenfield_parent = [self]
 
     def resolve(self, module):
         if self.resolved:
@@ -288,17 +291,17 @@ class ComplexType(Type):
             elif child.tag == 'exprfield':
                 field_name = child.get('name')
                 fkey = child.get('type')
-                type = ExprType(child, module.get_type(fkey), self)
+                type = ExprType(child, module.get_type(fkey), *self.lenfield_parent)
                 visible = False
             elif child.tag == 'list':
                 field_name = child.get('name')
                 fkey = child.get('type')
-                type = ListType(child, module.get_type(fkey), self)
+                type = ListType(child, module.get_type(fkey), *self.lenfield_parent)
                 visible = True
             elif child.tag == 'valueparam':
                 field_name = child.get('value-list-name')
                 fkey = 'CARD32'
-                type = ListType(child, module.get_type(fkey), self)
+                type = ListType(child, module.get_type(fkey), *self.lenfield_parent)
                 visible = True
             else:
                 # Hit this on Reply
