@@ -117,7 +117,11 @@ class Expression(object):
             for p in reversed(parents): 
                 fields = dict([(f.field_name, f) for f in p.fields])
                 if self.lenfield_name in fields.keys():
-                    self.lenfield_parent = p
+                    if p.is_bitcase:
+                        # switch is the anchestor 
+                        self.lenfield_parent = p.parents[-1]
+                    else:
+                        self.lenfield_parent = p
                     self.lenfield_type = fields[self.lenfield_name].field_type
                     break
                     
