@@ -378,16 +378,25 @@ class SwitchType(ComplexType):
         # Resolve all of our field datatypes.
         for index, child in enumerate(list(self.elt)):
             if child.tag == 'bitcase':
+                field_name = child.get('name')
+                # construct the switch type name from the parent type and the field name
+                if field_name is None:
+                    field_type = self.name + ('bitcase%d' % index,)
+                else:
+                    field_type = self.name + (field_name,)
+
                 # use self.parent to indicate anchestor, 
                 # as switch does not contain named fields itself
                 type = BitcaseType(index, self.name, child, *parents)
+                if field_name is None:
+                    type.has_name = False
                 visible = True
 
                 # Get the full type name for the field
                 field_type = type.name               
 
                 # add the field to ourself
-                type.make_member_of(module, self, field_type, index, visible, True, False)
+                type.make_member_of(module, self, field_type, field_name, visible, True, False)
 
                 # recursively resolve the type (could be another structure, list)
                 type.resolve(module)
@@ -470,6 +479,7 @@ class BitcaseType(ComplexType):
         elts = list(elt)
         self.expr = Expression(elts[0] if len(elts) else elt, self)
         ComplexType.__init__(self, name, elts[1:])        
+        self.has_name = True
         self.index = 1
         self.lenfield_parent = list(parent) + [self]
         self.parents = list(parent)
