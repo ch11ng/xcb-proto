@@ -833,7 +833,7 @@ authorization from the authors.
     <field type="CARD16" name="class" enum="WindowClass" />
     <field type="VISUALID" name="visual" />
     <field type="CARD32" name="value_mask" enum="CW" />
-    <switch name="value_list">
+    <switch name="value_list" fixed_type="CARD32">
       <fieldref>value_mask</fieldref>
       <bitcase>
 	<enumref ref="CW">BackPixmap</enumref>

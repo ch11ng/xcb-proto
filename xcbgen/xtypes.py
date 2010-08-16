@@ -159,7 +159,7 @@ class ListType(Type):
         Type.__init__(self, member.name)
         self.is_list = True
         self.member = member
-        self.parent = list(parent)
+        self.parents = list(parent)
 
         if elt.tag == 'list':
             elts = list(elt)
@@ -180,7 +180,7 @@ class ListType(Type):
             needlen = True
 
             # See if the length field is already in the structure.
-            for parent in self.parent:
+            for parent in self.parents:
                 for field in parent.fields:
                     if field.field_name == lenfield_name:
                         needlen = False
@@ -198,12 +198,12 @@ class ListType(Type):
         if self.resolved:
             return
         self.member.resolve(module)
-        self.expr.resolve(module, self.parent)
+        self.expr.resolve(module, self.parents)
 
         # Find my length field again.  We need the actual Field object in the expr.
         # This is needed because we might have added it ourself above.
         if not self.fixed_size():
-            for parent in self.parent:
+            for parent in self.parents:
                 for field in parent.fields:
                     if field.field_name == self.expr.lenfield_name and field.wire:
                         self.expr.lenfield = field
@@ -357,7 +357,7 @@ class SwitchType(ComplexType):
 
     def __init__(self, name, elt, *parents):
         ComplexType.__init__(self, name, elt)
-        self.parent = parents
+        self.parents = parents
         # FIXME: switch cannot store lenfields, so it should just delegate the parents
         self.lenfield_parent = list(parents) + [self]
         # self.fields contains all possible fields collected from the Bitcase objects, 
@@ -373,7 +373,7 @@ class SwitchType(ComplexType):
             return
 #        pads = 0
 
-        parents = list(self.parent) + [self]
+        parents = list(self.parents) + [self]
 
         # Resolve all of our field datatypes.
         for index, child in enumerate(list(self.elt)):
@@ -413,7 +413,6 @@ class SwitchType(ComplexType):
         self.calc_size() # Figure out how big we are
         self.resolved = True
 
-    # FIXME: really necessary for Switch??
     def make_member_of(self, module, complex_type, field_type, field_name, visible, wire, auto):
         if not self.fixed_size():
             # We need a length field.
@@ -424,7 +423,7 @@ class SwitchType(ComplexType):
             needlen = True
 
             # See if the length field is already in the structure.
-            for parent in self.parent:
+            for parent in self.parents:
                 for field in parent.fields:
                     if field.field_name == lenfield_name:
                         needlen = False

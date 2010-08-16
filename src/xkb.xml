@@ -401,8 +401,12 @@ authorization from the authors.
 
 	<struct name="KTMapEntry">
 		<field name="active" type="BOOL" />
+		<!-- Xlib uses a different arrangement of fields
 		<field name="mods_mask" type="CARD8" mask="ModMask" />
 		<field name="level" type="CARD8" />
+		-->
+		<field name="level" type="CARD8" />
+		<field name="mods_mask" type="CARD8" mask="ModMask" />
 		<field name="mods_mods" type="CARD8" mask="ModMask" />
 		<field name="mods_vmods" type="CARD16" mask="VMod" />
 		<pad bytes="2" />
@@ -1626,7 +1630,11 @@ authorization from the authors.
 				<bitcase>
 					<enumref ref="NameDetail">KTLevelNames</enumref>
 					<list name="nLevelsPerType" type="CARD8">
-						<fieldref>nKTLevels</fieldref>
+					  <!-- Xlib uses NTypes here - 
+					       the spec says nKTLevels is correct, but
+					       it does not work in reality
+					       <fieldref>nKTLevels</fieldref> -->
+					        <fieldref>nTypes</fieldref>
 					</list>
 					<list name="ktLevelNames" type="ATOM">
 						<sumof ref="nLevelsPerType" />
@@ -1975,7 +1983,14 @@ authorization from the authors.
 				<fieldref>reported</fieldref>
 				<bitcase name="types">
 					<enumref ref="GBNDetail">Types</enumref>
+					<!-- from the spec, this has to be a GetMap reply -->
+					<field name="type" type="CARD8" />
+				        <!-- done 'emulating' GetMap reply header-->
 					<field name="typeDeviceID" type="CARD8" />
+					<!-- from the spec, this has to be a GetMap reply -->
+					<field name="sequence" type="CARD16" />
+					<field name="length" type="CARD32" />
+				        <!-- done 'emulating' GetMap reply header-->
 					<pad bytes="2" />
 					<field name="typeMinKeyCode" type="KEYCODE" />
 					<field name="typeMaxKeyCode" type="KEYCODE" />
