@@ -1984,12 +1984,12 @@ authorization from the authors.
 				<bitcase name="types">
 					<enumref ref="GBNDetail">Types</enumref>
 					<!-- from the spec, this has to be a GetMap reply -->
-					<field name="type" type="CARD8" />
+					<field name="getmap_type" type="CARD8" />
 				        <!-- done 'emulating' GetMap reply header-->
 					<field name="typeDeviceID" type="CARD8" />
 					<!-- from the spec, this has to be a GetMap reply -->
-					<field name="sequence" type="CARD16" />
-					<field name="length" type="CARD32" />
+					<field name="getmap_sequence" type="CARD16" />
+					<field name="getmap_length" type="CARD32" />
 				        <!-- done 'emulating' GetMap reply header-->
 					<pad bytes="2" />
 					<field name="typeMinKeyCode" type="KEYCODE" />
