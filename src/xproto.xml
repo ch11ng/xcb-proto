@@ -2295,7 +2295,7 @@ authorization from the authors.
     <field type="CARD8" name="family" enum="Family" />
     <pad bytes="1" />
     <field type="CARD16" name="address_len" />
-    <list type="char" name="address">
+    <list type="BYTE" name="address">
       <fieldref>address_len</fieldref>
     </list>
   </request>
