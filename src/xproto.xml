@@ -1483,8 +1483,8 @@ authorization from the authors.
     <pad bytes="1" />
     <field type="CARD16" name="font_qty" />
     <pad bytes="2" />
-    <list type="STR" name="path">
-      <fieldref>path_len</fieldref>
+    <list type="STR" name="font">
+      <fieldref>font_qty</fieldref>
     </list>
   </request>
 
