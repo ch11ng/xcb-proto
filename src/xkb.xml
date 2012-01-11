@@ -1162,6 +1162,7 @@ authorization from the authors.
 			<field name="compatState" type="CARD8" mask="ModMask" />
 			<field name="grabMods" type="CARD8" mask="ModMask" />
 			<field name="compatGrabMods" type="CARD8" mask="ModMask" />
+                        <field name="lookupMods" type="CARD8" mask="ModMask" />
 			<field name="compatLookupMods" type="CARD8" mask="ModMask" />
 			<pad bytes="1" />
 			<field name="ptrBtnState" type="CARD16" mask="KeyButMask" />
