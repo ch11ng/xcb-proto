@@ -593,8 +593,7 @@ class Event(ComplexType):
         ComplexType.__init__(self, name, elt)
         self.opcodes = {}
 
-        tmp = elt.get('no-sequence-number')
-        self.has_seq = (tmp == None or tmp.lower() == 'false' or tmp == '0')
+        self.has_seq = not bool(elt.get('no-sequence-number'))
 
         self.doc = None
         for item in list(elt):
