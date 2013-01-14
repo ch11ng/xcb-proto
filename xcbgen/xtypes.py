@@ -75,6 +75,18 @@ class Type(object):
 
         complex_type.fields.append(new_field)
 
+    def make_fd_of(self, module, complex_type, fd_name):
+    	'''
+        Method for making a fd member of a structure.
+        '''
+        new_fd = Field(self, module.get_type_name('INT32'), fd_name, True, False, False, None, True)
+        # We dump the _placeholder_byte if any fields are added.
+        for (idx, field) in enumerate(complex_type.fields):
+            if field == _placeholder_byte:
+                complex_type.fields[idx] = new_fd
+                return
+
+        complex_type.fields.append(new_fd)
 
 class SimpleType(Type):
     '''
@@ -279,6 +291,7 @@ class ComplexType(Type):
         self.nmemb = 1
         self.size = 0
         self.lenfield_parent = [self]
+        self.fds = []
 
     def resolve(self, module):
         if self.resolved:
@@ -324,9 +337,14 @@ class ComplexType(Type):
                 type.make_member_of(module, self, field_type, field_name, visible, True, False)
                 type.resolve(module)
                 continue
+            elif child.tag == 'fd':
+                fd_name = child.get('name')
+                type = module.get_type('INT32')
+                type.make_fd_of(module, self, fd_name)
+                continue
             else:
                 # Hit this on Reply
-                continue 
+                continue
 
             # Get the full type name for the field
             field_type = module.get_type_name(fkey)
