@@ -33,7 +33,7 @@ authorization from the authors.
 -->
 
 <xcb header="xinput" extension-xname="XInputExtension" extension-name="Input"
-     major-version="2" minor-version="2">
+     major-version="2" minor-version="3">
     <import>xproto</import>
 
     <!-- ⋅⋅⋅ Types (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
@@ -50,6 +50,10 @@ authorization from the authors.
         <field type="INT32"  name="integral" />
         <field type="CARD32" name="frac" />
     </struct>
+
+    <!-- ⋅⋅⋅ Types (v2.3) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <typedef oldname="CARD32" newname="Barrier" />
 
     <!-- ⋅⋅⋅ Requests (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
 
@@ -1646,6 +1650,24 @@ authorization from the authors.
         </reply>
     </request>
 
+    <!-- ⋅⋅⋅ Requests (v2.3) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <!-- XIBarrierReleasePointer -->
+
+    <struct name="BarrierReleasePointerInfo">
+        <field type="DeviceId" name="deviceid" />
+        <pad bytes="2" />
+        <field type="Barrier"  name="barrier" />
+        <field type="CARD32"   name="eventid" />
+    </struct>
+
+    <request name="XIBarrierReleasePointer" opcode="61">
+        <field type="CARD32" name="num_barriers" />
+        <list type="BarrierReleasePointerInfo" name="barriers">
+            <fieldref>num_barriers</fieldref>
+        </list>
+    </request>
+
     <!-- ⋅⋅⋅ Events (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
     <!-- Notes:
          - A 'len' field in a v1++ structure is in bytes.
@@ -2094,6 +2116,29 @@ authorization from the authors.
 
     <eventcopy name="RawTouchUpdate" number="23" ref="RawTouchBegin" />
     <eventcopy name="RawTouchEnd"    number="24" ref="RawTouchBegin" />
+
+    <!-- ⋅⋅⋅ Events (v2.3) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <event name="BarrierHit" number="25" xge="true">
+        <field type="DeviceId"  name="deviceid" altenum="Device" />
+        <field type="TIMESTAMP" name="time" altenum="Time" />
+        <!-- event specific fields -->
+        <field type="CARD32"    name="eventid" />
+        <field type="WINDOW"    name="root" />
+        <field type="WINDOW"    name="event" />
+        <field type="Barrier"   name="barrier" />
+        <!-- 32 byte boundary -->
+        <field type="CARD32"    name="dtime" />
+        <field type="CARD32"    name="flags" />
+        <field type="DeviceId"  name="sourceid" altenum="Device" />
+        <pad bytes="2" />
+        <field type="FP1616"    name="root_x" />
+        <field type="FP1616"    name="root_y" />
+        <field type="FP3232"    name="dx" />
+        <field type="FP3232"    name="dy" />
+    </event>
+
+    <eventcopy name="BarrierLeave" number="26" ref="BarrierHit" />
 
     <!-- ⋅⋅⋅ Errors (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
 
