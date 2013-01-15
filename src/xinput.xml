@@ -517,6 +517,12 @@ authorization from the authors.
         <field type="CARD8"  name="class_id" enum="FeedbackClass" />
         <field type="CARD8"  name="feedback_id" />
         <field type="CARD16" name="len" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <fieldref>len</fieldref>
+                <value>4</value>
+            </op>
+        </list>
     </struct>
 
     <request name="GetFeedbackControl" opcode="22">
@@ -526,7 +532,9 @@ authorization from the authors.
             <pad bytes="1" />
             <field type="CARD16" name="num_feedbacks" />
             <pad bytes="22" />
-            <!-- Uninterpreted: list (feedbacks) of FeedbackState structures -->
+            <list type="FeedbackState" name="feedbacks">
+                <fieldref>num_feedbacks</fieldref>
+            </list>
         </reply>
     </request>
 
@@ -596,13 +604,19 @@ authorization from the authors.
         <field type="CARD8"  name="class_id" enum="FeedbackClass" />
         <field type="CARD8"  name="feedback_id" />
         <field type="CARD16" name="len" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <fieldref>len</fieldref>
+                <value>4</value>
+            </op>
+        </list>
     </struct>
 
     <request name="ChangeFeedbackControl" opcode="23">
         <field type="CARD32"      name="mask" />
         <field type="CARD8"       name="device_id" />
         <field type="CARD8"       name="feedback_id" />
-        <!-- Uninterpreted: field (feedback) of FeedbackCtl structure -->
+        <field type="FeedbackCtl" name="feedback" />
     </request>
 
     <!-- GetDeviceKeyMapping -->
@@ -741,6 +755,13 @@ authorization from the authors.
         <field type="CARD8" name="class_id" enum="InputClass" />
         <field type="CARD8" name="len" />
         <field type="CARD8" name="num_items" />
+        <pad bytes="1" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <fieldref>len</fieldref>
+                <value>4</value>
+            </op>
+        </list>
     </struct>
 
     <request name="QueryDeviceState" opcode="30">
@@ -750,7 +771,9 @@ authorization from the authors.
             <pad bytes="1" />
             <field type="CARD8" name="num_classes" />
             <pad bytes="23" />
-            <!-- Uninterpreted: list (classes) of InputState structures -->
+            <list type="InputState" name="classes">
+                <fieldref>num_classes</fieldref>
+            </list>
         </reply>
     </request>
 
@@ -867,6 +890,12 @@ authorization from the authors.
     <struct name="DeviceState">
         <field type="CARD16" name="control_id" enum="DeviceControl" />
         <field type="CARD16" name="len" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <fieldref>len</fieldref>
+                <value>4</value>
+            </op>
+        </list>
     </struct>
 
     <request name="GetDeviceControl" opcode="34">
@@ -877,7 +906,7 @@ authorization from the authors.
             <pad bytes="1" />
             <field type="CARD8" name="status" altenum="GrabStatus" />
             <pad bytes="23" />
-            <!-- Uninterpreted: field (control) of DeviceState structure -->
+            <field type="DeviceState" name="control" />
         </reply>
     </request>
 
@@ -934,13 +963,19 @@ authorization from the authors.
     <struct name="DeviceCtl">
         <field type="CARD16" name="control_id" enum="DeviceControl" />
         <field type="CARD16" name="len" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <fieldref>len</fieldref>
+                <value>4</value>
+            </op>
+        </list>
     </struct>
 
     <request name="ChangeDeviceControl" opcode="35">
         <field type="CARD16" name="control_id" enum="DeviceControl" />
         <field type="CARD8"  name="device_id" />
         <pad bytes="1" />
-        <!-- Uninterpreted: field (control) of DeviceCtl structure -->
+        <field type="DeviceCtl" name="control" />
         <reply>
             <pad bytes="1" />
             <field type="CARD8" name="status" altenum="GrabStatus" />
@@ -1184,11 +1219,22 @@ authorization from the authors.
     <struct name="HierarchyChange">
         <field type="CARD16" name="type" enum="HierarchyChangeType" />
         <field type="CARD16" name="len" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <op op="*">
+                    <fieldref>len</fieldref>
+                    <value>4</value>
+                </op>
+                <value>4</value>
+            </op>
+        </list>
     </struct>
 
     <request name="XIChangeHierarchy" opcode="43">
         <field type="CARD8" name="num_changes" />
-        <!-- Uninterpreted: list (changes) of HierarchyChange structures -->
+        <list type="HierarchyChange" name="changes">
+            <fieldref>num_changes</fieldref>
+        </list>
     </request>
 
     <!-- XISetClientPointer -->
@@ -1345,6 +1391,15 @@ authorization from the authors.
         <field type="CARD16"   name="len" />
         <field type="DeviceId" name="sourceid" />
         <pad bytes="2" />
+        <list type="CARD8" name="uninterpreted_data">
+            <op op="-">
+                <op op="*">
+                    <fieldref>len</fieldref>
+                    <value>4</value>
+                </op>
+                <value>8</value>
+            </op>
+        </list>
     </struct>
 
     <struct name="XIDeviceInfo">
@@ -1369,7 +1424,9 @@ authorization from the authors.
                 <value>4</value>
             </op>
         </list>
-        <!-- Uninterpreted: list (classes) of DeviceClass structures -->
+        <list type="DeviceClass" name="classes">
+            <fieldref>num_classes</fieldref>
+        </list>
     </struct>
 
     <request name="XIQueryDevice" opcode="48">
