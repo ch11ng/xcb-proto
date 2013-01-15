@@ -33,7 +33,7 @@ authorization from the authors.
 -->
 
 <xcb header="xinput" extension-xname="XInputExtension" extension-name="Input"
-     major-version="2" minor-version="0">
+     major-version="2" minor-version="1">
     <import>xproto</import>
 
     <!-- ⋅⋅⋅ Types (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
@@ -1967,6 +1967,51 @@ authorization from the authors.
         <pad bytes="11" />
         <!-- 32 byte boundary -->
     </event>
+
+    <!-- ⋅⋅⋅ Events (v2.1) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <event name="RawKeyPress" number="13" xge="true">
+        <field type="DeviceId"  name="deviceid" altenum="Device" />
+        <field type="TIMESTAMP" name="time" altenum="Time" />
+        <!-- event specific fields -->
+        <field type="CARD32"    name="detail" />
+        <field type="DeviceId"  name="sourceid" />
+        <field type="CARD16"    name="valuators_len" />
+        <field type="CARD32"    name="flags" mask="KeyEventFlags"/>
+        <pad bytes="4" />
+        <!-- 32 byte boundary -->
+        <list type="CARD32" name="valuator_mask">
+            <fieldref>valuators_len</fieldref>
+        </list>
+        <!-- Uninterpreted: list (axisvalues) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+        <!-- Uninterpreted: list (axisvalues_raw) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+    </event>
+
+    <eventcopy name="RawKeyRelease" number="14" ref="RawKeyPress" />
+
+    <event name="RawButtonPress" number="15" xge="true">
+        <field type="DeviceId"  name="deviceid" altenum="Device" />
+        <field type="TIMESTAMP" name="time" altenum="Time" />
+        <!-- event specific fields -->
+        <field type="CARD32"    name="detail" />
+        <field type="DeviceId"  name="sourceid" />
+        <field type="CARD16"    name="valuators_len" />
+        <field type="CARD32"    name="flags" mask="PointerEventFlags"/>
+        <pad bytes="4" />
+        <!-- 32 byte boundary -->
+        <list type="CARD32" name="valuator_mask">
+            <fieldref>valuators_len</fieldref>
+        </list>
+        <!-- Uninterpreted: list (axisvalues) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+        <!-- Uninterpreted: list (axisvalues_raw) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+    </event>
+
+    <eventcopy name="RawButtonRelease" number="16" ref="RawButtonPress" />
+    <eventcopy name="RawMotion"        number="17" ref="RawButtonPress" />
 
     <!-- ⋅⋅⋅ Errors (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
 
