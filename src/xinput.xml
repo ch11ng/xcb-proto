@@ -31,7 +31,7 @@ authorization from the authors.
 -->
 
 <xcb header="xinput" extension-xname="XInputExtension" extension-name="Input"
-     major-version="1" minor-version="4">
+     major-version="1" minor-version="5">
     <import>xproto</import>
 
     <!-- ⋅⋅⋅ Types (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
@@ -932,6 +932,120 @@ authorization from the authors.
         </reply>
     </request>
 
+    <!-- ⋅⋅⋅ Requests (v1.5) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <!-- ListDeviceProperties -->
+
+    <request name="ListDeviceProperties" opcode="36">
+        <field type="CARD8"  name="device_id" />
+        <pad bytes="3" />
+        <reply>
+            <pad bytes="1" />
+            <field type="CARD16" name="num_atoms" />
+            <pad bytes="22" />
+            <list type="ATOM" name="atoms">
+                <fieldref>num_atoms</fieldref>
+            </list>
+        </reply>
+    </request>
+
+    <!-- ChangeDeviceProperty -->
+
+    <enum name="PropertyFormat">
+        <item name="8Bits">  <value> 8</value> </item>
+        <item name="16Bits"> <value>16</value> </item>
+        <item name="32Bits"> <value>32</value> </item>
+    </enum>
+
+    <request name="ChangeDeviceProperty" opcode="37">
+        <field type="ATOM"  name="property" />
+        <field type="ATOM"  name="type" />
+        <field type="CARD8" name="device_id" />
+        <field type="CARD8" name="format" enum="PropertyFormat" />
+        <field type="CARD8" name="mode" enum="PropMode" />
+        <pad bytes="1" />
+        <field type="CARD32" name="num_items" />
+        <switch name="items">
+            <fieldref>format</fieldref>
+            <!-- <bitcase> is not correct, this would need <cases>s.
+                 It works in that case, because PropertyFormat items can be
+                 distinguished exactly as their values don't have equal bits.
+            -->
+            <bitcase>
+                <enumref ref="PropertyFormat">8Bits</enumref>
+                <list type="CARD8" name="data8">
+                    <fieldref>num_items</fieldref>
+                </list>
+            </bitcase>
+            <bitcase>
+                <enumref ref="PropertyFormat">16Bits</enumref>
+                <list type="CARD16" name="data16">
+                    <fieldref>num_items</fieldref>
+                </list>
+            </bitcase>
+            <bitcase>
+                <enumref ref="PropertyFormat">32Bits</enumref>
+                <list type="CARD32" name="data32">
+                    <fieldref>num_items</fieldref>
+                </list>
+            </bitcase>
+        </switch>
+    </request>
+
+    <!-- DeleteDeviceProperty -->
+
+    <request name="DeleteDeviceProperty" opcode="38">
+        <field type="ATOM"  name="property" />
+        <field type="CARD8" name="device_id" />
+        <pad bytes="3" />
+    </request>
+
+    <!-- GetDeviceProperty -->
+
+    <request name="GetDeviceProperty" opcode="39">
+        <field type="ATOM"   name="property" />
+        <field type="ATOM"   name="type" />
+        <field type="CARD32" name="offset" />
+        <field type="CARD32" name="len" />
+        <field type="CARD8"  name="device_id" />
+        <field type="BOOL"   name="delete" />
+        <pad bytes="2" />
+        <reply>
+            <pad bytes="1" />
+            <field type="ATOM"   name="type" />
+            <field type="CARD32" name="bytes_after" />
+            <field type="CARD32" name="num_items" />
+            <field type="CARD8"  name="format" enum="PropertyFormat" />
+            <field type="CARD8"  name="device_id" />
+            <pad bytes="10" />
+            <switch name="items">
+                <fieldref>format</fieldref>
+                <!-- <bitcase> is not correct, this would need <cases>s.
+                     It works in that case, because PropertyFormat items can be
+                     distinguished exactly as their values don't have equal bits.
+                -->
+                <bitcase>
+                    <enumref ref="PropertyFormat">8Bits</enumref>
+                    <list type="CARD8" name="data8">
+                        <fieldref>num_items</fieldref>
+                    </list>
+                </bitcase>
+                <bitcase>
+                    <enumref ref="PropertyFormat">16Bits</enumref>
+                    <list type="CARD16" name="data16">
+                        <fieldref>num_items</fieldref>
+                    </list>
+                </bitcase>
+                <bitcase>
+                    <enumref ref="PropertyFormat">32Bits</enumref>
+                    <list type="CARD32" name="data32">
+                        <fieldref>num_items</fieldref>
+                    </list>
+                </bitcase>
+            </switch>
+        </reply>
+    </request>
+
     <!-- ⋅⋅⋅ Events (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
     <!-- Notes:
          - A 'len' field in a v1++ structure is in bytes.
@@ -1047,6 +1161,16 @@ authorization from the authors.
         <field type="BYTE"      name="device_id" />
         <field type="CARD16"    name="control" />
         <pad bytes="20" />
+    </event>
+
+    <!-- ⋅⋅⋅ Events (v1.5) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <event name="DevicePropertyNotify" number="16">
+        <field type="BYTE"      name="state" enum="Property" />
+        <field type="TIMESTAMP" name="time" />
+        <field type="ATOM"      name="property" />
+        <pad bytes="19" />
+        <field type="CARD8"     name="device_id" />
     </event>
 
     <!-- ⋅⋅⋅ Errors (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
