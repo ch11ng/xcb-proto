@@ -33,7 +33,7 @@ authorization from the authors.
 -->
 
 <xcb header="xinput" extension-xname="XInputExtension" extension-name="Input"
-     major-version="2" minor-version="1">
+     major-version="2" minor-version="2">
     <import>xproto</import>
 
     <!-- ⋅⋅⋅ Types (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
@@ -2012,6 +2012,88 @@ authorization from the authors.
 
     <eventcopy name="RawButtonRelease" number="16" ref="RawButtonPress" />
     <eventcopy name="RawMotion"        number="17" ref="RawButtonPress" />
+
+    <!-- ⋅⋅⋅ Events (v2.2) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
+
+    <enum name="TouchEventFlags">
+        <item name="TouchPendingEnd">       <bit>16</bit> </item>
+        <item name="TouchEmulatingPointer"> <bit>17</bit> </item>
+    </enum>
+
+    <event name="TouchBegin" number="18" xge="true">
+        <field type="DeviceId"  name="deviceid" altenum="Device" />
+        <field type="TIMESTAMP" name="time" altenum="Time" />
+        <!-- event specific fields -->
+        <field type="CARD32"    name="detail" />
+        <field type="WINDOW"    name="root" />
+        <field type="WINDOW"    name="event" />
+        <field type="WINDOW"    name="child" />
+        <!-- 32 byte boundary -->
+        <field type="FP1616"    name="root_x" />
+        <field type="FP1616"    name="root_y" />
+        <field type="FP1616"    name="event_x" />
+        <field type="FP1616"    name="event_y" />
+        <field type="CARD16"    name="buttons_len" />
+        <field type="CARD16"    name="valuators_len" />
+        <field type="DeviceId"  name="sourceid" altenum="Device" />
+        <pad bytes="2" />
+        <field type="CARD32"       name="flags" mask="TouchEventFlags" />
+        <field type="ModifierInfo" name="mods" />
+        <field type="GroupInfo"    name="group" />
+        <list type="CARD32" name="button_mask">
+            <fieldref>buttons_len</fieldref>
+        </list>
+        <list type="CARD32" name="valuator_mask">
+            <fieldref>valuators_len</fieldref>
+        </list>
+        <!-- Uninterpreted: list (axisvalues) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+    </event>
+
+    <eventcopy name="TouchUpdate" number="19" ref="TouchBegin" />
+    <eventcopy name="TouchEnd"    number="20" ref="TouchBegin" />
+
+    <enum name="TouchOwnershipFlags">
+        <!-- XXX: Remove this enum? Currently, no flag is defined. -->
+        <item name="None" />
+    </enum>
+
+    <event name="TouchOwnership" number="21" xge="true">
+        <field type="DeviceId"  name="deviceid" altenum="Device" />
+        <field type="TIMESTAMP" name="time" altenum="Time" />
+        <!-- event specific fields -->
+        <field type="CARD32"    name="touchid" />
+        <field type="WINDOW"    name="root" />
+        <field type="WINDOW"    name="event" />
+        <field type="WINDOW"    name="child" />
+        <!-- 32 byte boundary -->
+        <field type="DeviceId"  name="sourceid" altenum="Device" />
+        <pad bytes="2" />
+        <field type="CARD32"    name="flags" enum="TouchOwnershipFlags" />
+        <pad bytes="8" />
+    </event>
+
+    <event name="RawTouchBegin" number="22" xge="true">
+        <field type="DeviceId"  name="deviceid" altenum="Device" />
+        <field type="TIMESTAMP" name="time" altenum="Time" />
+        <!-- event specific fields -->
+        <field type="CARD32"    name="detail" />
+        <field type="DeviceId"  name="sourceid" />
+        <field type="CARD16"    name="valuators_len" />
+        <field type="CARD32"    name="flags" mask="TouchEventFlags"/>
+        <pad bytes="4" />
+        <!-- 32 byte boundary -->
+        <list type="CARD32" name="valuator_mask">
+            <fieldref>valuators_len</fieldref>
+        </list>
+        <!-- Uninterpreted: list (axisvalues) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+        <!-- Uninterpreted: list (axisvalues_raw) of FP3232,
+                            length is <popcount> on valuator_mask list -->
+    </event>
+
+    <eventcopy name="RawTouchUpdate" number="23" ref="RawTouchBegin" />
+    <eventcopy name="RawTouchEnd"    number="24" ref="RawTouchBegin" />
 
     <!-- ⋅⋅⋅ Errors (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
 
