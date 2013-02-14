@@ -34,6 +34,7 @@ authorization from the authors.
 
 <xcb header="xinput" extension-xname="XInputExtension" extension-name="Input"
      major-version="2" minor-version="3">
+    <import>xfixes</import>
     <import>xproto</import>
 
     <!-- ⋅⋅⋅ Types (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
@@ -50,10 +51,6 @@ authorization from the authors.
         <field type="INT32"  name="integral" />
         <field type="CARD32" name="frac" />
     </struct>
-
-    <!-- ⋅⋅⋅ Types (v2.3) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
-
-    <typedef oldname="CARD32" newname="Barrier" />
 
     <!-- ⋅⋅⋅ Requests (v1.0) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
 
@@ -1714,7 +1711,7 @@ authorization from the authors.
     <struct name="BarrierReleasePointerInfo">
         <field type="DeviceId" name="deviceid" />
         <pad bytes="2" />
-        <field type="Barrier"  name="barrier" />
+        <field type="BARRIER"  name="barrier" />
         <field type="CARD32"   name="eventid" />
     </struct>
 
@@ -2183,7 +2180,7 @@ authorization from the authors.
         <field type="CARD32"    name="eventid" />
         <field type="WINDOW"    name="root" />
         <field type="WINDOW"    name="event" />
-        <field type="Barrier"   name="barrier" />
+        <field type="BARRIER"   name="barrier" />
         <!-- 32 byte boundary -->
         <field type="CARD32"    name="dtime" />
         <field type="CARD32"    name="flags" />
