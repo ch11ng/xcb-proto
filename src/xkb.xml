@@ -384,13 +384,6 @@ authorization from the authors.
 		</list>
 	</struct>
 
-	<struct name="CountedString8">
-		<field name="length" type="CARD8" />
-		<list name="string" type="CARD8">
-			<fieldref>length</fieldref>
-		</list>
-	</struct>
-
 	<struct name="CountedString16">
 		<field name="length" type="CARD16" />
 		<list name="string" type="CARD8">
