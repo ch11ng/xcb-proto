@@ -389,7 +389,23 @@ authorization from the authors.
 		<list name="string" type="CARD8">
 			<fieldref>length</fieldref>
 		</list>
-		<pad bytes="1" />
+		<list type="void" name="alignment_pad">
+			<op op="-">
+				<op op="&amp;">
+					<op op="+">
+						<fieldref>length</fieldref>
+						<value>5</value>
+					</op>
+					<unop op="~">
+						<value>3</value>
+					</unop>
+				</op>
+				<op op="+">
+					<fieldref>length</fieldref>
+					<value>2</value>
+				</op>
+			</op>
+		</list>
 	</struct>
 
 	<struct name="KTMapEntry">
