@@ -1363,7 +1363,7 @@ authorization from the authors.
 				<bitcase>
 					<enumref ref="MapPart">VirtualMods</enumref>
 					<list name="vmods_rtrn" type="CARD8" mask="ModMask">
-						<fieldref>nVModMapKeys</fieldref>
+						<popcount><fieldref>virtualMods</fieldref></popcount>
 					</list>
 				</bitcase>
 				<bitcase>
@@ -1447,7 +1447,7 @@ authorization from the authors.
 			<bitcase>
 				<enumref ref="MapPart">VirtualMods</enumref>
 				<list name="vmods" type="CARD8">
-					<fieldref>nVModMapKeys</fieldref>
+					<popcount><fieldref>virtualMods</fieldref></popcount>
 				</list>
 			</bitcase>
 			<bitcase>
@@ -2071,7 +2071,7 @@ authorization from the authors.
 						<bitcase>
 							<enumref ref="MapPart">VirtualMods</enumref>
 							<list name="vmods_rtrn" type="CARD8" mask="ModMask">
-								<fieldref>nVModMapKeys</fieldref>
+								<popcount><fieldref>virtualMods</fieldref></popcount>
 							</list>
 						</bitcase>
 						<bitcase>
