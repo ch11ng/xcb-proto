@@ -2004,6 +2004,8 @@ authorization from the authors.
 				<fieldref>reported</fieldref>
 				<bitcase name="types">
 					<enumref ref="GBNDetail">Types</enumref>
+					<enumref ref="GBNDetail">ClientSymbols</enumref>
+					<enumref ref="GBNDetail">ServerSymbols</enumref>
 					<!-- from the spec, this has to be a GetMap reply -->
 					<field name="getmap_type" type="CARD8" />
 				        <!-- done 'emulating' GetMap reply header-->
@@ -2096,7 +2098,12 @@ authorization from the authors.
 				</bitcase>
 				<bitcase name="compat_map">
 					<enumref ref="GBNDetail">CompatMap</enumref>
+					<!-- from the spec, this has to include a reply header -->
+					<field name="compatmap_type" type="CARD8" />
 					<field name="compatDeviceID" type="CARD8" />
+					<field name="compatmap_sequence" type="CARD16" />
+					<field name="compatmap_length" type="CARD32" />
+					<!-- done 'emulating' reply header -->
 					<field name="groupsRtrn" type="CARD8" mask="SetOfGroup" />
 					<pad bytes="1" />
 					<field name="firstSIRtrn" type="CARD16" />
@@ -2112,179 +2119,14 @@ authorization from the authors.
 						</popcount>
 					</list>
 				</bitcase>
-				<bitcase name="client_symbols">
-					<enumref ref="GBNDetail">ClientSymbols</enumref>
-					<field name="clientDeviceID" type="CARD8" />
-					<pad bytes="2" />
-					<field name="clientMinKeyCode" type="KEYCODE" />
-					<field name="clientMaxKeyCode" type="KEYCODE" />
-					<field name="present" type="CARD16" enum="MapPart" />
-					<field name="firstType" type="CARD8" />
-					<field name="nTypes" type="CARD8" />
-					<field name="totalTypes" type="CARD8" />
-					<field name="firstKeySym" type="KEYCODE" />
-					<field name="totalSyms" type="CARD16" />
-					<field name="nKeySyms" type="CARD8" />
-					<field name="firstKeyAction" type="KEYCODE" />
-					<field name="totalActions" type="CARD16" />
-					<field name="nKeyActions" type="CARD8" />
-					<field name="firstKeyBehavior" type="KEYCODE" />
-					<field name="nKeyBehaviors" type="CARD8" />
-					<field name="totalKeyBehaviors" type="CARD8" />
-					<field name="firstKeyExplicit" type="KEYCODE" />
-					<field name="nKeyExplicit" type="CARD8" />
-					<field name="totalKeyExplicit" type="CARD8" />
-					<field name="firstModMapKey" type="KEYCODE" />
-					<field name="nModMapKeys" type="CARD8" />
-					<field name="totalModMapKeys" type="CARD8" />
-					<field name="firstVModMapKey" type="KEYCODE" />
-					<field name="nVModMapKeys" type="CARD8" />
-					<field name="totalVModMapKeys" type="CARD8" />
-					<pad bytes="1" />
-					<field name="virtualMods" type="CARD16" mask="VMod" />
-					<switch name="map">
-						<fieldref>present</fieldref>
-						<bitcase>
-							<enumref ref="MapPart">KeyTypes</enumref>
-							<list name="types_rtrn" type="KeyType">
-								<fieldref>nTypes</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">KeySyms</enumref>
-							<list name="syms_rtrn" type="KeySymMap">
-								<fieldref>nKeySyms</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">KeyActions</enumref>
-							<list name="acts_rtrn_count" type="CARD8">
-								<fieldref>nKeyActions</fieldref>
-							</list>
-							<list name="acts_rtrn_acts" type="Action">
-								<fieldref>totalActions</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">KeyBehaviors</enumref>
-							<list name="behaviors_rtrn" type="SetBehavior">
-								<fieldref>totalKeyBehaviors</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">VirtualMods</enumref>
-							<list name="vmods_rtrn" type="CARD8" mask="ModMask">
-								<fieldref>nVModMapKeys</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">ExplicitComponents</enumref>
-							<list name="explicit_rtrn" type="SetExplicit">
-								<fieldref>totalKeyExplicit</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">ModifierMap</enumref>
-							<list name="modmap_rtrn" type="KeyModMap">
-								<fieldref>totalModMapKeys</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">VirtualModMap</enumref>
-							<list name="vmodmap_rtrn" type="KeyVModMap">
-								<fieldref>totalVModMapKeys</fieldref>
-							</list>
-						</bitcase>
-					</switch>
-				</bitcase>
-				<bitcase name="server_symbols">
-					<enumref ref="GBNDetail">ServerSymbols</enumref>
-					<field name="serverDeviceID" type="CARD8" />
-					<pad bytes="2" />
-					<field name="serverMinKeyCode" type="KEYCODE" />
-					<field name="serverMaxKeyCode" type="KEYCODE" />
-					<field name="present" type="CARD16" enum="MapPart" />
-					<field name="firstType" type="CARD8" />
-					<field name="nTypes" type="CARD8" />
-					<field name="totalTypes" type="CARD8" />
-					<field name="firstKeySym" type="KEYCODE" />
-					<field name="totalSyms" type="CARD16" />
-					<field name="nKeySyms" type="CARD8" />
-					<field name="firstKeyAction" type="KEYCODE" />
-					<field name="totalActions" type="CARD16" />
-					<field name="nKeyActions" type="CARD8" />
-					<field name="firstKeyBehavior" type="KEYCODE" />
-					<field name="nKeyBehaviors" type="CARD8" />
-					<field name="totalKeyBehaviors" type="CARD8" />
-					<field name="firstKeyExplicit" type="KEYCODE" />
-					<field name="nKeyExplicit" type="CARD8" />
-					<field name="totalKeyExplicit" type="CARD8" />
-					<field name="firstModMapKey" type="KEYCODE" />
-					<field name="nModMapKeys" type="CARD8" />
-					<field name="totalModMapKeys" type="CARD8" />
-					<field name="firstVModMapKey" type="KEYCODE" />
-					<field name="nVModMapKeys" type="CARD8" />
-					<field name="totalVModMapKeys" type="CARD8" />
-					<pad bytes="1" />
-					<field name="virtualMods" type="CARD16" mask="VMod" />
-					<switch name="map">
-						<fieldref>present</fieldref>
-						<bitcase>
-							<enumref ref="MapPart">KeyTypes</enumref>
-							<list name="types_rtrn" type="KeyType">
-								<fieldref>nTypes</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">KeySyms</enumref>
-							<list name="syms_rtrn" type="KeySymMap">
-								<fieldref>nKeySyms</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">KeyActions</enumref>
-							<list name="acts_rtrn_count" type="CARD8">
-								<fieldref>nKeyActions</fieldref>
-							</list>
-							<list name="acts_rtrn_acts" type="Action">
-								<fieldref>totalActions</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">KeyBehaviors</enumref>
-							<list name="behaviors_rtrn" type="SetBehavior">
-								<fieldref>totalKeyBehaviors</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">VirtualMods</enumref>
-							<list name="vmods_rtrn" type="CARD8" mask="ModMask">
-								<fieldref>nVModMapKeys</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">ExplicitComponents</enumref>
-							<list name="explicit_rtrn" type="SetExplicit">
-								<fieldref>totalKeyExplicit</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">ModifierMap</enumref>
-							<list name="modmap_rtrn" type="KeyModMap">
-								<fieldref>totalModMapKeys</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="MapPart">VirtualModMap</enumref>
-							<list name="vmodmap_rtrn" type="KeyVModMap">
-								<fieldref>totalVModMapKeys</fieldref>
-							</list>
-						</bitcase>
-					</switch>
-				</bitcase>
 				<bitcase name="indicator_maps">
 					<enumref ref="GBNDetail">IndicatorMaps</enumref>
+					<!-- from the spec, this has to include a reply header -->
+					<field name="indicatormap_type" type="CARD8" />
 					<field name="indicatorDeviceID" type="CARD8" />
+					<field name="indicatormap_sequence" type="CARD16" />
+					<field name="indicatormap_length" type="CARD32" />
+					<!-- done 'emulating' reply header -->
 					<field name="which" type="CARD32" />
 					<field name="realIndicators" type="CARD32" />
 					<field name="nIndicators" type="CARD8" />
@@ -2295,7 +2137,13 @@ authorization from the authors.
 				</bitcase>
 				<bitcase name="key_names">
 					<enumref ref="GBNDetail">KeyNames</enumref>
+					<enumref ref="GBNDetail">OtherNames</enumref>
+					<!-- from the spec, this has to include a reply header -->
+					<field name="keyname_type" type="CARD8" />
 					<field name="keyDeviceID" type="CARD8" />
+					<field name="keyname_sequence" type="CARD16" />
+					<field name="keyname_length" type="CARD32" />
+					<!-- done 'emulating' reply header -->
 					<field name="which" type="CARD32" mask="NameDetail" />
 					<field name="keyMinKeyCode" type="KEYCODE" />
 					<field name="keyMaxKeyCode" type="KEYCODE" />
@@ -2394,110 +2242,14 @@ authorization from the authors.
 						</bitcase>
 					</switch>
 				</bitcase>
-				<bitcase name="other_names">
-					<enumref ref="GBNDetail">OtherNames</enumref>
-					<field name="otherDeviceID" type="CARD8" />
-					<field name="which" type="CARD32" mask="NameDetail" />
-					<field name="otherMinKeyCode" type="KEYCODE" />
-					<field name="otherMaxKeyCode" type="KEYCODE" />
-					<field name="nTypes" type="CARD8" />
-					<field name="groupNames" type="CARD8" mask="SetOfGroup" />
-					<field name="virtualMods" type="CARD16" mask="VMod" />
-					<field name="firstKey" type="KEYCODE" />
-					<field name="nKeys" type="CARD8" />
-					<field name="indicators" type="CARD32" />
-					<field name="nRadioGroups" type="CARD8" />
-					<field name="nKeyAliases" type="CARD8" />
-					<field name="nKTLevels" type="CARD16" />
-					<pad bytes="4" />
-					<switch name="valueList">
-						<fieldref>which</fieldref>
-						<bitcase>
-							<enumref ref="NameDetail">Keycodes</enumref>
-							<field name="keycodesName" type="ATOM" />
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">Geometry</enumref>
-							<field name="geometryName" type="ATOM" />
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">Symbols</enumref>
-							<field name="symbolsName" type="ATOM" />
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">PhysSymbols</enumref>
-							<field name="physSymbolsName" type="ATOM" />
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">Types</enumref>
-							<field name="typesName" type="ATOM" />
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">Compat</enumref>
-							<field name="compatName" type="ATOM" />
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">KeyTypeNames</enumref>
-							<list name="typeNames" type="ATOM">
-								<fieldref>nTypes</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">KTLevelNames</enumref>
-							<list name="nLevelsPerType" type="CARD8">
-								<fieldref>nKTLevels</fieldref>
-							</list>
-							<list name="ktLevelNames" type="ATOM">
-								<sumof ref="nLevelsPerType" />
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">IndicatorNames</enumref>
-							<list name="indicatorNames" type="ATOM">
-								<popcount>
-									<fieldref>indicators</fieldref>
-								</popcount>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">VirtualModNames</enumref>
-							<list name="virtualModNames" type="ATOM">
-								<popcount>
-									<fieldref>virtualMods</fieldref>
-								</popcount>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">GroupNames</enumref>
-							<list name="groups" type="ATOM">
-								<popcount>
-									<fieldref>groupNames</fieldref>
-								</popcount>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">KeyNames</enumref>
-							<list name="keyNames" type="KeyName">
-								<fieldref>nKeys</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">KeyAliases</enumref>
-							<list name="keyAliases" type="KeyAlias">
-								<fieldref>nKeyAliases</fieldref>
-							</list>
-						</bitcase>
-						<bitcase>
-							<enumref ref="NameDetail">RGNames</enumref>
-							<list name="radioGroupNames" type="ATOM">
-								<fieldref>nRadioGroups</fieldref>
-							</list>
-						</bitcase>
-					</switch>
-				</bitcase>
 				<bitcase name="geometry">
 					<enumref ref="GBNDetail">Geometry</enumref>
+					<!-- from the spec, this has to include a reply header -->
+					<field name="geometry_type" type="CARD8" />
 					<field name="geometryDeviceID" type="CARD8" />
+					<field name="geometry_sequence" type="CARD16" />
+					<field name="geometry_length" type="CARD32" />
+					<!-- done 'emulating' reply header -->
 					<field name="name" type="ATOM" />
 					<field name="geometryFound" type="BOOL" />
 					<pad bytes="1" />
