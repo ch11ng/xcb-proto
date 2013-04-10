@@ -370,23 +370,23 @@ authorization from the authors.
 	</struct>
 
 	<struct name="KeyName">
-		<list name="name" type="CARD8">
+		<list name="name" type="char">
 			<value>4</value>
 		</list>
 	</struct>
 
 	<struct name="KeyAlias">
-		<list name="real" type="CARD8">
+		<list name="real" type="char">
 			<value>4</value>
 		</list>
-		<list name="alias" type="CARD8">
+		<list name="alias" type="char">
 			<value>4</value>
 		</list>
 	</struct>
 
 	<struct name="CountedString16">
 		<field name="length" type="CARD16" />
-		<list name="string" type="CARD8">
+		<list name="string" type="char">
 			<fieldref>length</fieldref>
 		</list>
 		<list type="void" name="alignment_pad">
