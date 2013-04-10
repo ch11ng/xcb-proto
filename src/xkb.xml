@@ -268,7 +268,7 @@ authorization from the authors.
 		<item name="KeyType1">    <bit>0</bit> </item>
 	</enum>
 
-	<enum name="SymInterpret">
+	<enum name="SymInterpretMatch">
 		<item name="NoneOf">      <value>0</value> </item>
 		<item name="AnyOfOrNone"> <value>1</value> </item>
 		<item name="AnyOf">       <value>2</value> </item>
@@ -1029,6 +1029,23 @@ authorization from the authors.
 		<field name="val2value" type="CARD8" />
 	</struct>
 
+	<struct name="SIAction">
+		<field name="type" type="CARD8" enum="SAType" />
+		<list name="data" type="CARD8">
+			<value>7</value>
+		</list>
+	</struct>
+
+	<struct name="SymInterpret">
+		<field name="sym" type="KEYSYM" />
+		<field name="mods" type="CARD8" mask="ModMask" />
+		<!-- "match" may also have XkbSI_LevelOneOnly (0x80) or'd into it -->
+		<field name="match" type="CARD8" altenum="SymInterpretMatch" />
+		<field name="virtualMod" type="CARD8" mask="VModsLow" />
+		<field name="flags" type="CARD8" />
+		<field name="action" type="SIAction" />
+	</struct>
+
 	<union name="Action">
 		<field name="noaction" type="SANoAction" />
 		<field name="setmods" type="SASetMods" />
@@ -1468,11 +1485,8 @@ authorization from the authors.
 			<field name="nSIRtrn" type="CARD16" />
 			<field name="nTotalSI" type="CARD16" />
 			<pad bytes="16" />
-			<list name="si_rtrn" type="CARD8" mask="SymInterpret">
-				<op op="*">
-					<value>16</value>
-					<fieldref>nSIRtrn</fieldref>
-				</op>
+			<list name="si_rtrn" type="SymInterpret">
+				<fieldref>nSIRtrn</fieldref>
 			</list>
 			<list name="group_rtrn" type="ModDef">
 				<popcount>
@@ -1491,11 +1505,8 @@ authorization from the authors.
 		<field name="firstSI" type="CARD16" />
 		<field name="nSI" type="CARD16" />
 		<pad bytes="2"/>
-		<list name="si" type="CARD8" mask="SymInterpret">
-			<op op="*">
-				<value>16</value>
-				<fieldref>nSI</fieldref>
-			</op>
+		<list name="si" type="SymInterpret">
+			<fieldref>nSI</fieldref>
 		</list>
 		<list name="groupMaps" type="ModDef">
 			<popcount>
@@ -2092,11 +2103,8 @@ authorization from the authors.
 					<field name="nSIRtrn" type="CARD16" />
 					<field name="nTotalSI" type="CARD16" />
 					<pad bytes="16" />
-					<list name="si_rtrn" type="CARD8" mask="SymInterpret">
-						<op op="*">
-							<value>16</value>
-							<fieldref>nSIRtrn</fieldref>
-						</op>
+					<list name="si_rtrn" type="SymInterpret">
+						<fieldref>nSIRtrn</fieldref>
 					</list>
 					<list name="group_rtrn" type="ModDef">
 						<popcount>
