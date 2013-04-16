@@ -1536,7 +1536,7 @@ authorization from the authors.
 			<field name="nIndicators" type="CARD8" />
 			<pad bytes="15" />
 			<list name="maps" type="IndicatorMap">
-				<fieldref>nIndicators</fieldref>
+				<popcount><fieldref>which</fieldref></popcount>
 			</list>
 		</reply>
 	</request>
