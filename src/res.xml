@@ -49,7 +49,7 @@ authorization from the authors.
     <struct name="ClientIdValue">
         <field type="ClientIdSpec" name="spec" />
         <field type="CARD32" name="length" />
-        <list type="CARD8" name="client_ids">
+        <list type="CARD32" name="value">
             <fieldref>length</fieldref>
         </list>
     </struct>
