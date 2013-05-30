@@ -311,7 +311,7 @@ authorization from the authors.
 		<field name="mods" type="CARD8" mask="ModMask" />
 		<field name="realMods" type="CARD8" mask="ModMask" />
 		<field name="vmods" type="CARD16" mask="VMod" />
-		<field name="ctrls" type="CARD32" enum="BoolCtrl" />
+		<field name="ctrls" type="CARD32" mask="BoolCtrl" />
 	</struct>
 
 	<enum name="CMDetail">
@@ -1086,11 +1086,11 @@ authorization from the authors.
 
 	<request name="SelectEvents" opcode="1">
 		<field name="deviceSpec" type="DeviceSpec" />
-		<field name="affectWhich" type="CARD16" enum="EventType" />
-		<field name="clear" type="CARD16" enum="EventType" />
-		<field name="selectAll" type="CARD16" enum="EventType" />
-		<field name="affectMap" type="CARD16" enum="MapPart" />
-		<field name="map" type="CARD16" enum="MapPart" />
+		<field name="affectWhich" type="CARD16" mask="EventType" />
+		<field name="clear" type="CARD16" mask="EventType" />
+		<field name="selectAll" type="CARD16" mask="EventType" />
+		<field name="affectMap" type="CARD16" mask="MapPart" />
+		<field name="map" type="CARD16" mask="MapPart" />
 		<switch name="details">
 			<op op="&amp;">
 				<fieldref>affectWhich</fieldref>
@@ -1237,9 +1237,9 @@ authorization from the authors.
 			<field name="accessXTimeoutOptionsMask" type="AXOption" />
 			<field name="accessXTimeoutOptionsValues" type="AXOption" />
 			<pad bytes="2" />
-			<field name="accessXTimeoutMask" type="CARD32" enum="BoolCtrl" />
-			<field name="accessXTimeoutValues" type="CARD32" enum="BoolCtrl" />
-			<field name="enabledControls" type="CARD32" enum="BoolCtrl" />
+			<field name="accessXTimeoutMask" type="CARD32" mask="BoolCtrl" />
+			<field name="accessXTimeoutValues" type="CARD32" mask="BoolCtrl" />
+			<field name="enabledControls" type="CARD32" mask="BoolCtrl" />
 			<list name="perKeyRepeat" type="CARD8">
 				<value>32</value>
 			</list>
@@ -1260,8 +1260,8 @@ authorization from the authors.
 		<field name="groupsWrap" type="CARD8" />
 		<field name="accessXOptions" type="AXOption" />
 		<pad bytes="2" />
-		<field name="affectEnabledControls" type="CARD32" enum="BoolCtrl" />
-		<field name="enabledControls" type="CARD32" enum="BoolCtrl" />
+		<field name="affectEnabledControls" type="CARD32" mask="BoolCtrl" />
+		<field name="enabledControls" type="CARD32" mask="BoolCtrl" />
 		<field name="changeControls" type="CARD32" mask="Control" />
 		<field name="repeatDelay" type="CARD16" />
 		<field name="repeatInterval" type="CARD16" />
@@ -1273,8 +1273,8 @@ authorization from the authors.
 		<field name="mouseKeysMaxSpeed" type="CARD16" />
 		<field name="mouseKeysCurve" type="INT16" />
 		<field name="accessXTimeout" type="CARD16" />
-		<field name="accessXTimeoutMask" type="CARD32" enum="BoolCtrl" />
-		<field name="accessXTimeoutValues" type="CARD32" enum="BoolCtrl" />
+		<field name="accessXTimeoutMask" type="CARD32" mask="BoolCtrl" />
+		<field name="accessXTimeoutValues" type="CARD32" mask="BoolCtrl" />
 		<field name="accessXTimeoutOptionsMask" type="AXOption" />
 		<field name="accessXTimeoutOptionsValues" type="AXOption" />
 		<list name="perKeyRepeat" type="CARD8">
@@ -1284,8 +1284,8 @@ authorization from the authors.
 
 	<request name="GetMap" opcode="8">
 		<field name="deviceSpec" type="DeviceSpec" />
-		<field name="full" type="CARD16" enum="MapPart" />
-		<field name="partial" type="CARD16" enum="MapPart" />
+		<field name="full" type="CARD16" mask="MapPart" />
+		<field name="partial" type="CARD16" mask="MapPart" />
 		<field name="firstType" type="CARD8" />
 		<field name="nTypes" type="CARD8" />
 		<field name="firstKeySym" type="KEYCODE" />
@@ -1307,7 +1307,7 @@ authorization from the authors.
 			<pad bytes="2" />
 			<field name="minKeyCode" type="KEYCODE" />
 			<field name="maxKeyCode" type="KEYCODE" />
-			<field name="present" type="CARD16" enum="MapPart" />
+			<field name="present" type="CARD16" mask="MapPart" />
 			<field name="firstType" type="CARD8" />
 			<field name="nTypes" type="CARD8" />
 			<field name="totalTypes" type="CARD8" />
@@ -1390,7 +1390,7 @@ authorization from the authors.
 
 	<request name="SetMap" opcode="9">
 		<field name="deviceSpec" type="DeviceSpec" />
-		<field name="present" type="CARD16" enum="MapPart" />
+		<field name="present" type="CARD16" mask="MapPart" />
 		<field name="flags" type="CARD16" mask="SetMapFlags" />
 		<field name="minKeyCode" type="KEYCODE" />
 		<field name="maxKeyCode" type="KEYCODE" />
@@ -2017,7 +2017,7 @@ authorization from the authors.
 					<pad bytes="2" />
 					<field name="typeMinKeyCode" type="KEYCODE" />
 					<field name="typeMaxKeyCode" type="KEYCODE" />
-					<field name="present" type="CARD16" enum="MapPart" />
+					<field name="present" type="CARD16" mask="MapPart" />
 					<field name="firstType" type="CARD8" />
 					<field name="nTypes" type="CARD8" />
 					<field name="totalTypes" type="CARD8" />
