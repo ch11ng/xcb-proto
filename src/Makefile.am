@@ -9,6 +9,7 @@ xcbinclude_HEADERS = \
 	dri3.xml \
 	ge.xml \
 	glx.xml \
+	present.xml \
 	randr.xml \
 	record.xml \
 	render.xml \
