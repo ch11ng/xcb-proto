@@ -410,12 +410,8 @@ authorization from the authors.
 
 	<struct name="KTMapEntry">
 		<field name="active" type="BOOL" />
-		<!-- Xlib uses a different arrangement of fields
 		<field name="mods_mask" type="CARD8" mask="ModMask" />
 		<field name="level" type="CARD8" />
-		-->
-		<field name="level" type="CARD8" />
-		<field name="mods_mask" type="CARD8" mask="ModMask" />
 		<field name="mods_mods" type="CARD8" mask="ModMask" />
 		<field name="mods_vmods" type="CARD16" mask="VMod" />
 		<pad bytes="2" />
