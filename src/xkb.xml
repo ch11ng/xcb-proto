@@ -874,7 +874,8 @@ authorization from the authors.
 	</struct>
 
 	<enum name="SASetPtrDfltFlag">
-		<item name="DfltBtnAbsolute">  <bit>1</bit> </item>
+		<!-- The spec says 0x02 but Xlib uses 0x04. -->
+		<item name="DfltBtnAbsolute">  <bit>2</bit> </item>
 		<item name="AffectDfltButton"> <bit>0</bit> </item>
 	</enum>
 
