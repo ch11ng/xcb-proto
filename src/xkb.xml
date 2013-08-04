@@ -1350,6 +1350,20 @@ authorization from the authors.
 					<list name="acts_rtrn_count" type="CARD8">
 						<fieldref>nKeyActions</fieldref>
 					</list>
+					<list type="CARD8" name="alignment_pad">
+					    <op op="-">
+						<op op="&amp;">
+						    <op op="+">
+							<fieldref>nKeyActions</fieldref>
+							<value>3</value>
+						    </op>
+						    <unop op="~">
+							<value>3</value>
+						    </unop>
+						</op>
+						<fieldref>nKeyActions</fieldref>
+					    </op>
+					</list>
 					<list name="acts_rtrn_acts" type="Action">
 						<fieldref>totalActions</fieldref>
 					</list>
@@ -1365,17 +1379,59 @@ authorization from the authors.
 					<list name="vmods_rtrn" type="CARD8" mask="ModMask">
 						<popcount><fieldref>virtualMods</fieldref></popcount>
 					</list>
+					<list type="CARD8" name="alignment_pad2">
+					    <op op="-">
+						<op op="&amp;">
+						    <op op="+">
+							<popcount><fieldref>virtualMods</fieldref></popcount>
+							<value>3</value>
+						    </op>
+						    <unop op="~">
+							<value>3</value>
+						    </unop>
+						</op>
+						<popcount><fieldref>virtualMods</fieldref></popcount>
+					    </op>
+					</list>
 				</bitcase>
 				<bitcase>
 					<enumref ref="MapPart">ExplicitComponents</enumref>
 					<list name="explicit_rtrn" type="SetExplicit">
 						<fieldref>totalKeyExplicit</fieldref>
 					</list>
+					<list type="CARD16" name="alignment_pad3">
+					    <op op="-">
+						<op op="&amp;">
+						    <op op="+">
+							<fieldref>totalKeyExplicit</fieldref>
+							<value>1</value>
+						    </op>
+						    <unop op="~">
+							<value>1</value>
+						    </unop>
+						</op>
+						<fieldref>totalKeyExplicit</fieldref>
+					    </op>
+					</list>
 				</bitcase>
 				<bitcase>
 					<enumref ref="MapPart">ModifierMap</enumref>
 					<list name="modmap_rtrn" type="KeyModMap">
 						<fieldref>totalModMapKeys</fieldref>
+					</list>
+					<list type="CARD16" name="alignment_pad4">
+					    <op op="-">
+						<op op="&amp;">
+						    <op op="+">
+							<fieldref>totalModMapKeys</fieldref>
+							<value>1</value>
+						    </op>
+						    <unop op="~">
+							<value>1</value>
+						    </unop>
+						</op>
+						<fieldref>totalModMapKeys</fieldref>
+					    </op>
 					</list>
 				</bitcase>
 				<bitcase>
@@ -1656,6 +1712,20 @@ authorization from the authors.
 					       it does not work in reality
 					       <fieldref>nKTLevels</fieldref> -->
 					        <fieldref>nTypes</fieldref>
+					</list>
+					<list type="CARD8" name="alignment_pad">
+					    <op op="-">
+						<op op="&amp;">
+						    <op op="+">
+							<fieldref>nTypes</fieldref>
+							<value>3</value>
+						    </op>
+						    <unop op="~">
+							<value>3</value>
+						    </unop>
+						</op>
+						<fieldref>nTypes</fieldref>
+					    </op>
 					</list>
 					<list name="ktLevelNames" type="ATOM">
 						<sumof ref="nLevelsPerType" />
