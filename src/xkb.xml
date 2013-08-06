@@ -467,32 +467,26 @@ authorization from the authors.
 		<field name="group" type="CARD8" />
 	</struct>
 
-	<struct name="Overlay1Behavior">
+	<struct name="OverlayBehavior">
 		<field name="type" type="CARD8" />
 		<field name="key" type="KEYCODE" />
 	</struct>
 
-	<struct name="Overlay2Behavior">
-		<field name="type" type="CARD8" />
-		<field name="key" type="CARD8" />
-	</struct>
-
 	<typedef oldname="LockBehavior" newname="PermamentLockBehavior" />
 	<typedef oldname="RadioGroupBehavior" newname="PermamentRadioGroupBehavior" />
-	<typedef oldname="Overlay1Behavior" newname="PermamentOverlay1Behavior" />
-	<typedef oldname="Overlay2Behavior" newname="PermamentOverlay2Behavior" />
+	<typedef oldname="OverlayBehavior" newname="PermamentOverlayBehavior" />
 
 	<union name="Behavior">
 		<field name="common" type="CommonBehavior" />
 		<field name="default" type="DefaultBehavior" />
 		<field name="lock" type="LockBehavior" />
 		<field name="radioGroup" type="RadioGroupBehavior" />
-		<field name="overlay1" type="Overlay1Behavior" />
-		<field name="overlay2" type="Overlay2Behavior" />
+		<field name="overlay1" type="OverlayBehavior" />
+		<field name="overlay2" type="OverlayBehavior" />
 		<field name="permamentLock" type="PermamentLockBehavior" />
 		<field name="permamentRadioGroup" type="PermamentRadioGroupBehavior" />
-		<field name="permamentOverlay1" type="PermamentOverlay1Behavior" />
-		<field name="permamentOverlay2" type="PermamentOverlay2Behavior" />
+		<field name="permamentOverlay1" type="PermamentOverlayBehavior" />
+		<field name="permamentOverlay2" type="PermamentOverlayBehavior" />
 		<field name="type" type="CARD8" />
 	</union>
 
