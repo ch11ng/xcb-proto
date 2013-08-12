@@ -161,8 +161,10 @@ authorization from the authors.
 	</enum>
 
 	<enum name="LedClass">
-		<item name="DfltXIClass">  <value>768</value> </item>	<!--0x300-->
-		<item name="AllXIClasses"> <value>1280</value> </item>	<!--0x500-->
+		<item name="KbdFeedbackClass"> <value>0</value> </item>
+		<item name="LedFeedbackClass"> <value>4</value> </item>
+		<item name="DfltXIClass">      <value>768</value> </item>	<!--0x300-->
+		<item name="AllXIClasses">     <value>1280</value> </item>	<!--0x500-->
 	</enum>
 	<typedef oldname="CARD16" newname="LedClassSpec" />
 
@@ -172,7 +174,9 @@ authorization from the authors.
 	</enum>
 
 	<enum name="BellClass">
-		<item name="DfltXIClass"> <value>768</value> </item>	<!--0x300-->
+		<item name="KbdFeedbackClass">  <value>0</value> </item>
+		<item name="BellFeedbackClass"> <value>5</value> </item>
+		<item name="DfltXIClass">       <value>768</value> </item>	<!--0x300-->
 	</enum>
 	<typedef oldname="CARD16" newname="BellClassSpec" />
 
