@@ -1620,6 +1620,7 @@ authorization from the authors.
 			<field name="map_realMods" type="CARD8" mask="ModMask" />
 			<field name="map_vmod" type="CARD16" mask="VMod" />
 			<field name="map_ctrls" type="CARD32" mask="BoolCtrl" />
+			<field name="supported" type="BOOL" />
 			<pad bytes="3" />
 		</reply>
 	</request>
