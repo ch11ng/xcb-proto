@@ -248,9 +248,9 @@ authorization from the authors.
 
 	<!-- for GetOutputInfo.connection -->
 	<enum name="Connection">
-		<item name="Connected" />
-		<item name="Disconnected" />
-		<item name="Unknown" />
+		<item name="Connected">    <value>0</value> </item>
+		<item name="Disconnected"> <value>1</value> </item>
+		<item name="Unknown">      <value>2</value> </item>
 	</enum>
 
 	<request name="GetOutputInfo" opcode="9">
