@@ -137,10 +137,10 @@ authorization from the authors.
 		<item name="SlowWarnFB">    <bit>3</bit> </item>
 		<item name="IndicatorFB">   <bit>4</bit> </item>
 		<item name="StickyKeysFB">  <bit>5</bit> </item>
-		<item name="SKReleaseFB">   <bit>6</bit> </item>
-		<item name="SKRejectFB">    <bit>7</bit> </item>
-		<item name="BKRejectFB">    <bit>8</bit> </item>
-		<item name="DumbBell">      <bit>9</bit> </item>
+		<item name="SKReleaseFB">   <bit>8</bit> </item>
+		<item name="SKRejectFB">    <bit>9</bit> </item>
+		<item name="BKRejectFB">    <bit>10</bit> </item>
+		<item name="DumbBell">      <bit>11</bit> </item>
 	</enum>
 
 	<enum name="AXSKOpt">
