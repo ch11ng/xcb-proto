@@ -633,6 +633,7 @@ authorization from the authors.
 		<item name="Logo">      <value>5</value> </item>
 	</enum>
 
+	<!-- XXX: doodads are broken
 	<struct name="CommonDoodad">
 		<field name="name" type="ATOM" />
 		<field name="type" type="CARD8" enum="DoodadType" />
@@ -726,6 +727,7 @@ authorization from the authors.
 			<fieldref>nOverlays</fieldref>
 		</list>
 	</struct>
+	-->
 
 	<struct name="Listing">
 		<field name="flags" type="CARD16" />
@@ -1898,6 +1900,7 @@ authorization from the authors.
 			<list name="shapes" type="Shape">
 				<fieldref>nShapes</fieldref>
 			</list>
+			<!-- XXX: doodads are broken
 			<list name="sections" type="Section">
 				<fieldref>nSections</fieldref>
 			</list>
@@ -1907,6 +1910,7 @@ authorization from the authors.
 			<list name="keyAliases" type="KeyAlias">
 				<fieldref>nKeyAliases</fieldref>
 			</list>
+			-->
 		</reply>
 	</request>
 
@@ -1934,6 +1938,7 @@ authorization from the authors.
 		<list name="shapes" type="Shape">
 			<fieldref>nShapes</fieldref>
 		</list>
+		<!-- XXX: doodads are broken
 		<list name="sections" type="Section">
 			<fieldref>nSections</fieldref>
 		</list>
@@ -1943,6 +1948,7 @@ authorization from the authors.
 		<list name="keyAliases" type="KeyAlias">
 			<fieldref>nKeyAliases</fieldref>
 		</list>
+		-->
 	</request>
 
 	<request name="PerClientFlags" opcode="21">
@@ -2333,6 +2339,7 @@ authorization from the authors.
 					<list name="shapes" type="Shape">
 						<fieldref>nShapes</fieldref>
 					</list>
+					<!-- XXX: doodads are broken
 					<list name="sections" type="Section">
 						<fieldref>nSections</fieldref>
 					</list>
@@ -2342,6 +2349,7 @@ authorization from the authors.
 					<list name="keyAliases" type="KeyAlias">
 						<fieldref>nKeyAliases</fieldref>
 					</list>
+					-->
 				</bitcase>
 			</switch>
 		</reply>
