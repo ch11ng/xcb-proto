@@ -1974,6 +1974,7 @@ authorization from the authors.
 	<request name="ListComponents" opcode="22">
 		<field name="deviceSpec" type="DeviceSpec" />
 		<field name="maxNames" type="CARD16" />
+		<!-- XXX: Intermixed fixed size fields and lists are broken
 		<field name="keymapsSpecLen" type="CARD8" />
 		<list name="keymapsSpec" type="STRING8">
 			<fieldref>keymapsSpecLen</fieldref>
@@ -1998,6 +1999,7 @@ authorization from the authors.
 		<list name="geometrySpec" type="STRING8">
 			<fieldref>geometrySpecLen</fieldref>
 		</list>
+		-->
 		<reply>
 			<field name="deviceID" type="CARD8" />
 			<field name="nKeymaps" type="CARD16" />
@@ -2035,6 +2037,7 @@ authorization from the authors.
 		<field name="want" type="CARD16" mask="GBNDetail" />
 		<field name="load" type="BOOL" />
 		<pad bytes="1" />
+		<!-- XXX: Intermixed fixed size fields and lists are broken
 		<field name="keymapsSpecLen" type="CARD8" />
 		<list name="keymapsSpec" type="STRING8">
 			<fieldref>keymapsSpecLen</fieldref>
@@ -2059,6 +2062,7 @@ authorization from the authors.
 		<list name="geometrySpec" type="STRING8">
 			<fieldref>geometrySpecLen</fieldref>
 		</list>
+		-->
 		<reply>
 			<field name="deviceID" type="CARD8" />
 			<field name="minKeyCode" type="KEYCODE" />
