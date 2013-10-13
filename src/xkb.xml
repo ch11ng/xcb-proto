@@ -547,6 +547,7 @@ authorization from the authors.
 
 	<typedef oldname="char" newname="STRING8" />
 
+	<!-- XXX: Property is broken
 	<struct name="Property">
 		<field name="nameLength" type="CARD16" />
 		<list name="name" type="STRING8">
@@ -557,6 +558,7 @@ authorization from the authors.
 			<fieldref>valueLength</fieldref>
 		</list>
 	</struct>
+	-->
 
 	<struct name="Outline">
 		<field name="nPoints" type="CARD8" />
@@ -1871,6 +1873,7 @@ authorization from the authors.
 		</switch>
 	</request>
 
+	<!-- XXX: Property and doodads are broken, which renders GetGeometry useless
 	<request name="GetGeometry" opcode="19">
 		<field name="deviceSpec" type="DeviceSpec" />
 		<pad bytes="2" />
@@ -1900,7 +1903,6 @@ authorization from the authors.
 			<list name="shapes" type="Shape">
 				<fieldref>nShapes</fieldref>
 			</list>
-			<!-- XXX: doodads are broken
 			<list name="sections" type="Section">
 				<fieldref>nSections</fieldref>
 			</list>
@@ -1910,10 +1912,11 @@ authorization from the authors.
 			<list name="keyAliases" type="KeyAlias">
 				<fieldref>nKeyAliases</fieldref>
 			</list>
-			-->
 		</reply>
 	</request>
+	-->
 
+	<!-- XXX: Property and doodads are broken, which renders SetGeometry useless
 	<request name="SetGeometry" opcode="20">
 		<field name="deviceSpec" type="DeviceSpec" />
 		<field name="nShapes" type="CARD8" />
@@ -1938,7 +1941,6 @@ authorization from the authors.
 		<list name="shapes" type="Shape">
 			<fieldref>nShapes</fieldref>
 		</list>
-		<!-- XXX: doodads are broken
 		<list name="sections" type="Section">
 			<fieldref>nSections</fieldref>
 		</list>
@@ -1948,8 +1950,8 @@ authorization from the authors.
 		<list name="keyAliases" type="KeyAlias">
 			<fieldref>nKeyAliases</fieldref>
 		</list>
-		-->
 	</request>
+	-->
 
 	<request name="PerClientFlags" opcode="21">
 		<field name="deviceSpec" type="DeviceSpec" />
@@ -2330,6 +2332,7 @@ authorization from the authors.
 					<field name="baseColorNdx" type="CARD8" />
 					<field name="labelColorNdx" type="CARD8" />
 					<field name="labelFont" type="CountedString16" />
+					<!-- XXX: Property is broken
 					<list name="properties" type="Property">
 						<fieldref>nProperties</fieldref>
 					</list>
@@ -2339,6 +2342,7 @@ authorization from the authors.
 					<list name="shapes" type="Shape">
 						<fieldref>nShapes</fieldref>
 					</list>
+					-->
 					<!-- XXX: doodads are broken
 					<list name="sections" type="Section">
 						<fieldref>nSections</fieldref>
