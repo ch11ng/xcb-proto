@@ -143,7 +143,7 @@ for licensing information.
       </bitcase>
       <bitcase>
         <enumref ref="CA">ValueType</enumref>
-        <field type="CARD32" name="valueType" mask="VALUETYPE" />
+        <field type="CARD32" name="valueType" enum="VALUETYPE" />
       </bitcase>
       <bitcase>
         <enumref ref="CA">Value</enumref>
@@ -151,7 +151,7 @@ for licensing information.
       </bitcase>
       <bitcase>
         <enumref ref="CA">TestType</enumref>
-        <field type="CARD32" name="testType" mask="TESTTYPE" />
+        <field type="CARD32" name="testType" enum="TESTTYPE" />
       </bitcase>
       <bitcase>
         <enumref ref="CA">Delta</enumref>
@@ -175,7 +175,7 @@ for licensing information.
       </bitcase>
       <bitcase>
         <enumref ref="CA">ValueType</enumref>
-        <field type="CARD32" name="valueType" mask="VALUETYPE" />
+        <field type="CARD32" name="valueType" enum="VALUETYPE" />
       </bitcase>
       <bitcase>
         <enumref ref="CA">Value</enumref>
@@ -183,7 +183,7 @@ for licensing information.
       </bitcase>
       <bitcase>
         <enumref ref="CA">TestType</enumref>
-        <field type="CARD32" name="testType" mask="TESTTYPE" />
+        <field type="CARD32" name="testType" enum="TESTTYPE" />
       </bitcase>
       <bitcase>
         <enumref ref="CA">Delta</enumref>
