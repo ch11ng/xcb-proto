@@ -317,7 +317,7 @@ authorization from the authors.
           <xsd:attribute name="name" type="xsd:string" use="required" />
           <xsd:attribute name="opcode" type="xsd:integer" use="required" />
           <xsd:attribute name="combine-adjacent" type="xsd:boolean"
-                         use="optional"/>
+                         use="optional" default="false" />
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="event">
@@ -328,8 +328,9 @@ authorization from the authors.
                 <xsd:element ref="doc" minOccurs="0" maxOccurs="1" />
               </xsd:sequence>
               <xsd:attribute name="no-sequence-number" type="xsd:boolean"
-                             use="optional" />
-              <xsd:attribute name="xge" type="xsd:boolean" use="optional" />
+                             use="optional" default="false" />
+              <xsd:attribute name="xge" type="xsd:boolean"
+                             use="optional" default="false" />
             </xsd:extension>
           </xsd:complexContent>
         </xsd:complexType>
