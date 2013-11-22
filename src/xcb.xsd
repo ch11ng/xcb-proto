@@ -91,7 +91,11 @@ authorization from the authors.
   <xsd:element name="field" type="var" />
 
   <!-- fd passing parameter -->
-  <xsd:element name="fd" />
+  <xsd:element name="fd">
+    <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="required" />
+    </xsd:complexType>
+  </xsd:element>
 
   <!-- list replaces ARRAYFIELD, LISTPARAM, and ARRAYREPLY.  The name and type
        are specified as attributes.  The content is an expression giving the
