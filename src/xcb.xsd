@@ -162,7 +162,7 @@ authorization from the authors.
           <xsd:attribute name="ref" use="required" type="xsd:string" />
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="value" type="dec-or-hex-integer" />
+      <xsd:element name="value" type="xsd:integer" />
       <xsd:element name="bit" type="xsd:integer" />
     </xsd:choice>
   </xsd:group>
@@ -223,18 +223,6 @@ authorization from the authors.
     <xsd:attribute name="number" type="xsd:integer" use="required" />
     <xsd:attribute name="ref" type="xsd:string" use="required" />
   </xsd:complexType>
-
-  <!-- Type for hex integers -->
-  <xsd:simpleType name="hex-integer">
-    <xsd:restriction base="xsd:string">
-      <xsd:pattern value="0x[0-9a-fA-F]+" />
-    </xsd:restriction>
-  </xsd:simpleType>
-
-  <!-- Type for integers in either decimal or hex -->
-  <xsd:simpleType name="dec-or-hex-integer">
-    <xsd:union memberTypes="xsd:integer hex-integer" />
-  </xsd:simpleType>
 
   <!-- Type for documentation -->
   <xsd:group name="doc-fields">
@@ -364,7 +352,7 @@ authorization from the authors.
             <xsd:element name="item">
               <xsd:complexType>
                 <xsd:choice minOccurs="1" maxOccurs="1">
-                  <xsd:element name="value" type="dec-or-hex-integer" />
+                  <xsd:element name="value" type="xsd:integer" />
                   <xsd:element name="bit" type="xsd:integer" />
                 </xsd:choice>
                 <xsd:attribute name="name" type="xsd:string" use="required" />
