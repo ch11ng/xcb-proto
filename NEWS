@@ -1,3 +1,12 @@
+Release 1.10 (2013-12-XX)
+=========================
+* xkb: comment out portions that libxcb doesn't handle properly
+* Present: Remove reference to nonexistent enum
+* sync: Add missing namespace for the INT64 struct
+* sync: VALUETYPE and TESTTYPE are enum
+* xinput: Add XI2 event enum. for event selection
+* Rename ge events to GeGeneric events to avoid clash with libxcb
+
 Release 1.9 (2013-11-07)
 ========================
 * Add Present protocol specification
