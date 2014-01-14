@@ -267,13 +267,17 @@ class PadType(Type):
         Type.__init__(self, tcard8.name)
         self.is_pad = True
         self.size = 1
-        self.nmemb = 1 if (elt == None) else int(elt.get('bytes'), 0)
+        self.nmemb = 1
+        self.align = 1
+        if elt != None:
+            self.nmemb = int(elt.get('bytes', "1"), 0)
+            self.align = int(elt.get('align', "1"), 0)
 
     def resolve(self, module):
         self.resolved = True
 
     def fixed_size(self):
-        return True
+        return self.align <= 1
 
     
 class ComplexType(Type):
