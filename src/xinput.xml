@@ -914,6 +914,7 @@ authorization from the authors.
         <field type="CARD16" name="len" />
         <field type="CARD8"  name="first_valuator" />
         <field type="CARD8"  name="num_valuators" />
+        <pad bytes="2" />
         <list type="CARD32"  name="resolution_values">
             <fieldref>num_valuators</fieldref>
         </list>
