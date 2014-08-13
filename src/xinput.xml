@@ -672,7 +672,7 @@ authorization from the authors.
     <request name="SetDeviceModifierMapping" opcode="27">
         <field type="CARD8" name="device_id" />
         <field type="CARD8" name="keycodes_per_modifier" />
-        <pad bytes="1" />
+        <pad bytes="2" />
         <list type="CARD8" name="keymaps">
             <op op="*">
                 <fieldref>keycodes_per_modifier</fieldref>
