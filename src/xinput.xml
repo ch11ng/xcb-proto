@@ -613,6 +613,7 @@ authorization from the authors.
         <field type="CARD32"      name="mask" />
         <field type="CARD8"       name="device_id" />
         <field type="CARD8"       name="feedback_id" />
+        <pad bytes="2" />
         <field type="FeedbackCtl" name="feedback" />
     </request>
 
