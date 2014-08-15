@@ -1720,12 +1720,14 @@ authorization from the authors.
                     <list type="CARD8" name="data8">
                         <fieldref>num_items</fieldref>
                     </list>
+                    <pad align="4" />
                 </bitcase>
                 <bitcase>
                     <enumref ref="PropertyFormat">16Bits</enumref>
                     <list type="CARD16" name="data16">
                         <fieldref>num_items</fieldref>
                     </list>
+                    <pad align="4" />
                 </bitcase>
                 <bitcase>
                     <enumref ref="PropertyFormat">32Bits</enumref>
