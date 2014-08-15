@@ -394,6 +394,7 @@ authorization from the authors.
         <field type="CARD8"  name="modifier_device" />
         <field type="CARD8"  name="button" altenum="Grab" />
         <field type="CARD8"  name="grabbed_device" />
+        <pad bytes="3" />
     </request>
 
     <!-- AllowDeviceEvents -->
