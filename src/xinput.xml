@@ -704,6 +704,7 @@ authorization from the authors.
             <list type="CARD8" name="map">
                 <fieldref>map_size</fieldref>
             </list>
+            <pad align="4" />
         </reply>
     </request>
 
