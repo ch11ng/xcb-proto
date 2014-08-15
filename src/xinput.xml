@@ -412,6 +412,7 @@ authorization from the authors.
         <field type="TIMESTAMP" name="time" altenum="Time" />
         <field type="CARD8"     name="mode" enum="DeviceInputMode" />
         <field type="CARD8"     name="device_id" />
+        <pad bytes="2" />
     </request>
 
     <!-- GetDeviceFocus -->
