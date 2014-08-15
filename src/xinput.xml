@@ -436,6 +436,7 @@ authorization from the authors.
         <field type="TIMESTAMP" name="time" altenum="Time" />
         <field type="CARD8"     name="revert_to" enum="InputFocus" />
         <field type="CARD8"     name="device_id" />
+        <pad bytes="2" />
     </request>
 
     <!-- GetFeedbackControl -->
