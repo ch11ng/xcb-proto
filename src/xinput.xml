@@ -628,6 +628,7 @@ authorization from the authors.
         <field type="CARD8"   name="device_id" />
         <field type="KeyCode" name="first_keycode" />
         <field type="CARD8"   name="count" />
+        <pad bytes="1" />
         <reply>
             <pad bytes="1" />
             <field type="CARD8" name="keysyms_per_keycode" />
