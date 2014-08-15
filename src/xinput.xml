@@ -275,6 +275,7 @@ authorization from the authors.
         <field type="TIMESTAMP" name="start" />
         <field type="TIMESTAMP" name="stop" altenum="Time" />
         <field type="CARD8"     name="device_id" />
+        <pad bytes="3"/>
         <reply>
             <pad bytes="1" />
             <field type="CARD32" name="num_events" />
