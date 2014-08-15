@@ -337,6 +337,7 @@ authorization from the authors.
     <request name="UngrabDevice" opcode="14">
         <field type="TIMESTAMP" name="time" altenum="Time" />
         <field type="CARD8"     name="device_id" />
+        <pad bytes="3" />
     </request>
 
     <!-- GrabDeviceKey -->
