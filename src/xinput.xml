@@ -179,6 +179,7 @@ authorization from the authors.
             <list type="InputClassInfo" name="class_info">
                 <fieldref>num_classes</fieldref>
             </list>
+            <pad align="4" />
         </reply>
     </request>
 
