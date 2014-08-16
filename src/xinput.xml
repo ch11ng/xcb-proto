@@ -1143,7 +1143,7 @@ authorization from the authors.
             <field type="FP1616"       name="root_y" />
             <field type="FP1616"       name="win_x" />
             <field type="FP1616"       name="win_y" />
-            <field type="CARD8"        name="same_screen" />
+            <field type="BOOL"         name="same_screen" />
             <pad bytes="1" />
             <field type="CARD16"       name="buttons_len" />
             <field type="ModifierInfo" name="mods" />
