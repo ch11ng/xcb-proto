@@ -380,7 +380,7 @@ authorization from the authors.
         <field type="CARD8"  name="this_device_mode" enum="GrabMode" />
         <field type="CARD8"  name="other_device_mode" enum="GrabMode" />
         <field type="CARD8"  name="button" altenum="Grab" />
-        <field type="CARD8"  name="owner_events" />
+        <field type="BOOL"   name="owner_events" />
         <pad bytes="2" />
         <list type="EventClass" name="classes">
             <fieldref>num_classes</fieldref>
