@@ -2031,8 +2031,8 @@ authorization from the authors.
         <field type="FP1616"       name="root_y" />
         <field type="FP1616"       name="event_x" />
         <field type="FP1616"       name="event_y" />
-        <field type="CARD8"        name="same_screen" />
-        <field type="CARD8"        name="focus" />
+        <field type="BOOL"         name="same_screen" />
+        <field type="BOOL"         name="focus" />
         <field type="CARD16"       name="buttons_len" />
         <field type="ModifierInfo" name="mods" />
         <field type="GroupInfo"    name="group" />
