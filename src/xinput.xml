@@ -267,7 +267,7 @@ authorization from the authors.
 
     <struct name="DeviceTimeCoord">
         <field type="TIMESTAMP" name="time" />
-        <!-- Uninterpreted: list (axisvalues) of CARD32,
+        <!-- Uninterpreted: list (axisvalues) of INT32,
                             length is num_axes from GetDeviceMotionEvents -->
     </struct>
 
