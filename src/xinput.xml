@@ -304,7 +304,10 @@ authorization from the authors.
         <pad bytes="3" />
         <reply>
             <pad bytes="1" />
-            <field type="CARD8" name="status" altenum="GrabStatus" />
+            <!-- only the following GrabStatus-values are valid here:
+                 "Success", "AlreadyGrabbed", and "Frozen"
+            -->
+            <field type="CARD8" name="status" enum="GrabStatus" />
             <pad bytes="23" />
         </reply>
     </request>
