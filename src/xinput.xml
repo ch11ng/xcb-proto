@@ -2288,6 +2288,11 @@ authorization from the authors.
 
     <!-- ⋅⋅⋅ Events (v2.3) ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ -->
 
+    <enum name="BarrierFlags">
+	<item name="PointerReleased"> <bit>0</bit> </item>
+	<item name="DeviceIsGrabbed"> <bit>1</bit> </item>
+    </enum>
+
     <event name="BarrierHit" number="25" xge="true">
         <field type="DeviceId"  name="deviceid" altenum="Device" />
         <field type="TIMESTAMP" name="time" altenum="Time" />
@@ -2298,7 +2303,7 @@ authorization from the authors.
         <field type="BARRIER"   name="barrier" />
         <!-- 32 byte boundary -->
         <field type="CARD32"    name="dtime" />
-        <field type="CARD32"    name="flags" />
+        <field type="CARD32"    name="flags" mask="BarrierFlags" />
         <field type="DeviceId"  name="sourceid" altenum="Device" />
         <pad bytes="2" />
         <field type="FP1616"    name="root_x" />
