@@ -1839,7 +1839,7 @@ authorization from the authors.
         <field type="INT16"     name="root_y" />
         <field type="INT16"     name="event_x" />
         <field type="INT16"     name="event_y" />
-        <field type="CARD16"    name="state" />
+        <field type="CARD16"    name="state" mask="KeyButMask" />
         <field type="BOOL"      name="same_screen" />
         <field type="CARD8"     name="device_id" />
     </event>
