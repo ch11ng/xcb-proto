@@ -1890,10 +1890,15 @@ authorization from the authors.
         <pad bytes="20" />
     </event>
 
+    <enum name="ChangeDevice">
+	<item name="NewPointer">  <value>0</value> </item>
+	<item name="NewKeyboard"> <value>1</value> </item>
+    </enum>
+
     <event name="ChangeDeviceNotify" number="12">
         <field type="BYTE"      name="device_id" />
         <field type="TIMESTAMP" name="time" />
-        <field type="CARD8"     name="request" />
+        <field type="CARD8"     name="request" enum="ChangeDevice" />
         <pad bytes="23" />
     </event>
 
