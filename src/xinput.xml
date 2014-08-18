@@ -63,7 +63,7 @@ authorization from the authors.
             <fieldref>name_len</fieldref>
         </list>
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="CARD16" name="server_major" />
             <field type="CARD16" name="server_minor" />
             <field type="BOOL"   name="present" />
@@ -161,7 +161,7 @@ authorization from the authors.
 
     <request name="ListInputDevices" opcode="2">
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="devices_len" />
             <pad bytes="23" />
             <list type="DeviceInfo" name="devices">
@@ -184,7 +184,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="num_classes" />
             <pad bytes="23" />
             <list type="InputClassInfo" name="class_info">
@@ -208,7 +208,7 @@ authorization from the authors.
         <field type="CARD8" name="mode" enum="ValuatorMode" />
         <pad bytes="2" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <!-- values for status: 0: Success, 1: AlreadyGrabbed -->
             <field type="CARD8" name="status" enum="GrabStatus" />
             <pad bytes="23" />
@@ -231,7 +231,7 @@ authorization from the authors.
     <request name="GetSelectedExtensionEvents" opcode="7">
         <field type="WINDOW" name="window" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="CARD16" name="num_this_classes" />
             <field type="CARD16" name="num_all_classes" />
             <pad bytes="20" />
@@ -266,7 +266,7 @@ authorization from the authors.
     <request name="GetDeviceDontPropagateList" opcode="9">
         <field type="WINDOW" name="window" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="CARD16" name="num_classes" />
             <pad bytes="22" />
             <list type="EventClass" name="classes">
@@ -289,7 +289,7 @@ authorization from the authors.
         <field type="CARD8"     name="device_id" />
         <pad bytes="3"/>
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="CARD32" name="num_events" />
             <field type="CARD8"  name="num_axes" />
             <field type="CARD8"  name="device_mode" enum="ValuatorMode" />
@@ -304,7 +304,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <!-- only the following GrabStatus-values are valid here:
                  "Success", "AlreadyGrabbed", and "Frozen"
             -->
@@ -321,7 +321,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="1" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <!-- only the following GrabStatus-values are valid here:
                  "Success", "AlreadyGrabbed", and "Frozen"
             -->
@@ -345,7 +345,7 @@ authorization from the authors.
             <fieldref>num_classes</fieldref>
         </list>
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="status" enum="GrabStatus" />
             <pad bytes="23" />
         </reply>
@@ -444,7 +444,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"     name="xi_reply_type" />
             <field type="WINDOW"    name="focus" altenum="InputFocus" />
             <field type="TIMESTAMP" name="time" />
             <field type="CARD8"     name="revert_to" enum="InputFocus" />
@@ -554,7 +554,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="CARD16" name="num_feedbacks" />
             <pad bytes="22" />
             <list type="FeedbackState" name="feedbacks">
@@ -669,7 +669,7 @@ authorization from the authors.
         <field type="CARD8"   name="count" />
         <pad bytes="1" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="keysyms_per_keycode" />
             <pad bytes="23" />
             <list type="KEYSYM" name="keysyms">
@@ -700,7 +700,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="keycodes_per_modifier" />
             <pad bytes="23" />
             <list type="CARD8"  name="keymaps">
@@ -725,7 +725,7 @@ authorization from the authors.
             </op>
         </list>
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="status" enum="MappingStatus" />
             <pad bytes="23" />
         </reply>
@@ -737,7 +737,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="map_size" />
             <pad bytes="23" />
             <list type="CARD8" name="map">
@@ -757,7 +757,7 @@ authorization from the authors.
             <fieldref>map_size</fieldref>
         </list>
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="status" enum="MappingStatus" />
             <pad bytes="23" />
         </reply>
@@ -817,7 +817,7 @@ authorization from the authors.
         <field type="CARD8" name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="num_classes" />
             <pad bytes="23" />
             <list type="InputState" name="classes">
@@ -866,7 +866,7 @@ authorization from the authors.
             <fieldref>num_valuators</fieldref>
         </list>
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="status" enum="GrabStatus" />
             <pad bytes="23" />
         </reply>
@@ -952,7 +952,7 @@ authorization from the authors.
         <field type="CARD8"  name="device_id" />
         <pad bytes="1" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="status" altenum="GrabStatus" />
             <pad bytes="23" />
             <field type="DeviceState" name="control" />
@@ -1027,7 +1027,7 @@ authorization from the authors.
         <pad bytes="1" />
         <field type="DeviceCtl" name="control" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8" name="xi_reply_type" />
             <field type="CARD8" name="status" altenum="GrabStatus" />
             <pad bytes="23" />
         </reply>
@@ -1041,7 +1041,7 @@ authorization from the authors.
         <field type="CARD8"  name="device_id" />
         <pad bytes="3" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="CARD16" name="num_atoms" />
             <pad bytes="22" />
             <list type="ATOM" name="atoms">
@@ -1114,7 +1114,7 @@ authorization from the authors.
         <field type="BOOL"   name="delete" />
         <pad bytes="2" />
         <reply>
-            <pad bytes="1" />
+            <field type="CARD8"  name="xi_reply_type" />
             <field type="ATOM"   name="type" />
             <field type="CARD32" name="bytes_after" />
             <field type="CARD32" name="num_items" />
