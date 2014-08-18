@@ -209,7 +209,8 @@ authorization from the authors.
         <pad bytes="2" />
         <reply>
             <pad bytes="1" />
-            <field type="CARD8" name="status" altenum="GrabStatus" />
+            <!-- values for status: 0: Success, 1: AlreadyGrabbed -->
+            <field type="CARD8" name="status" enum="GrabStatus" />
             <pad bytes="23" />
         </reply>
     </request>
