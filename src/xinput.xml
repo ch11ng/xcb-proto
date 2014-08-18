@@ -1447,7 +1447,7 @@ authorization from the authors.
         <field type="CARD16"   name="number" />
         <field type="CARD16"   name="scroll_type" enum="ScrollType" />
         <pad bytes="2" />
-        <field type="CARD32"   name="flags" enum="ScrollFlags" />
+        <field type="CARD32"   name="flags" mask="ScrollFlags" />
         <field type="FP3232"   name="increment" />
     </struct>
 
