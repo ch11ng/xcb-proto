@@ -89,6 +89,17 @@ authorization from the authors.
         <item name="Proximity"> <value>4</value> </item>
         <item name="Focus">     <value>5</value> </item>
         <item name="Other">     <value>6</value> </item>
+        <!--
+               value Attach=7 is still contained in XI.h as "#define AttachClass"
+               but it was never transmitted over the protocol.
+               (It was used to tag a fake class created by libXi).
+
+               Even the creation of that fake class has been dropped
+               from libXi in 2009 by the following change:
+               http://cgit.freedesktop.org/xorg/lib/libXi/commit/?id=62858c426e6de1b99df660251737233afd335302
+
+               <item name="Attach">    <value>7</value> </item>
+        -->
     </enum>
 
     <enum name="ValuatorMode">
