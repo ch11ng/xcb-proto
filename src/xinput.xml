@@ -1882,7 +1882,7 @@ authorization from the authors.
 
     <event name="DeviceMappingNotify" number="11">
         <field type="BYTE"    name="device_id" />
-        <field type="CARD8"   name="request" />
+        <field type="CARD8"   name="request" enum="Mapping" />
         <field type="KeyCode" name="first_keycode" />
         <field type="CARD8"   name="count" />
         <pad bytes="1" />
