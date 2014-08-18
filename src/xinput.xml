@@ -1498,19 +1498,9 @@ authorization from the authors.
         <field type="BOOL"     name="enabled" />
         <pad bytes="1" />
         <list type="char" name="name">
-            <!-- name_len is without padding, so we've to pad on our own,
-                 auto align pad after the list would be helpfull -->
-            <op op="*">
-                <op op="/">
-                    <op op="+">
-                        <fieldref>name_len</fieldref>
-                        <value>3</value>
-                    </op>
-                    <value>4</value>
-                </op>
-                <value>4</value>
-            </op>
+            <fieldref>name_len</fieldref>
         </list>
+        <pad align="4" />
         <list type="DeviceClass" name="classes">
             <fieldref>num_classes</fieldref>
         </list>
