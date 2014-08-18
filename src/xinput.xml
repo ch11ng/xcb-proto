@@ -1491,7 +1491,7 @@ authorization from the authors.
 
     <struct name="XIDeviceInfo">
         <field type="DeviceId" name="deviceid" altenum="Device" />
-        <field type="CARD16"   name="type" altenum="DeviceType" />
+        <field type="CARD16"   name="type" enum="DeviceType" />
         <field type="DeviceId" name="attachment" altenum="Device" />
         <field type="CARD16"   name="num_classes" />
         <field type="CARD16"   name="name_len" />
