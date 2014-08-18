@@ -360,6 +360,10 @@ authorization from the authors.
 
     <!-- GrabDeviceKey -->
 
+    <enum name="ModifierDevice">
+	<item name="UseXKeyboard"><value>255</value></item> <!-- 0xff -->
+    </enum>
+
     <request name="GrabDeviceKey" opcode="15">
         <field type="WINDOW" name="grab_window" />
         <field type="CARD16" name="num_classes" />
