@@ -1847,7 +1847,7 @@ authorization from the authors.
         <field type="INT16"     name="event_y" />
         <field type="CARD16"    name="state" mask="KeyButMask" />
         <field type="BOOL"      name="same_screen" />
-        <field type="CARD8"     name="device_id" />
+        <field type="CARD8"     name="device_id" altmask="MoreEventsMask" />
     </event>
 
     <eventcopy name="DeviceKeyRelease"    number="2" ref="DeviceKeyPress" />
