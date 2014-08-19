@@ -1909,7 +1909,7 @@ authorization from the authors.
     </event>
 
     <event name="DeviceKeyStateNotify" number="13">
-        <field type="BYTE" name="device_id" />
+        <field type="BYTE" name="device_id" altmask="MoreEventsMask" />
         <list type="CARD8" name="keys">
             <value>28</value>
         </list>
