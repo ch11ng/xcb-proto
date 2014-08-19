@@ -768,11 +768,16 @@ authorization from the authors.
         </list>
     </struct>
 
+    <enum name="ValuatorStateModeMask">
+        <item name="DeviceModeAbsolute"> <bit>0</bit> </item>
+        <item name="OutOfProximity">     <bit>1</bit> </item>
+    </enum>
+
     <struct name="ValuatorState">
         <field type="CARD8" name="class_id" enum="InputClass" />
         <field type="CARD8" name="len" />
         <field type="CARD8" name="num_valuators" />
-        <field type="CARD8" name="mode" />
+        <field type="CARD8" name="mode" mask="ValuatorStateModeMask" />
         <list type="CARD32" name="valuators">
             <fieldref>num_valuators</fieldref>
         </list>
