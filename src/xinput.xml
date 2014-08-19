@@ -1135,30 +1135,26 @@ in struct DeviceTimeCoord.
         <field type="CARD32" name="num_items" />
         <switch name="items">
             <fieldref>format</fieldref>
-            <!-- <bitcase> is not correct, this would need <cases>s.
-                 It works in that case, because PropertyFormat items can be
-                 distinguished exactly as their values don't have equal bits.
-            -->
-            <bitcase>
+            <case>
                 <enumref ref="PropertyFormat">8Bits</enumref>
                 <list type="CARD8" name="data8">
                     <fieldref>num_items</fieldref>
                 </list>
                 <pad align="4" />
-            </bitcase>
-            <bitcase>
+            </case>
+            <case>
                 <enumref ref="PropertyFormat">16Bits</enumref>
                 <list type="CARD16" name="data16">
                     <fieldref>num_items</fieldref>
                 </list>
                 <pad align="4" />
-            </bitcase>
-            <bitcase>
+            </case>
+            <case>
                 <enumref ref="PropertyFormat">32Bits</enumref>
                 <list type="CARD32" name="data32">
                     <fieldref>num_items</fieldref>
                 </list>
-            </bitcase>
+            </case>
         </switch>
     </request>
 
