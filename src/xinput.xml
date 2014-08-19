@@ -1829,6 +1829,12 @@ authorization from the authors.
         </list>
     </event>
 
+    <!-- the highest bit in a CARD8 device_id-field indicates that more
+	events will follow -->
+    <enum name="MoreEventsMask">
+	<item name="MoreEvents"> <bit>7</bit> </item> <!-- 0x80 -->
+    </enum>
+
     <event name="DeviceKeyPress" number="1">
         <field type="BYTE"      name="detail" />
         <field type="TIMESTAMP" name="time" />
