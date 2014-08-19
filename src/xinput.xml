@@ -1869,7 +1869,7 @@ authorization from the authors.
     <eventcopy name="ProximityOut"   number="9" ref="DeviceKeyPress" />
 
     <event name="DeviceStateNotify" number="10">
-        <field type="BYTE"      name="device_id" />
+        <field type="BYTE"      name="device_id" altmask="MoreEventsMask" />
         <field type="TIMESTAMP" name="time" />
         <field type="CARD8"     name="num_keys" />
         <field type="CARD8"     name="num_buttons" />
