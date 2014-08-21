@@ -636,8 +636,24 @@ authorization from the authors.
         </list>
     </struct>
 
+    <enum name="ChangeFeedbackControlMask">
+        <item name="KeyClickPercent">  <bit>0</bit> </item> <!-- 0x01 -->
+        <item name="Percent">          <bit>1</bit> </item> <!-- 0x02 -->
+        <item name="Pitch">            <bit>2</bit> </item> <!-- 0x04 -->
+        <item name="Duration">         <bit>3</bit> </item> <!-- 0x08 -->
+        <item name="Led">              <bit>4</bit> </item> <!-- 0x10 -->
+        <item name="LedMode">          <bit>5</bit> </item> <!-- 0x20 -->
+        <item name="Key">              <bit>6</bit> </item> <!-- 0x40 -->
+        <item name="AutoRepeatMode">   <bit>7</bit> </item> <!-- 0x80 -->
+        <item name="String">           <bit>0</bit> </item> <!-- 0x01 -->
+        <item name="Integer">          <bit>0</bit> </item> <!-- 0x01 -->
+        <item name="AccelNum">         <bit>0</bit> </item> <!-- 0x01 -->
+        <item name="AccelDenom">       <bit>1</bit> </item> <!-- 0x02 -->
+        <item name="Threshold">        <bit>2</bit> </item> <!-- 0x04 -->
+    </enum>
+
     <request name="ChangeFeedbackControl" opcode="23">
-        <field type="CARD32"      name="mask" />
+        <field type="CARD32"      name="mask" mask="ChangeFeedbackControlMask" />
         <field type="CARD8"       name="device_id" />
         <field type="CARD8"       name="feedback_id" />
         <pad bytes="2" />
