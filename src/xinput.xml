@@ -368,7 +368,7 @@ authorization from the authors.
         <field type="WINDOW" name="grab_window" />
         <field type="CARD16" name="num_classes" />
         <field type="CARD16" name="modifiers" mask="ModMask" />
-        <field type="CARD8"  name="modifier_device" />
+        <field type="CARD8"  name="modifier_device" altenum="ModifierDevice" />
         <field type="CARD8"  name="grabbed_device" />
         <field type="CARD8"  name="key" altenum="Grab" />
         <field type="CARD8"  name="this_device_mode" enum="GrabMode" />
