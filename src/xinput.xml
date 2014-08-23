@@ -1868,13 +1868,25 @@ authorization from the authors.
     <eventcopy name="ProximityIn"    number="8" ref="DeviceKeyPress" />
     <eventcopy name="ProximityOut"   number="9" ref="DeviceKeyPress" />
 
+    <enum name="ClassesReportedMask">
+        <item name="OutOfProximity">     <bit>7</bit> </item> <!-- 0x80 -->
+            <!-- 0 = InProxmity, 1 = OutOfProximity -->
+
+        <item name="DeviceModeAbsolute"> <bit>6</bit> </item> <!-- 0x40 -->
+            <!-- 0 = Relative, 1 = Absolute -->
+
+        <item name="ReportingValuators"> <bit>2</bit> </item> <!-- 0x04 -->
+        <item name="ReportingButtons">   <bit>1</bit> </item> <!-- 0x02 -->
+        <item name="ReportingKeys">      <bit>0</bit> </item> <!-- 0x01 -->
+    </enum>
+
     <event name="DeviceStateNotify" number="10">
         <field type="BYTE"      name="device_id" altmask="MoreEventsMask" />
         <field type="TIMESTAMP" name="time" />
         <field type="CARD8"     name="num_keys" />
         <field type="CARD8"     name="num_buttons" />
         <field type="CARD8"     name="num_valuators" />
-        <field type="CARD8"     name="classes_reported" />
+        <field type="CARD8"     name="classes_reported" mask="ClassesReportedMask" />
         <list type="CARD8"      name="buttons">
             <value>4</value>
         </list>
