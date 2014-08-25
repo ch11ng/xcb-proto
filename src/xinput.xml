@@ -1634,6 +1634,7 @@ authorization from the authors.
     </struct>
 
     <request name="XIPassiveGrabDevice" opcode="54">
+        <!-- field "time" is unused and its value is undefined -->
         <field type="TIMESTAMP" name="time" altenum="Time" />
         <field type="WINDOW"    name="grab_window" />
         <field type="CURSOR"    name="cursor" />
