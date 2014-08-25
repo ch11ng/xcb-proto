@@ -54,6 +54,7 @@ authorization from the authors.
     <xsd:attribute name="enum" type="xsd:string" use="optional" />
     <xsd:attribute name="altenum" type="xsd:string" use="optional" />
     <xsd:attribute name="mask" type="xsd:string" use="optional" />
+    <xsd:attribute name="altmask" type="xsd:string" use="optional" />
   </xsd:complexType>
 
   <!-- case expression -->

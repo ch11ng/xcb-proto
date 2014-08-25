@@ -184,11 +184,12 @@ separated by a single colon.  For example, to refer to the PIXMAP type defined
 in glx rather than the one defined in xproto, use type="glx:PIXMAP" rather
 than type="PIXMAP".
 
-Note: Most of the below may optionally contain an enum, altenum, or mask
+Note: Most of the below may optionally contain an enum, altenum, mask or altmask
 attribute, which follows the above rules for "type". "enum" is an exhaustive
 enum; the value is restricted to one of the constants named in the enum.
 "altenum" may be one of the values contained in the enum, but it need not be.
-"mask" refers to an enum to be used as a bitmask.
+"mask" refers to an exhaustive enum to be used as a bitmask.
+"altmask" may be a mask from the referred enum, but it need not be.
 
 <pad bytes="integer" />
 
