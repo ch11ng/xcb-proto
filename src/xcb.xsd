@@ -78,7 +78,9 @@ authorization from the authors.
       <xsd:group ref="expression" minOccurs="1" maxOccurs="1" />
       <xsd:choice>
         <!-- bitcase expression - bit test -->
-        <xsd:element name="bitcase" type="caseexpr" minOccurs="1" maxOccurs="unbounded" />
+        <xsd:element name="bitcase" type="caseexpr" minOccurs="0" maxOccurs="unbounded" />
+        <!-- case expression - value test -->
+        <xsd:element name="case" type="caseexpr" minOccurs="0" maxOccurs="unbounded" />
       </xsd:choice>
       <!-- default: -->
       <xsd:group ref="fields" minOccurs="0" maxOccurs="1" />
