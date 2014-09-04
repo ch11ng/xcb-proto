@@ -2306,8 +2306,13 @@ in struct DeviceTimeCoord.
         <list type="CARD32" name="valuator_mask">
             <fieldref>valuators_len</fieldref>
         </list>
-        <!-- Uninterpreted: list (axisvalues) of FP3232,
-                            length is <popcount> on valuator_mask list -->
+        <list type="FP3232" name="axisvalues">
+            <sumof ref="valuator_mask">
+                <popcount>
+                    <listelement-ref/>
+                </popcount>
+            </sumof>
+        </list>
     </event>
 
     <eventcopy name="KeyRelease" number="3" ref="KeyPress" />
