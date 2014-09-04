@@ -47,7 +47,6 @@ which will, e.g., be necessary for server-side xcb.
 
 This affects the following:
 * QueryDeviceState reply field "classes" ( structs InputState, ... )
-* ChangeDeviceControl request field "control" ( structs ChangeDeviceControl, ... )
 * XIChangeHierarchy request field "changes" ( structs  HierarchyChange, ... )
 * struct XIDeviceInfo field "classes" ( structs DeviceClass, ... )
 * SendExtensionEvent member "events"
@@ -1242,12 +1241,48 @@ in struct DeviceTimeCoord.
     <struct name="DeviceCtl">
         <field type="CARD16" name="control_id" enum="DeviceControl" />
         <field type="CARD16" name="len" />
-        <list type="CARD8" name="uninterpreted_data">
-            <op op="-">
-                <fieldref>len</fieldref>
-                <value>4</value>
-            </op>
-        </list>
+        <switch name="data">
+            <fieldref>control_id</fieldref>
+            <case name="resolution">
+                <enumref ref="DeviceControl">resolution</enumref>
+                <field type="CARD8"  name="first_valuator" />
+                <field type="CARD8"  name="num_valuators" />
+                <pad bytes="2" />
+                <list type="CARD32"  name="resolution_values">
+                    <fieldref>num_valuators</fieldref>
+                </list>
+            </case>
+            <case name="abs_calib">
+                <enumref ref="DeviceControl">abs_calib</enumref>
+                <field type="INT32"  name="min_x" />
+                <field type="INT32"  name="max_x" />
+                <field type="INT32"  name="min_y" />
+                <field type="INT32"  name="max_y" />
+                <field type="CARD32" name="flip_x" />
+                <field type="CARD32" name="flip_y" />
+                <field type="CARD32" name="rotation" />
+                <field type="CARD32" name="button_threshold" />
+            </case>
+            <case name="core">
+                <enumref ref="DeviceControl">core</enumref>
+                <field type="CARD8"  name="status" />
+                <pad bytes="3" />
+            </case>
+            <case name="enable">
+                <enumref ref="DeviceControl">enable</enumref>
+                <field type="CARD8"  name="enable" />
+                <pad bytes="3" />
+            </case>
+            <case name="abs_area">
+                <enumref ref="DeviceControl">abs_area</enumref>
+                <field type="CARD32" name="offset_x" />
+                <field type="CARD32" name="offset_y" />
+                <field type="INT32"  name="width" />
+                <field type="INT32"  name="height" />
+                <field type="INT32"  name="screen" />
+                <field type="CARD32" name="following" />
+            </case>
+        </switch>
     </struct>
 
     <request name="ChangeDeviceControl" opcode="35">
