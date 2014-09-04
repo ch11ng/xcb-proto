@@ -337,6 +337,11 @@ Expressions
 
   This element represents the number of bits set in the expression.
 
+<listelement-ref/>
+
+  This element represents the current list-element when used inside
+  a list-iteration expression such as <sumof>.
+
 Documentation
 -------------
 
