@@ -47,7 +47,6 @@ which will, e.g., be necessary for server-side xcb.
 
 This affects the following:
 * QueryDeviceState reply field "classes" ( structs InputState, ... )
-* XIChangeHierarchy request field "changes" ( structs  HierarchyChange, ... )
 * struct XIDeviceInfo field "classes" ( structs DeviceClass, ... )
 * SendExtensionEvent member "events"
 
@@ -1534,15 +1533,37 @@ in struct DeviceTimeCoord.
     <struct name="HierarchyChange">
         <field type="CARD16" name="type" enum="HierarchyChangeType" />
         <field type="CARD16" name="len" />
-        <list type="CARD8" name="uninterpreted_data">
-            <op op="-">
-                <op op="*">
-                    <fieldref>len</fieldref>
-                    <value>4</value>
-                </op>
-                <value>4</value>
-            </op>
-        </list>
+        <switch name="data">
+            <fieldref>type</fieldref>
+            <case name="add_master">
+                <enumref ref="HierarchyChangeType">AddMaster</enumref>
+                <field type="CARD16" name="name_len" />
+                <field type="BOOL"   name="send_core" />
+                <field type="BOOL"   name="enable" />
+                <list type="char" name="name">
+                    <fieldref>name_len</fieldref>
+                </list>
+                <pad align="4" />
+            </case>
+            <case name="remove_master">
+                <enumref ref="HierarchyChangeType">RemoveMaster</enumref>
+                <field type="DeviceId" name="deviceid" altenum="Device" />
+                <field type="CARD8"    name="return_mode" enum="ChangeMode" />
+                <pad bytes="1" />
+                <field type="DeviceId" name="return_pointer" altenum="Device" />
+                <field type="DeviceId" name="return_keyboard" altenum="Device" />
+            </case>
+            <case name="attach_slave">
+                <enumref ref="HierarchyChangeType">AttachSlave</enumref>
+                <field type="DeviceId" name="deviceid" altenum="Device" />
+                <field type="DeviceId" name="master" altenum="Device" />
+            </case>
+            <case name="detach_slave">
+                <enumref ref="HierarchyChangeType">DetachSlave</enumref>
+                <field type="DeviceId" name="deviceid" altenum="Device" />
+                <pad bytes="2" />
+            </case>
+        </switch>
     </struct>
 
     <request name="XIChangeHierarchy" opcode="43">
