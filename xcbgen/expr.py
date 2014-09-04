@@ -53,6 +53,8 @@ class Expression(object):
         self.lhs = None
         self.rhs = None
 
+        self.contains_listelement_ref = False
+
         if elt.tag == 'list':
             # List going into a request, which has no length field (inferred by server)
             self.lenfield_name = elt.get('name') + '_len'
@@ -111,12 +113,23 @@ class Expression(object):
                 # sumof then returns the sum of the results of these evaluations
                 self.rhs = Expression(subexpressions[0], parent)
 
+        elif elt.tag == 'listelement-ref':
+            # current list element inside iterating expressions such as sumof
+            self.op = 'listelement-ref'
+            self.contains_listelement_ref = True
+
         else:
             # Notreached
             raise Exception("undefined tag '%s'" % elt.tag)
 
     def fixed_size(self):
         return self.nmemb != None
+
+    def recursive_resolve_tasks(self, module, parents):
+        for subexpr in (self.lhs, self.rhs):
+            if subexpr != None:
+                subexpr.recursive_resolve_tasks(module, parents)
+                self.contains_listelement_ref |= subexpr.contains_listelement_ref
 
     def resolve(self, module, parents):
         if self.op == 'enumref':
@@ -134,4 +147,6 @@ class Expression(object):
                         self.lenfield_parent = p
                     self.lenfield_type = fields[self.lenfield_name].field_type
                     break
+
+        self.recursive_resolve_tasks(module, parents)
                     
