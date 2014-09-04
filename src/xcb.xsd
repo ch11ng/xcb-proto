@@ -168,6 +168,7 @@ authorization from the authors.
           <xsd:attribute name="ref" use="required" type="xsd:string" />
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="listelement-ref" />
       <xsd:element name="value" type="xsd:integer" />
       <xsd:element name="bit" type="bitType" />
     </xsd:choice>
