@@ -50,14 +50,6 @@ This affects the following:
 
 *****
 
-Parametrized structs
-
-This is needed for being able to use the value of the field
-"num_axes" of the GetDeviceMotionEvents-reply
-in struct DeviceTimeCoord.
-
-*****
-
 -->
 
 
