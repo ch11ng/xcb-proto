@@ -298,6 +298,23 @@ Expressions
   the structure containing this expression.  The identifier is the value of
   the "name" attribute on the referenced field.
 
+<paramref type="type">identifier</paramref>
+
+  A paramref is similar to a fieldref, but it refers to the value of
+  a field in the context which refers to the struct which contains the paramref.
+
+  So, it refers to a field outside of the structure where it is defined.
+  This has the following consequences:
+  * The generator cannot deduce its type.
+    So, it is mandatory to specify its type.
+  * The identifier-name must not be used as a field in the structure
+    which contaons the paramref.
+
+  For an example, see struct "DeviceTimeCoord" and request/reply
+  "GetDeviceMotionEvents" in xinput.xml, where paramref "num_axes"
+  in struct DeviceTimeCoord refers to field "num_axes" in
+  the DeviceTimeCoord reply.
+
 <value>integer</value>
 
   The value element represents a literal integer value in an expression.  The
