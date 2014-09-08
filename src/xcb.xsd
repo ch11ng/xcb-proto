@@ -146,6 +146,15 @@ authorization from the authors.
          </xsd:complexType>
       </xsd:element>
       <xsd:element name="fieldref" type="xsd:string" />
+      <xsd:element name="paramref">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="type" use="required" type="xsd:string" />
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
       <xsd:element name="enumref">
         <xsd:complexType>
           <xsd:simpleContent>
