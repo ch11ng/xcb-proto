@@ -337,8 +337,9 @@ in struct DeviceTimeCoord.
 
     <struct name="DeviceTimeCoord">
         <field type="TIMESTAMP" name="time" />
-        <!-- Uninterpreted: list (axisvalues) of INT32,
-                            length is num_axes from GetDeviceMotionEvents -->
+        <list type="INT32" name="axisvalues">
+            <paramref type="CARD8">num_axes</paramref>
+        </list>
     </struct>
 
     <request name="GetDeviceMotionEvents" opcode="10">
@@ -352,7 +353,9 @@ in struct DeviceTimeCoord.
             <field type="CARD8"  name="num_axes" />
             <field type="CARD8"  name="device_mode" enum="ValuatorMode" />
             <pad bytes="18" />
-            <!-- Uninterpreted: list (events) of DeviceTimeCoord structures -->
+            <list type="DeviceTimeCoord" name="events">
+                <fieldref>num_events</fieldref>
+            </list>
         </reply>
     </request>
 
