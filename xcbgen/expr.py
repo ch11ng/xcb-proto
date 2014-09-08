@@ -64,6 +64,10 @@ class Expression(object):
             # Standard list with a fieldref
             self.lenfield_name = elt.text
 
+        elif elt.tag == 'paramref':
+            self.lenfield_name = elt.text
+            self.lenfield_type = elt.get('type')
+
         elif elt.tag == 'valueparam':
             # Value-mask.  The length bitmask is described by attributes.
             self.lenfield_name = elt.get('value-mask-name')
