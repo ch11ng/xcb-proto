@@ -162,6 +162,9 @@ authorization from the authors.
       </xsd:element>
       <xsd:element name="sumof">
         <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group ref="expression" minOccurs="0" maxOccurs="1"/>
+          </xsd:sequence>
           <xsd:attribute name="ref" use="required" type="xsd:string" />
         </xsd:complexType>
       </xsd:element>
