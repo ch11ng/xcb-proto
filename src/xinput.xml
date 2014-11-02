@@ -217,6 +217,29 @@ in struct DeviceTimeCoord.
     <struct name="InputInfo">
         <field type="CARD8" name="class_id" enum="InputClass" />
         <field type="CARD8" name="len" />
+        <switch name="info">
+            <fieldref>class_id</fieldref>
+            <case name="key">
+                <enumref ref="InputClass">Key</enumref>
+                <field type="KeyCode" name="min_keycode" />
+                <field type="KeyCode" name="max_keycode" />
+                <field type="CARD16"  name="num_keys" />
+                <pad bytes="2" />
+            </case>
+            <case name="button">
+                <enumref ref="InputClass">Button</enumref>
+                <field type="CARD16"    name="num_buttons" />
+            </case>
+            <case name="valuator">
+                <enumref ref="InputClass">Valuator</enumref>
+                <field type="CARD8"   name="axes_len" />
+                <field type="CARD8"   name="mode" enum="ValuatorMode" />
+                <field type="CARD32"  name="motion_size" />
+                <list type="AxisInfo" name="axes">
+                    <fieldref>axes_len</fieldref>
+                </list>
+            </case>
+	</switch>
     </struct>
 
     <struct name="DeviceName">
@@ -234,9 +257,15 @@ in struct DeviceTimeCoord.
             <list type="DeviceInfo" name="devices">
                 <fieldref>devices_len</fieldref>
             </list>
-            <!-- Uninterpreted: list (infos) of InputInfo structures,
-                                length is <sumof> all devices.num_class_info -->
-            <!-- Uninterpreted: list (name) of DeviceName structures -->
+            <list type="InputInfo" name="infos">
+                <sumof ref="devices">
+			<fieldref>num_class_info</fieldref>
+		</sumof>
+            </list>
+            <list type="STR" name="names">
+                <fieldref>devices_len</fieldref>
+            </list>
+            <pad align="4" />
         </reply>
     </request>
 
