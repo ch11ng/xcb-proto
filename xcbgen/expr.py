@@ -22,6 +22,7 @@ class Field(object):
         self.wire = wire
         self.auto = auto
         self.isfd = isfd
+        self.parent = None
 
 
 class Expression(object):
