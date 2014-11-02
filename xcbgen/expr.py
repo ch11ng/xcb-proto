@@ -104,6 +104,12 @@ class Expression(object):
         elif elt.tag == 'sumof':
             self.op = 'sumof'
             self.lenfield_name = elt.get('ref')
+            subexpressions = list(elt)
+            if len(subexpressions) > 0:
+                # sumof with a nested expression which is to be evaluated
+                # for each list-element in the context of that list-element.
+                # sumof then returns the sum of the results of these evaluations
+                self.rhs = Expression(subexpressions[0], parent)
 
         else:
             # Notreached
