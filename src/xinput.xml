@@ -68,13 +68,6 @@ This is needed for the following XI2-events ( and eventcopies thereof )
 	TouchBegin
 	RawTouchBegin
 
-
-*****
-
-<sumof> should support fields of listmembers.
-
-This is needed for request "ListInputDevices"
-
 *****
 
 xml and generator should support
