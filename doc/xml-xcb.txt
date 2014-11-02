@@ -322,6 +322,17 @@ Expressions
 
   This element represents a sumation of the elements of the referenced list.
 
+<sumof ref="identifier" >expression</sumof>
+
+  The expression is evaluated for each element of the referenced list,
+  in the context of this element.
+  This sumof element then represents a sumation of the results of these
+  evaluations.
+
+  expression will usually be a fieldref which references a field of
+  a list-element or an expression containing a fieldref,
+  such as popcount of a fieldref.
+
 <popcount>expression</popcount>
 
   This element represents the number of bits set in the expression.
