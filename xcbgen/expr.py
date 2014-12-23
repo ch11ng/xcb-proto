@@ -68,13 +68,6 @@ class Expression(object):
             self.lenfield_name = elt.text
             self.lenfield_type = elt.get('type')
 
-        elif elt.tag == 'valueparam':
-            # Value-mask.  The length bitmask is described by attributes.
-            self.lenfield_name = elt.get('value-mask-name')
-            self.lenfield_type = elt.get('value-mask-type')
-            self.lenwire = True
-            self.bitfield = True
-
         elif elt.tag == 'op':
             # Op field.  Need to recurse.
             self.op = elt.get('op')
