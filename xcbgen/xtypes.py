@@ -76,6 +76,7 @@ class Type(object):
                 return
 
         complex_type.fields.append(new_field)
+        new_field.parent = complex_type
 
     def make_fd_of(self, module, complex_type, fd_name):
         '''
