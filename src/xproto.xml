@@ -5465,6 +5465,7 @@ sensitive!
     <list type="BYTE" name="address">
       <fieldref>address_len</fieldref>
     </list>
+    <pad align="4" />
   </struct>
 
   <request name="ListHosts" opcode="110">
