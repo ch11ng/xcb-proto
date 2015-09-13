@@ -255,6 +255,7 @@ authorization from the authors.
     <list type="char" name="vendor">
       <fieldref>vendor_len</fieldref>
     </list>
+    <pad align="4" />
     <list type="FORMAT" name="pixmap_formats">
       <fieldref>pixmap_formats_len</fieldref>
     </list>
