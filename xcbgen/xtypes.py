@@ -268,10 +268,17 @@ class ListType(Type):
         self.is_list = True
         self.member = member
         self.parents = list(parent)
+        lenfield_name = False
 
         if elt.tag == 'list':
             elts = list(elt)
             self.expr = Expression(elts[0] if len(elts) else elt, self)
+            is_list_in_parent = self.parents[0].elt.tag in ('request', 'event', 'reply', 'error')
+            if not len(elts) and is_list_in_parent:
+                self.expr = Expression(elt,self)
+                self.expr.op = 'calculate_len'
+            else:
+                self.expr = Expression(elts[0] if len(elts) else elt, self)
 
         self.size = member.size if member.fixed_size() else None
         self.nmemb = self.expr.nmemb if self.expr.fixed_size() else None
