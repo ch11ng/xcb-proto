@@ -226,10 +226,11 @@ This affects the following:
     </request>
 
     <!-- OpenDevice -->
+    <typedef oldname="CARD8" newname="EventTypeBase" />
 
     <struct name="InputClassInfo">
         <field type="CARD8" name="class_id" enum="InputClass" />
-        <field type="CARD8" name="event_type_base" />
+        <field type="EventTypeBase" name="event_type_base" />
     </struct>
 
     <request name="OpenDevice" opcode="3">
